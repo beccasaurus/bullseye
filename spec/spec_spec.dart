@@ -1,16 +1,18 @@
-class SpecSpec_NoDescribes   extends Spec {}
+class SpecSpec_NoDescribes extends Spec {}
 class SpecSpec_ManyDescribes extends Spec {
   spec() {
     describe("Foo");
     describe("Bar");
   }
 }
+class SpecSpec_ManyDescribesWithExamples extends Spec {}
 
 class SpecSpec extends SpecMap {
   spec() {
 
-    var noDescribes   = new SpecSpec_NoDescribes();
-    var manyDescribes = new SpecSpec_ManyDescribes();
+    var noDescribes               = new SpecSpec_NoDescribes();
+    var manyDescribes             = new SpecSpec_ManyDescribes();
+    var manyDescribesWithExamples = new SpecSpec_ManyDescribesWithExamples();
 
     describe("Spec", {
 
@@ -22,7 +24,9 @@ class SpecSpec extends SpecMap {
         Expect.equals(2, manyDescribes.describes.length);
         Expect.equals("Foo", manyDescribes.describes[0].subject);
         Expect.equals("Bar", manyDescribes.describes[1].subject);
-      }
+      },
+
+      "can have many describes with examples": null
 
     });
   }
