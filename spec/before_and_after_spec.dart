@@ -130,6 +130,13 @@ class BeforeAndAfterSpec extends SpecMap {
 
     });
 
-    describe("After", { });
+    describe("After", {
+      "can have 1 after hook": (){
+        withAfters.run();
+
+        Expect.equals(SpecExampleResult.passed, withAfters.describes[0].examples[0].result);
+        Expect.equals(SpecExampleResult.passed, withAfters.describes[0].examples[1].result);
+      }
+    });
   }
 }
