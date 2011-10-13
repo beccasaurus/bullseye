@@ -1,5 +1,8 @@
 // Represents a single Spec
 class Spec {
+  
+  // Returns the vurrent version of Spec.dart
+  static final VERSION = "0.1.0";
 
   static List<Function> _beforeFunctions;
   static List<Function> _afterFunctions;

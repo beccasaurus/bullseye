@@ -8,6 +8,7 @@
 #source("before_and_after_spec.dart");
 #source("pending_example_spec.dart");
 #source("run_hooks_spec.dart");
+#source("specdoc_formatter_spec.dart");
 
 int main() {
   SpecMap.raiseExceptions = true;
@@ -18,7 +19,8 @@ int main() {
     new RunningExamplesSpec(),
     new BeforeAndAfterSpec(),
     new PendingExampleSpec(),
-    new RunHooksSpec()
+    new RunHooksSpec(),
+    new SpecDocFormatterSpec()
   ]);
 }
 

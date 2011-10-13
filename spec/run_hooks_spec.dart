@@ -34,7 +34,7 @@ class RunHooksSpec extends SpecDartTest {
     new RunHooksSpec_Example1().run();
     new RunHooksSpec_Example2().run();
 
-    describe("global run() hooks", {
+    describe("Global run() hooks", {
 
       "can hook into Spec.beforeRun()": (){
         Expect.equals(2, hookData["spec:before"].length);
