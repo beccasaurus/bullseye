@@ -1,12 +1,26 @@
 // Represents a single Spec
 class Spec {
 
+  static List<Function> _beforeFunctions;
+  static List<Function> _afterFunctions;
+
+  // Registers the given callback so it will be 
+  // fired every time any Spec is run()
+  static void beforeRun(Function callback) => _beforeFunctions.add(callback);
+
+  // Registers the given callback so it will be 
+  // fired after every time any Spec is run()
+  static void afterRun(Function callback) => _afterFunctions.add(callback);
+
   // All of the SpecDescribe defined in this Spec
   List<SpecDescribe> describes;
 
   List<SpecDescribe> _currentDescribes;
 
   Spec() {
+    if (_beforeFunctions == null) _beforeFunctions = new List<Function>();
+    if (_afterFunctions == null)  _afterFunctions = new List<Function>();
+
     describes         = new List<SpecDescribe>();
     _currentDescribes = new List<SpecDescribe>();
     spec();
@@ -86,6 +100,8 @@ class Spec {
 
   // Runs all of the describes in this spec
   run() {
+    _beforeFunctions.forEach((fn) => fn(this));
     describes.forEach((desc) => desc.run());
+    _afterFunctions.forEach((fn) => fn(this));
   }
 }

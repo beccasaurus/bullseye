@@ -1,6 +1,17 @@
 // Represents a 'describe' block inside a Spec
 class SpecDescribe {
 
+  static List<Function> _beforeFunctions;
+  static List<Function> _afterFunctions;
+
+  // Registers the given callback so it will be 
+  // fired every time any SpecDescribe is run()
+  static void beforeRun(Function callback) => _beforeFunctions.add(callback);
+
+  // Registers the given callback so it will be 
+  // fired after every time any SpecDescribe is run()
+  static void afterRun(Function callback) => _afterFunctions.add(callback);
+
   // The Spec that this describe is in
   Spec spec;
 
@@ -31,6 +42,9 @@ class SpecDescribe {
   bool _evaluatedFn;
 
   SpecDescribe([Spec spec = null, String subject = null, Function fn = null]) {
+    if (_beforeFunctions == null) _beforeFunctions = new List<Function>();
+    if (_afterFunctions == null)  _afterFunctions = new List<Function>();
+
     this.spec      = spec;
     this.subject   = subject;
     this.fn        = fn;
@@ -51,9 +65,11 @@ class SpecDescribe {
   // Runs all of the examples in the describe
   void run() {
     examples.forEach((example) {
+      _beforeFunctions.forEach((fn) => fn(this));
       befores.forEach((fn) => fn());
       example.run();
       afters.forEach((fn) => fn());
+      _afterFunctions.forEach((fn) => fn(this));
     });
     describes.forEach((desc) => desc.run());
   }

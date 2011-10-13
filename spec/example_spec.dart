@@ -34,23 +34,21 @@ class ExampleSpec extends SpecDartTest {
       "passed": (){
         var example = spec.describes[0].examples[0];
         Expect.equals("should pass", example.name);
-        Expect.isFalse(example.hasBeenRun);
+        Expect.isNull(example.result);
 
         example.run();
 
-        Expect.isTrue(example.hasBeenRun);
         Expect.equals(SpecExampleResult.passed, example.result);
       },
 
       "failed": (){
         var example = spec.describes[0].examples[1];
         Expect.equals("should fail", example.name);
-        Expect.isFalse(example.hasBeenRun);
+        Expect.isNull(example.result);
         Expect.isNull(example.exception);
 
         example.run();
 
-        Expect.isTrue(example.hasBeenRun);
         Expect.equals(SpecExampleResult.failed, example.result);
 
         var exception = example.exception;
@@ -62,12 +60,11 @@ class ExampleSpec extends SpecDartTest {
       "error": (){
         var example = spec.describes[0].examples[2];
         Expect.equals("should have an error", example.name);
-        Expect.isFalse(example.hasBeenRun);
+        Expect.isNull(example.result);
         Expect.isNull(example.exception);
 
         example.run();
 
-        Expect.isTrue(example.hasBeenRun);
         Expect.equals(SpecExampleResult.error, example.result);
 
         var exception = example.exception;
@@ -79,11 +76,10 @@ class ExampleSpec extends SpecDartTest {
       "pending": (){
         var example = spec.describes[0].examples[3];
         Expect.equals("should be pending", example.name);
-        Expect.isFalse(example.hasBeenRun);
+        Expect.isNull(example.result);
 
         example.run();
 
-        Expect.isTrue(example.hasBeenRun);
         Expect.equals(SpecExampleResult.pending, example.result);
       }
 
