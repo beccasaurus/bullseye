@@ -15,7 +15,7 @@ class ExampleSpec_Example extends Spec {
   }
 }
 
-class ExampleSpec extends SpecMap {
+class ExampleSpec extends SpecDartTest {
   spec() {
 
     var spec = new ExampleSpec_Example();

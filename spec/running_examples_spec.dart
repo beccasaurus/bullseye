@@ -18,7 +18,7 @@ class RunningExamplesSpec_SingleDescribe extends Spec {
   }
 }
 
-class RunningExamplesSpec extends SpecMap {
+class RunningExamplesSpec extends SpecDartTest {
   spec() {
     describe("Running Examples", {
 

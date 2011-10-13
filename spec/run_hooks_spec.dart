@@ -1,4 +1,4 @@
-class RunHooksSpec extends SpecMap {
+class RunHooksSpec extends SpecDartTest {
   spec() {
     describe("run() hooks", {
 

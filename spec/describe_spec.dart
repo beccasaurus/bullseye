@@ -31,7 +31,7 @@ class DescribeSpec_SubDescribes extends Spec {
   }
 }
 
-class DescribeSpec extends SpecMap {
+class DescribeSpec extends SpecDartTest {
   spec() {
 
     var noExamples   = new DescribeSpec_NoExamples();

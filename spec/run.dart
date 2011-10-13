@@ -19,3 +19,11 @@ int main() {
     new PendingExampleSpec()
   ]);
 }
+
+// Our custom SpecMap baseclass.
+//
+// All of our specs inherit from this so they 
+// can use all of the helper methods defined here.
+class SpecDartTest extends SpecMap {
+
+}

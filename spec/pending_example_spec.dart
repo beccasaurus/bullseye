@@ -14,7 +14,7 @@ class PendingExampleSpec_Example extends Spec {
   }
 }
 
-class PendingExampleSpec extends SpecMap {
+class PendingExampleSpec extends SpecDartTest {
   spec() {
 
     var spec = new PendingExampleSpec_Example();

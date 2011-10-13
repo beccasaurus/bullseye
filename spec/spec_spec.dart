@@ -7,7 +7,7 @@ class SpecSpec_ManyDescribes extends Spec {
 }
 class SpecSpec_ManyDescribesWithExamples extends Spec {}
 
-class SpecSpec extends SpecMap {
+class SpecSpec extends SpecDartTest {
   spec() {
 
     var noDescribes               = new SpecSpec_NoDescribes();

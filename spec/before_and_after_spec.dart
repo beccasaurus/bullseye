@@ -91,7 +91,7 @@ class BeforeAndAfterSpec_WithAfters extends Spec {
   }
 }
 
-class BeforeAndAfterSpec extends SpecMap {
+class BeforeAndAfterSpec extends SpecDartTest {
   spec() {
 
     var with1Before  = new BeforeAndAfterSpec_With1Before();
