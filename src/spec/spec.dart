@@ -16,6 +16,11 @@ class Spec {
   // and use it to define your spec.
   void spec() {}
 
+  // describe() should be called from within your spec() 
+  // function definition.
+  //
+  // subject: Description of what you're describing, eg. "Dog"
+  // fn:      An anonymous function with calls to it(), before(), etc
   SpecDescribe describe([String subject = null, var fn = null]) {
     SpecDescribe describe = new SpecDescribe(subject: subject, fn: fn);
 
@@ -31,15 +36,20 @@ class Spec {
     return describe;
   }
 
-  SpecExample it(String exampleName) {
+  // it() should be called from within a function that you pass 
+  // to describe().
+  //
+  // name: The name of this example, eg. "should be awesome"
+  // fn:   An anonymous function that has your expectations. 
+  //       If fn isn't passed, the it will be marked pending; 
+  SpecExample it([String name = null, var fn = null]) {
     SpecDescribe currentDescribe = _currentDescribes.last();
     if (currentDescribe != null) {
-      SpecExample example = new SpecExample(exampleName);
+      SpecExample example = new SpecExample(name, fn);
       currentDescribe.examples.add(example);
       return example;
     } else {
       throw new UnsupportedOperationException("it() cannot be used before calling describe()");
     }
   }
-
 }
