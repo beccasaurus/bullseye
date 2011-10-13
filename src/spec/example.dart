@@ -8,6 +8,8 @@ class SpecExample {
 
   var result;
 
+  var exception;
+
   SpecExample([String name = null, var fn = null]) {
     this.name       = name;
     this.fn         = fn;
@@ -29,9 +31,11 @@ class SpecExample {
         fn();
         result = SpecExampleResult.passed;
       } catch (ExpectException ex) {
-        result = SpecExampleResult.failed;
+        result    = SpecExampleResult.failed;
+        exception = ex;
       } catch (Exception ex) {
-        result = SpecExampleResult.error;
+        result    = SpecExampleResult.error;
+        exception = ex;
       }
     }
   }
