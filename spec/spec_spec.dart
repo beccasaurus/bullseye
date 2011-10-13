@@ -24,9 +24,7 @@ class SpecSpec extends SpecMap {
         Expect.equals(2, manyDescribes.describes.length);
         Expect.equals("Foo", manyDescribes.describes[0].subject);
         Expect.equals("Bar", manyDescribes.describes[1].subject);
-      },
-
-      "can have many describes with examples": null
+      }
 
     });
   }

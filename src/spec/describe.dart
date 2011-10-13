@@ -19,6 +19,12 @@ class SpecDescribe {
   // the fn passed to another SpecDescribe.
   List<SpecDescribe> describes;
 
+  // All of the before() callbacks
+  List befores;
+
+  // All of the after() callbacks
+  List afters;
+
   bool _evaluatedFn;
 
   SpecDescribe([String subject = null, var fn = null]) {
@@ -26,6 +32,8 @@ class SpecDescribe {
     this.fn        = fn;
     this.examples  = new List<SpecExample>();
     this.describes = new List<SpecDescribe>();
+    this.befores   = new List();
+    this.afters    = new List();
   }
 
   // Evaluates this describe's function, if not already evaluated
@@ -38,7 +46,11 @@ class SpecDescribe {
 
   // Runs all of the examples in the describe
   void run() {
-    examples.forEach((ex) => ex.run());
+    examples.forEach((example) {
+      befores.forEach((fn) => fn());
+      example.run();
+      afters.forEach((fn) => fn());
+    });
     describes.forEach((desc) => desc.run());
   }
 }

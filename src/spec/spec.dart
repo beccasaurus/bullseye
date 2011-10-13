@@ -43,14 +43,37 @@ class Spec {
   // fn:   An anonymous function that has your expectations. 
   //       If fn isn't passed, the it will be marked pending; 
   SpecExample it([String name = null, var fn = null]) {
+    SpecExample example = new SpecExample(name, fn);
+    _getCurrentDescribe("it").examples.add(example);
+    return example;
+  }
+
+  SpecDescribe _getCurrentDescribe([String callerFunctionName = null]) {
     SpecDescribe currentDescribe = _currentDescribes.last();
     if (currentDescribe != null) {
-      SpecExample example = new SpecExample(name, fn);
-      currentDescribe.examples.add(example);
-      return example;
+      return currentDescribe;
     } else {
-      throw new UnsupportedOperationException("it() cannot be used before calling describe()");
+      if (callerFunctionName != null)
+        throw new UnsupportedOperationException("it${callerFunctionName} cannot be used before calling describe()");
     }
+  }
+
+  // Before each it() is evaluated, the before() function 
+  // will be called, if provided.
+  //
+  // NOTE: When using nested describe(), the outer parents' 
+  //       before() functions are called before the childrens'.
+  void before([var fn = null]) {
+    _getCurrentDescribe("before").befores.add(fn);
+  }
+
+  // After each it() is evaluated, the after() function 
+  // will be called, if provided.
+  //
+  // NOTE: When using nested describe(), the outer parents' 
+  //       after() functions are called after the childrens'.
+  void after([var fn = null]) {
+    _getCurrentDescribe("after").afters.add(fn);
   }
 
   // Runs all of the describes in this spec

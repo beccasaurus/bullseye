@@ -5,6 +5,7 @@
 #source("example_spec.dart");
 #source("describe_spec.dart");
 #source("running_examples_spec.dart");
+#source("before_and_after_spec.dart");
 
 int main() {
   SpecMap.raiseExceptions = true;
@@ -12,6 +13,7 @@ int main() {
     new SpecSpec(),
     new ExampleSpec(),
     new DescribeSpec(),
-    new RunningExamplesSpec()
+    new RunningExamplesSpec(),
+    new BeforeAndAfterSpec()
   ]);
 }

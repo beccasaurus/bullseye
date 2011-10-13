@@ -1,5 +1,7 @@
 class SpecExample {
 
+  static bool raiseExceptions;
+
   String name;
 
   bool hasBeenRun;
@@ -40,5 +42,7 @@ class SpecExample {
         exception = ex;
       }
     }
+    if (SpecExample.raiseExceptions && exception != null)
+      throw exception;
   }
 }

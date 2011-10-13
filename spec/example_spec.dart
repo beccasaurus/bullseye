@@ -76,7 +76,7 @@ class ExampleSpec extends SpecMap {
 
         Expect.isTrue(example.hasBeenRun);
         Expect.equals(SpecExampleResult.pending, example.result);
-      },
+      }
 
     });
   }
