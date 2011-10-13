@@ -9,13 +9,13 @@ class SpecExample {
 
   bool hasBeenRun;
 
-  var fn;
+  Function fn;
 
-  var result;
+  String result;
 
-  var exception;
+  Exception exception;
 
-  SpecExample([SpecDescribe describe, String name = null, var fn = null]) {
+  SpecExample([SpecDescribe describe, String name = null, Function fn = null]) {
     this.describe   = describe;
     this.name       = name;
     this.fn         = fn;

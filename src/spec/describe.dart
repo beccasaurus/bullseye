@@ -11,7 +11,7 @@ class SpecDescribe {
   // representing its code body.  You should call 
   // it() inside of this function to add examples 
   // to this SpecDescribe.
-  var fn;
+  Function fn;
 
   // All of the examples associated with this describe, 
   // added by making calls to it().
@@ -30,7 +30,7 @@ class SpecDescribe {
 
   bool _evaluatedFn;
 
-  SpecDescribe([Spec spec = null, String subject = null, var fn = null]) {
+  SpecDescribe([Spec spec = null, String subject = null, Function fn = null]) {
     this.spec      = spec;
     this.subject   = subject;
     this.fn        = fn;

@@ -2,7 +2,7 @@
 // allowing us to stop executing of the running function 
 // and mark the current example as pending.
 class SpecPendingException implements Exception {
-  var message;
+  String message;
 
   SpecPendingException(this.message);
 

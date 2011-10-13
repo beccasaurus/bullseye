@@ -21,7 +21,7 @@ class Spec {
   //
   // subject: Description of what you're describing, eg. "Dog"
   // fn:      An anonymous function with calls to it(), before(), etc
-  SpecDescribe describe([String subject = null, var fn = null]) {
+  SpecDescribe describe([String subject = null, Function fn = null]) {
     SpecDescribe describe = new SpecDescribe(spec: this, subject: subject, fn: fn);
 
     if (_currentDescribes.length == 0)
@@ -42,8 +42,8 @@ class Spec {
   // name: The name of this example, eg. "should be awesome"
   // fn:   An anonymous function that has your expectations. 
   //       If fn isn't passed, the it will be marked pending; 
-  SpecExample it([String name = null, var fn = null]) {
-    var desc = _getCurrentDescribe("it");
+  SpecExample it([String name = null, Function fn = null]) {
+    SpecDescribe desc = _getCurrentDescribe("it");
     SpecExample example = new SpecExample(describe: desc, name: name, fn: fn);
     desc.examples.add(example);
     return example;
@@ -71,7 +71,7 @@ class Spec {
   //
   // NOTE: When using nested describe(), the outer parents' 
   //       before() functions are called before the childrens'.
-  void before([var fn = null]) {
+  void before([Function fn = null]) {
     _getCurrentDescribe("before").befores.add(fn);
   }
 
@@ -80,7 +80,7 @@ class Spec {
   //
   // NOTE: When using nested describe(), the outer parents' 
   //       after() functions are called after the childrens'.
-  void after([var fn = null]) {
+  void after([Function fn = null]) {
     _getCurrentDescribe("after").afters.add(fn);
   }
 
