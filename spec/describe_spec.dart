@@ -19,7 +19,7 @@ class DescribeSpec_SubDescribes extends Spec {
       describe("inner first", (){
         it("inner first it");
       }); 
-      // it("outer bottom it"); // enable this AFTER green, cause it'll require a bit of refactoring
+      it("outer bottom it");
     });
     describe("outer second", (){
       describe("inner second", (){
@@ -68,6 +68,7 @@ class DescribeSpec extends SpecMap {
         Expect.equals("outer top it", spec.describes[0].examples[0].name);
         Expect.equals("inner first", spec.describes[0].describes[0].subject);
         Expect.equals("inner first it", spec.describes[0].describes[0].examples[0].name);
+        Expect.equals("outer bottom it", spec.describes[0].examples[1].name);
 
         Expect.equals("inner second", spec.describes[1].describes[0].subject);
         Expect.equals("inner inner second", spec.describes[1].describes[0].describes[0].subject);

@@ -35,4 +35,10 @@ class SpecDescribe {
       if (fn != null) fn();
     }
   }
+
+  // Runs all of the examples in the describe
+  void run() {
+    examples.forEach((ex) => ex.run());
+    describes.forEach((desc) => desc.run());
+  }
 }

@@ -52,4 +52,9 @@ class Spec {
       throw new UnsupportedOperationException("it() cannot be used before calling describe()");
     }
   }
+
+  // Runs all of the describes in this spec
+  run() {
+    describes.forEach((desc) => desc.run());
+  }
 }

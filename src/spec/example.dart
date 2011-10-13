@@ -16,14 +16,16 @@ class SpecExample {
     this.hasBeenRun = false;
   }
 
-  run() {
+  // Runs the function defined with this example, 
+  // if it hasn't already been run.
+  void run() {
     if (! hasBeenRun) {
       hasBeenRun = true;
       _runFunction();
     }
   }
 
-  _runFunction() {
+  void _runFunction() {
     if (fn == null) {
       result = SpecExampleResult.pending;
     } else {
