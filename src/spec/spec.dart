@@ -48,6 +48,13 @@ class Spec {
     return example;
   }
 
+  // Can be called (with an optional message) from the body 
+  // of your it() function and it will stop the execution of 
+  // that example's function and mark the spec as pending.
+  void pending([String message = "PENDING"]) {
+    throw new SpecPendingException(message);
+  }
+
   SpecDescribe _getCurrentDescribe([String callerFunctionName = null]) {
     SpecDescribe currentDescribe = _currentDescribes.last();
     if (currentDescribe != null) {

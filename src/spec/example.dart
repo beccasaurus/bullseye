@@ -27,6 +27,15 @@ class SpecExample {
     }
   }
 
+  // If this spec is pending and a reason 
+  // was given, this returns that reason.
+  String get pendingReason() {
+    if (result == SpecExampleResult.pending && exception is SpecPendingException)
+      return exception.message;
+    else
+      return null;
+  }
+
   void _runFunction() {
     if (fn == null) {
       result = SpecExampleResult.pending;
@@ -36,6 +45,9 @@ class SpecExample {
         result = SpecExampleResult.passed;
       } catch (ExpectException ex) {
         result    = SpecExampleResult.failed;
+        exception = ex;
+      } catch (SpecPendingException ex) {
+        result    = SpecExampleResult.pending;
         exception = ex;
       } catch (Exception ex) {
         result    = SpecExampleResult.error;
