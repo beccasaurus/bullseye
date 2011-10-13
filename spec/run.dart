@@ -5,6 +5,9 @@
 #source("example_spec.dart");
 #source("describe_spec.dart");
 
-int main() => SpecMap.run([
-  new SpecSpec(), new ExampleSpec(), new DescribeSpec()
-]);
+int main() {
+  SpecMap.raiseExceptions = true;
+  return SpecMap.run([
+    new SpecSpec(), new ExampleSpec(), new DescribeSpec()
+  ]);
+}

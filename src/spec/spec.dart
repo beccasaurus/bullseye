@@ -4,8 +4,11 @@ class Spec {
   // All of the SpecDescribe defined in this Spec
   List<SpecDescribe> describes;
 
+  List<SpecDescribe> _currentDescribes;
+
   Spec() {
-    describes = new List<SpecDescribe>();
+    describes         = new List<SpecDescribe>();
+    _currentDescribes = new List<SpecDescribe>();
     spec();
   }
 
@@ -15,13 +18,21 @@ class Spec {
 
   SpecDescribe describe([String subject = null, var fn = null]) {
     SpecDescribe describe = new SpecDescribe(subject: subject, fn: fn);
-    describes.add(describe);
+
+    if (_currentDescribes.length == 0)
+      describes.add(describe);
+    else
+      _currentDescribes.last().describes.add(describe);
+
+    _currentDescribes.addLast(describe);
     describe.evaluate();
+    _currentDescribes.removeLast();
+
     return describe;
   }
 
   SpecExample it(String exampleName) {
-    SpecDescribe currentDescribe = (describes.length == 0) ? null : describes.last();
+    SpecDescribe currentDescribe = _currentDescribes.last();
     if (currentDescribe != null) {
       SpecExample example = new SpecExample(exampleName);
       currentDescribe.examples.add(example);

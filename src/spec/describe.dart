@@ -14,12 +14,18 @@ class SpecDescribe {
   // added by making calls to it().
   List<SpecExample> examples;
 
+  // All of the SpecDescribe defined in this SpecDescribe. 
+  // These are created when describe() is called from within 
+  // the fn passed to another SpecDescribe.
+  List<SpecDescribe> describes;
+
   bool _evaluatedFn;
 
   SpecDescribe([String subject = null, var fn = null]) {
-    this.subject  = subject;
-    this.fn       = fn;
-    this.examples = new List<SpecExample>();
+    this.subject   = subject;
+    this.fn        = fn;
+    this.examples  = new List<SpecExample>();
+    this.describes = new List<SpecDescribe>();
   }
 
   // Evaluates this describe's function, if not already evaluated
