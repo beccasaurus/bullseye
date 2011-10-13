@@ -20,6 +20,15 @@ class ExampleSpec extends SpecMap {
 
     var spec = new ExampleSpec_Example();
 
+    describe("Example", {
+      "has reference to SpecDescribe": (){
+        var describe = spec.describes[0];
+        var example  = describe.examples[0];
+
+        Expect.identical(describe, example.describe);
+      }
+    });
+
     describe("Running Examples", {
 
       "passed": (){

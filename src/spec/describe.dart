@@ -1,6 +1,9 @@
 // Represents a 'describe' block inside a Spec
 class SpecDescribe {
 
+  // The Spec that this describe is in
+  Spec spec;
+
   // The subject that we're describing, eg. "Dog"
   String subject;
 
@@ -27,7 +30,8 @@ class SpecDescribe {
 
   bool _evaluatedFn;
 
-  SpecDescribe([String subject = null, var fn = null]) {
+  SpecDescribe([Spec spec = null, String subject = null, var fn = null]) {
+    this.spec      = spec;
     this.subject   = subject;
     this.fn        = fn;
     this.examples  = new List<SpecExample>();

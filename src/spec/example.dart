@@ -1,6 +1,9 @@
 class SpecExample {
 
-  static bool raiseExceptions;
+  // The SpecDecribe that this example is in
+  SpecDescribe describe;
+
+  static bool raiseExceptions; // UNTESTED! TODO
 
   String name;
 
@@ -12,7 +15,8 @@ class SpecExample {
 
   var exception;
 
-  SpecExample([String name = null, var fn = null]) {
+  SpecExample([SpecDescribe describe, String name = null, var fn = null]) {
+    this.describe   = describe;
     this.name       = name;
     this.fn         = fn;
     this.hasBeenRun = false;

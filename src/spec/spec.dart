@@ -22,7 +22,7 @@ class Spec {
   // subject: Description of what you're describing, eg. "Dog"
   // fn:      An anonymous function with calls to it(), before(), etc
   SpecDescribe describe([String subject = null, var fn = null]) {
-    SpecDescribe describe = new SpecDescribe(subject: subject, fn: fn);
+    SpecDescribe describe = new SpecDescribe(spec: this, subject: subject, fn: fn);
 
     if (_currentDescribes.length == 0)
       describes.add(describe);
@@ -43,8 +43,9 @@ class Spec {
   // fn:   An anonymous function that has your expectations. 
   //       If fn isn't passed, the it will be marked pending; 
   SpecExample it([String name = null, var fn = null]) {
-    SpecExample example = new SpecExample(name, fn);
-    _getCurrentDescribe("it").examples.add(example);
+    var desc = _getCurrentDescribe("it");
+    SpecExample example = new SpecExample(describe: desc, name: name, fn: fn);
+    desc.examples.add(example);
     return example;
   }
 
