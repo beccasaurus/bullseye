@@ -23,7 +23,7 @@ class SpecDocFormatterSpec extends SpecDartTest {
     Specs.run([new SpecDocFormatterSpec_Example()]);
 
     var output = buffer.toString();
-    // print("\nOUTPUT:\n$output");
+    print("\nOUTPUT:\n$output");
 
     describe("SpecDocFormatter", {
 
@@ -41,7 +41,11 @@ class SpecDocFormatterSpec extends SpecDartTest {
 
       "prints summary": (){
         Expect.isTrue(output.contains("4 Examples, 1 Failures, 1 Errors, 1 Pending", 0));
-      }
+      },
+
+      "prints out the details of any failed examples": null,
+      "prints out the details of any examples that raised Exceptions": null,
+      "prints out the details of any pending examples": null
 
     });
   }

@@ -16,18 +16,35 @@ class SamplesSpec extends SpecDartTest {
     return buffer.toString();
   }
 
+  String removeIndent(String indented) {
+    var spaces        = 26;
+    var withoutIndent = "";
+    indented.split("\n").forEach((line) {
+      if (line.length >= spaces)
+        withoutIndent += line.substring(spaces) + "\n";
+      else
+        withoutIndent += line + "\n";
+    });
+    return withoutIndent;
+  }
+
+  printString(var str) {
+    var lines = str.split("\n");
+    for (var i = 0; i < lines.length; i++)
+      print("$i [${lines[i]}]");
+  }
+
   spec() {
     describe("BowlingSpec", {
       "OK": (){
         var expected = """~ Spec.dart 0.1.0 ~
 
-Bowling #score
-  returns 0 for all gutter game
+                          Bowling #score
+                            returns 0 for all gutter game
+                          
+                          1 Examples, 0 Failures""";
 
-1 Examples, 0 Failures
-""";
-
-        Expect.equals(expected, getSpecOutput(new BowlingSpec()));
+        Expect.stringEquals(removeIndent(expected), getSpecOutput(new BowlingSpec()));
       }
     });
   }
