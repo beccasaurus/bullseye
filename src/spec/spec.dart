@@ -102,7 +102,7 @@ class Spec {
   }
 
   // Runs all of the describes in this spec
-  run() {
+  void run() {
     _beforeFunctions.forEach((fn) => fn(this));
     describes.forEach((desc) => desc.run());
     _afterFunctions.forEach((fn) => fn(this));

@@ -1,7 +1,13 @@
-class SpecFormatter {
+// Implementation of SpecFormattable that can be used as 
+// a base class to simplify SpecFormattable implementation.
+class SpecFormatter implements SpecFormattable {
 
   static Map<String,String> _colors;
+         bool               _colorize;
+         Function           _loggingFunction;
 
+  // A Map of color names, eg. "white" to escape 
+  // sequences for creating colored output.
   static Map<String,String> get colors() {
     if (_colors == null)
       _colors = {
@@ -13,25 +19,7 @@ class SpecFormatter {
     return _colors;
   }
 
-  bool _colorize;
-  bool get colorize() {
-    if (_colorize == null) _colorize = true;
-    return _colorize;
-  }
-  void set colorize(value) => _colorize = value;
-
-  String _indentString;
-
-  Function _loggingFunction;
-
-  get indentString() => "  ";
-
-  bool printToStdout;
-
-  void logger(Function fn) {
-    _loggingFunction = fn;
-  }
-
+  // Empty SpecFormattable implementation
   void header(){}
   void footer(){}
   void beforeSpec(Spec spec){}
@@ -41,19 +29,53 @@ class SpecFormatter {
   void beforeExample(SpecExample example){}
   void afterExample(SpecExample example){}
 
+  // Whether or not this formatter should print 
+  // all of its output to STDOUT (via print())
+  bool printToStdout;
+
+  // Returns the String that this formatter uses  
+  // when indenting content.  See write().
+  String get indentString() => "  ";
+
+  // Returns a color escape sequence for resetting 
+  // colored text back to the default color.
+  // NOTE: right now, this just sets the color to white.
+  String get colorReset() => "\x1b\x5b;0;37m";
+
+  // Returns whether or not this formatter 
+  // should colorize output.
+  bool get colorize() {
+    if (_colorize == null) _colorize = true;
+    return (_colorize == true);
+  }
+
+  // See colorize()
+  set colorize(bool value) => _colorize = value;
+
+  // TODO how should the arguments be .. void f(String text) ...?
+  // Registers a function with this formatter. 
+  // The function you provide will be called every 
+  // time output is written via write(),
+  void logger(Function fn) {
+    _loggingFunction = fn;
+  }
+
+  // Writes the given text out to STDOUT and/or functions 
+  // registered via logger().
+  //
+  // indent: the number of levels deep you would like this text indented
+  // color:  the name of a color to print this text as (from colors())
   void write(String text, [int indent = 0, String color = null]) {
-    var result = _indent(indent, text);
+    String result = _indent(indent, text);
     if (colorize == true)
-      result = colorizeText(result, color);
+      result = _colorizeText(result, color);
     if (printToStdout != false)
       print(result);
     if (_loggingFunction != null)
       _loggingFunction(result + "\n");
   }
 
-  String get colorReset() => "\x1b\x5b;0;37m";
-
-  String colorizeText([String text = null, String color = null]) {
+  String _colorizeText([String text = null, String color = null]) {
     if (color == null)
       return text;
     else
