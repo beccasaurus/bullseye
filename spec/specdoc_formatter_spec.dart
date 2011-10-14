@@ -10,12 +10,12 @@ class SpecDocFormatterSpec_Example extends Spec {
 class SpecDocFormatterSpec extends SpecDartTest {
   spec() {
 
-    var buffer      = new StringBuffer();
-    var formatter   = new SpecDocFormatter();
+    var buffer    = new StringBuffer();
+    var formatter = new SpecDocFormatter();
     formatter.printToStdout = false;
     formatter.logger((text) => buffer.add(text));
-    Specs.formatter = formatter;
 
+    Specs.formatter = formatter;
     Specs.run(new SpecDocFormatterSpec_Example());
 
     var output = buffer.toString();
