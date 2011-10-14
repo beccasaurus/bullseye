@@ -56,7 +56,7 @@ class SpecDescribe {
 
   // Evaluates this describe's function, if not already evaluated
   void evaluate() {
-    if (! _evaluatedFn) {
+    if (_evaluatedFn != true) {
       _evaluatedFn = true;
       if (fn != null) fn();
     }

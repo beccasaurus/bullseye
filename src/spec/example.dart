@@ -68,7 +68,7 @@ class SpecExample {
         exception = ex;
       }
     }
-    if (SpecExample.raiseExceptions && exception != null)
+    if (SpecExample.raiseExceptions == true && exception != null)
       throw exception;
   }
 }
