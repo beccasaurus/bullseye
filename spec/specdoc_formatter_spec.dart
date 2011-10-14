@@ -98,6 +98,10 @@ class SpecDocFormatterSpec extends SpecDartTest {
 
       "pending examples should be printed in yellow": (){
         Expect.isTrue(colored.contains("\n\x1b\x5b;0;33m    [custom pending message] is indented more", 0));
+      },
+
+      "the summary line should be red because atleast 1 example failed": (){
+        Expect.isTrue(colored.contains("\x1b\x5b;0;31m\n12 Examples, 2 Failures, 2 Errors, 6 Pending", 0));
       }
     });
   }
