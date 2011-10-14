@@ -9,6 +9,7 @@ class SamplesSpec extends SpecDartTest {
   String getSpecOutput(Spec spec) {
     var buffer    = new StringBuffer();
     var formatter = new SpecDocFormatter();
+    formatter.colorize      = false;
     formatter.printToStdout = false;
     formatter.logger((text) => buffer.add(text));
     Specs.formatter = formatter;

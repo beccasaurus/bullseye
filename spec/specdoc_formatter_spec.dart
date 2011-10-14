@@ -25,6 +25,7 @@ class SpecDocFormatterSpec extends SpecDartTest {
 
     var buffer    = new StringBuffer();
     var formatter = new SpecDocFormatter();
+    formatter.colorize      = false;
     formatter.printToStdout = false;
     formatter.logger((text) => buffer.add(text));
 
@@ -32,7 +33,6 @@ class SpecDocFormatterSpec extends SpecDartTest {
     Specs.run([new SpecDocFormatterSpec_Example()]);
 
     var output = buffer.toString();
-    print("\nOUTPUT:\n$output");
 
     describe("SpecDocFormatter", {
 
@@ -68,10 +68,37 @@ class SpecDocFormatterSpec extends SpecDartTest {
         Expect.isTrue(output.contains("bar\n  bar-1\n  [PENDING] bar-2\n  inner\n    [custom pending message] is indented more\n    one\n      [PENDING] more", 0));
       },
 
-      "prints out custom pending messages": null,
+      "prints out custom pending messages": (){
+        Expect.isTrue(output.contains("[custom pending message] is indented more", 0));
+      },
 
-      "prints out custom pending messages in pending summary": null
+      "prints out custom pending messages in pending summary": (){
+        Expect.isTrue(output.contains("inner is indented more [custom pending message]", 0));
+      }
+    });
 
+    buffer = new StringBuffer();
+    Specs.formatter.colorize = true;
+    Specs.run([new SpecDocFormatterSpec_Example()]);
+    var colored = buffer.toString();
+
+    describe("SpecDocFormatter with colored output", {
+
+      "passing examples should be printed in green": (){
+        Expect.isTrue(colored.contains("foo\n\x1b\x5b;0;32m  foo-1", 0));
+      },
+
+      "failed examples should be printed in red": (){
+        Expect.isTrue(colored.contains("bar\n\x1b\x5b;0;31m  bar-1", 0));
+      },
+
+      "error examples should be printed in red": (){
+        Expect.isTrue(colored.contains("\n\x1b\x5b;0;31m  foo-2", 0));
+      },
+
+      "pending examples should be printed in yellow": (){
+        Expect.isTrue(colored.contains("\n\x1b\x5b;0;33m    [custom pending message] is indented more", 0));
+      }
     });
   }
 }

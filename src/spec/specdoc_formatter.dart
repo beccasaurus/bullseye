@@ -35,7 +35,17 @@ class SpecDocFormatter extends SpecFormatter {
       else
         pendingString = "[${example.pendingReason}] ";
 
-    write(pendingString + example.name, indent: _describeDepth);
+    write(pendingString + example.name, indent: _describeDepth, color: colorForExample(example));
+  }
+
+  colorForExample(var example) {
+    switch (example.result) {
+      case SpecExampleResult.passed:  return "green";
+      case SpecExampleResult.failed:  return "red";
+      case SpecExampleResult.error:   return "red";
+      case SpecExampleResult.pending: return "yellow";
+      default: return "white";
+    }
   }
 
   separator() {
@@ -70,7 +80,7 @@ class SpecDocFormatter extends SpecFormatter {
       write("\nFailures:");
       failedExamples.forEach((example) {
         write("");
-        write("${example.describe.subject} ${example.name}", indent: 1);
+        write("${example.describe.subject} ${example.name}", indent: 1, color: colorForExample(example));
         write("Exception: ${example.exception}", indent: 2);
       });
     }
@@ -81,8 +91,8 @@ class SpecDocFormatter extends SpecFormatter {
       write("\nErrors:");
       errorExamples.forEach((example) {
         write("");
-        write("${example.describe.subject} ${example.name}", indent: 1);
-        write("Exception: ${example.exception}", indent: 2);
+        write("${example.describe.subject} ${example.name}", indent: 1, color: colorForExample(example));
+        write("Exception: ${example.exception}", indent: 2, color: colorForExample(example));
       });
     }
   }
@@ -91,7 +101,8 @@ class SpecDocFormatter extends SpecFormatter {
     if (pendingExamples.length > 0) {
       write("\nPending:\n");
       pendingExamples.forEach((example) {
-        write("${example.describe.subject} ${example.name}", indent: 1);
+        String pendingReason = (example.pendingReason != null) ? " [${example.pendingReason}]" : null;
+        write("${example.describe.subject} ${example.name}${pendingReason}", indent: 1, color: colorForExample(example));
       });
     }
   }
