@@ -1,0 +1,12 @@
+#! /bin/bash
+
+package="pkg/spec.dart"
+
+echo "Packaging spec.dart"
+mkdir -pv pkg
+rm -fv "$package"
+for file in `find src -iname '*.dart' | sort -n`; do
+  # cat the file without comments or empty lines or #sources into the package
+  cat "$file" | grep -v -e '^[ ]*\/\/' | grep -v -e '^[ ]*$' | grep -v '#source(' >> "$package"
+done
+echo "Done.  Created $package"

@@ -1,5 +1,5 @@
 #import("../lib/specmap.dart");
-#import("../src/spec.dart");
+#import("../pkg/spec.dart");
 
 #source("spec_spec.dart");
 #source("example_spec.dart");
