@@ -1,15 +1,25 @@
-// TODO add typing
-
+// TODO add typing!  and clean up!
 class SpecDocFormatter extends SpecFormatter {
   List<SpecExample> examples;
+  
+  var _describeDepth;
+
+  SpecDocFormatter() {
+    examples = new List<SpecExample>();
+    _describeDepth = 0;
+  }
 
   header() {
     write("~ Spec.dart ${Spec.VERSION} ~\n");
   }
 
   beforeDescribe(describe) {
-    if (examples != null) write(""); // not the first describe
-    write(describe.subject);
+    write(describe.subject, indent: _describeDepth);
+    ++_describeDepth;
+  }
+
+  afterDescribe(describe) {
+    --_describeDepth;
   }
 
   afterExample(example) {
@@ -18,10 +28,14 @@ class SpecDocFormatter extends SpecFormatter {
 
     examples.add(example);
 
+    String pendingString = "";
     if (example.pending == true)
-      write('[PENDING] ' + example.name, indent: 1);
-    else
-      write(example.name, indent: 1);
+      if (example.pendingReason == null)
+        pendingString = "[PENDING] ";
+      else
+        pendingString = "[${example.pendingReason}] ";
+
+    write(pendingString + example.name, indent: _describeDepth);
   }
 
   separator() {
@@ -75,7 +89,7 @@ class SpecDocFormatter extends SpecFormatter {
 
   pendingSummary() {
     if (pendingExamples.length > 0) {
-      write("\nPending:");
+      write("\nPending:\n");
       pendingExamples.forEach((example) {
         write("${example.describe.subject} ${example.name}", indent: 1);
       });

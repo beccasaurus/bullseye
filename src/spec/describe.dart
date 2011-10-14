@@ -70,7 +70,7 @@ class SpecDescribe {
       example.run();
       afters.forEach((fn) => fn());
     });
-    _afterFunctions.forEach((fn) => fn(this));
     describes.forEach((desc) => desc.run());
+    _afterFunctions.forEach((fn) => fn(this));
   }
 }

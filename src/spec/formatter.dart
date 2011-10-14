@@ -1,13 +1,10 @@
 class SpecFormatter {
 
-  String indentString;
+  String _indentString;
 
   Function _loggingFunction;
 
-  SpecFormatter() {
-    if (indentString == null)
-      indentString = "  ";
-  }
+  get indentString() => "  ";
 
   bool printToStdout;
 
