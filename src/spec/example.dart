@@ -59,21 +59,26 @@ class SpecExample {
     if (fn == null) {
       result = SpecExampleResult.pending;
     } else {
-      try {
+      if (SpecExample.raiseExceptions == true) {
+        // Any Exceptions thrown will bubble up
         fn();
         result = SpecExampleResult.passed;
-      } catch (ExpectException ex) {
-        result    = SpecExampleResult.failed;
-        exception = ex;
-      } catch (SpecPendingException ex) {
-        result    = SpecExampleResult.pending;
-        exception = ex;
-      } catch (Exception ex) {
-        result    = SpecExampleResult.error;
-        exception = ex;
+      } else {
+        try {
+          fn();
+          result = SpecExampleResult.passed;
+        } catch (ExpectException ex) {
+          result    = SpecExampleResult.failed;
+          exception = ex;
+        } catch (SpecPendingException ex) {
+          result    = SpecExampleResult.pending;
+          exception = ex;
+        } catch (Exception ex) {
+          result    = SpecExampleResult.error;
+          exception = ex;
+        }
       }
     }
-    if (SpecExample.raiseExceptions == true && exception != null)
-      throw exception;
   }
+
 }
