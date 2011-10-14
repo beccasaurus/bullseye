@@ -1,6 +1,13 @@
 class SpecFormatter {
 
+  String indentString;
+
   Function _loggingFunction;
+
+  SpecFormatter() {
+    if (indentString == null)
+      indentString = "  ";
+  }
 
   bool printToStdout;
 
@@ -17,10 +24,17 @@ class SpecFormatter {
   void beforeExample(SpecExample example){}
   void afterExample(SpecExample example){}
 
-  void write(String text) {
+  void write(String text, [int indent = 0]) {
     if (printToStdout)
-      print(text);
+      print(_indent(indent, text));
     if (_loggingFunction != null)
-      _loggingFunction(text);
+      _loggingFunction(_indent(indent, text) + "\n");
+  }
+
+  String _indent(int indent, String text) {
+    String prefix = "";
+    for (int i = 0; i < indent; i++)
+      prefix += indentString;
+    return prefix + text;
   }
 }

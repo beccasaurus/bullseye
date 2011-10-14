@@ -42,6 +42,11 @@ class SpecExample {
       return null;
   }
 
+  bool get passed()  => result == SpecExampleResult.passed;
+  bool get failed()  => result == SpecExampleResult.failed;
+  bool get error()   => result == SpecExampleResult.error;
+  bool get pending() => result == SpecExampleResult.pending;
+
   // Runs the function defined with this example, 
   // if it hasn't already been run.
   void run() {

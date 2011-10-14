@@ -64,13 +64,13 @@ class SpecDescribe {
 
   // Runs all of the examples in the describe
   void run() {
+    _beforeFunctions.forEach((fn) => fn(this));
     examples.forEach((example) {
-      _beforeFunctions.forEach((fn) => fn(this));
       befores.forEach((fn) => fn());
       example.run();
       afters.forEach((fn) => fn());
-      _afterFunctions.forEach((fn) => fn(this));
     });
+    _afterFunctions.forEach((fn) => fn(this));
     describes.forEach((desc) => desc.run());
   }
 }

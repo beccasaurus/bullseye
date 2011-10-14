@@ -1,8 +1,12 @@
 class SpecDocFormatterSpec_Example extends Spec {
   spec() {
     describe("foo", (){
+      it("foo-1", () => Expect.isTrue(true));
+      it("foo-2", () { throw new Exception("My Exception"); });
     });
     describe("bar", (){
+      it("bar-1", () => Expect.isTrue(false));
+      it("bar-2");
     });
   }
 }
@@ -19,15 +23,25 @@ class SpecDocFormatterSpec extends SpecDartTest {
     Specs.run(new SpecDocFormatterSpec_Example());
 
     var output = buffer.toString();
-    print("OUTPUT:\n$output");
+    // print("\nOUTPUT:\n$output");
 
     describe("SpecDocFormatter", {
 
-      "prints Spec.dart header": () => Expect.isTrue(output.indexOf("~ Spec.dart ${Spec.VERSION} ~", 0) > -1),
+      "prints Spec.dart header": () => Expect.isTrue(output.contains("~ Spec.dart ${Spec.VERSION} ~\n\n", 0)),
 
-      "prints describes": null,
+      "prints describes": (){
+        Expect.isTrue(output.contains("\nfoo", 0));
+        Expect.isTrue(output.contains("\nbar", 0));
+      },
 
-      "prints examples (indented under descibes)": null
+      "prints examples (indented under descibes)": (){
+        Expect.isTrue(output.contains("\nfoo\n  foo-1\n  foo-2\n", 0));
+        Expect.isTrue(output.contains("\nbar\n  bar-1\n  bar-2\n", 0));
+      },
+
+      "prints summary": (){
+        Expect.isTrue(output.contains("4 Examples, 1 Failures, 1 Errors, 1 Pending", 0));
+      }
 
     });
   }
