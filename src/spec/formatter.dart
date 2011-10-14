@@ -25,7 +25,7 @@ class SpecFormatter {
   void afterExample(SpecExample example){}
 
   void write(String text, [int indent = 0]) {
-    if (printToStdout)
+    if (printToStdout != false)
       print(_indent(indent, text));
     if (_loggingFunction != null)
       _loggingFunction(_indent(indent, text) + "\n");

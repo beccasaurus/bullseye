@@ -20,7 +20,7 @@ class SpecDocFormatterSpec extends SpecDartTest {
     formatter.logger((text) => buffer.add(text));
 
     Specs.formatter = formatter;
-    Specs.run(new SpecDocFormatterSpec_Example());
+    Specs.run([new SpecDocFormatterSpec_Example()]);
 
     var output = buffer.toString();
     // print("\nOUTPUT:\n$output");

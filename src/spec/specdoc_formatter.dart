@@ -26,9 +26,7 @@ class SpecDocFormatter extends SpecFormatter {
   get pendingExamples() => examples.filter((ex) => ex.pending);
 
   summary() {
-    var summary = "\n${examples.length} Examples";
-    if (failedExamples.length > 0)
-      summary += ", ${failedExamples.length} Failures";
+    var summary = "\n${examples.length} Examples, ${failedExamples.length} Failures";
     if (errorExamples.length > 0)
       summary += ", ${errorExamples.length} Errors";
     if (pendingExamples.length > 0)

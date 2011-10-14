@@ -9,6 +9,8 @@
 #source("pending_example_spec.dart");
 #source("run_hooks_spec.dart");
 #source("specdoc_formatter_spec.dart");
+#source("samples_spec.dart");
+#source("../samples/bowling_spec.dart");
 
 int main() {
   SpecMap.raiseExceptions = true;
@@ -20,7 +22,8 @@ int main() {
     new BeforeAndAfterSpec(),
     new PendingExampleSpec(),
     new RunHooksSpec(),
-    new SpecDocFormatterSpec()
+    new SpecDocFormatterSpec(),
+    new SamplesSpec()
   ]);
 }
 
