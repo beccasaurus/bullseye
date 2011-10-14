@@ -20,7 +20,7 @@ class SamplesSpec extends SpecDartTest {
     var spaces        = 26;
     var withoutIndent = "";
     indented.split("\n").forEach((line) {
-      if (line.length >= spaces)
+      if (line.length > spaces)
         withoutIndent += line.substring(spaces) + "\n";
       else
         withoutIndent += line + "\n";
@@ -41,7 +41,7 @@ class SamplesSpec extends SpecDartTest {
 
                           Bowling #score
                             returns 0 for all gutter game
-                          
+
                           1 Examples, 0 Failures""";
 
         Expect.stringEquals(removeIndent(expected), getSpecOutput(new BowlingSpec()));

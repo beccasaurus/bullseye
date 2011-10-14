@@ -82,16 +82,16 @@ class SpecMapExample {
   }
   _runBlockAndSetResult() {
     if (block != null) {
-      try {
+      //try {
         block();
         result = "passed";
-      } catch (ExpectException ex) {
-        result    = "failed";
-        exception = ex;
-      } catch (Exception ex) {
-        result    = "error";
-        exception = ex;
-      }
+      // } catch (ExpectException ex) {
+      //   result    = "failed";
+      //   exception = ex;
+      // } catch (Exception ex) {
+      //   result    = "error";
+      //   exception = ex;
+      // }
     } else {
       result = "pending";
     }

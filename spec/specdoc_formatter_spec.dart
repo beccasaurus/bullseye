@@ -23,7 +23,7 @@ class SpecDocFormatterSpec extends SpecDartTest {
     Specs.run([new SpecDocFormatterSpec_Example()]);
 
     var output = buffer.toString();
-    print("\nOUTPUT:\n$output");
+    // print("\nOUTPUT:\n$output");
 
     describe("SpecDocFormatter", {
 
@@ -36,16 +36,24 @@ class SpecDocFormatterSpec extends SpecDartTest {
 
       "prints examples (indented under descibes)": (){
         Expect.isTrue(output.contains("\nfoo\n  foo-1\n  foo-2\n", 0));
-        Expect.isTrue(output.contains("\nbar\n  bar-1\n  bar-2\n", 0));
+        Expect.isTrue(output.contains("\n\nbar\n  bar-1\n  [PENDING] bar-2\n", 0));
       },
 
       "prints summary": (){
         Expect.isTrue(output.contains("4 Examples, 1 Failures, 1 Errors, 1 Pending", 0));
       },
 
-      "prints out the details of any failed examples": null,
-      "prints out the details of any examples that raised Exceptions": null,
-      "prints out the details of any pending examples": null
+      "prints out the details of any failed examples": (){
+        Expect.isTrue(output.contains("\nFailures:\n\n  bar bar-1\n    Exception: Expect.isTrue(false) fails.", 0));
+      },
+
+      "prints out the details of any examples that raised Exceptions": (){
+        Expect.isTrue(output.contains("\nFailures:\n\n  bar bar-1\n    Exception: Expect.isTrue(false) fails.", 0));
+      },
+
+      "prints out the details of any pending examples": (){
+        Expect.isTrue(output.contains("\nPending:\n  bar bar-2", 0));
+      }
 
     });
   }

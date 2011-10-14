@@ -1,3 +1,5 @@
+// TODO add typing
+
 class SpecDocFormatter extends SpecFormatter {
   List<SpecExample> examples;
 
@@ -6,17 +8,32 @@ class SpecDocFormatter extends SpecFormatter {
   }
 
   beforeDescribe(describe) {
+    if (examples != null) write(""); // not the first describe
     write(describe.subject);
   }
 
-  beforeExample(example) {
+  afterExample(example) {
     if (examples == null)
       examples = new List<SpecExample>();
+
     examples.add(example);
-    write(example.name, indent: 1);
+
+    if (example.pending == true)
+      write('[PENDING] ' + example.name, indent: 1);
+    else
+      write(example.name, indent: 1);
+  }
+
+  separator() {
+    write("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
   }
 
   footer() {
+    if (failedExamples.length > 0 || errorExamples.length > 0 || pendingExamples.length > 0)
+      separator();
+    failedSummary();
+    errorSummary();
+    pendingSummary();
     summary();
   }
 
@@ -32,5 +49,36 @@ class SpecDocFormatter extends SpecFormatter {
     if (pendingExamples.length > 0)
       summary += ", ${pendingExamples.length} Pending";
     write(summary);
+  }
+
+  failedSummary() {
+    if (failedExamples.length > 0) {
+      write("\nFailures:");
+      failedExamples.forEach((example) {
+        write("");
+        write("${example.describe.subject} ${example.name}", indent: 1);
+        write("Exception: ${example.exception}", indent: 2);
+      });
+    }
+  }
+
+  errorSummary() {
+    if (errorExamples.length > 0) {
+      write("\nErrors:");
+      errorExamples.forEach((example) {
+        write("");
+        write("${example.describe.subject} ${example.name}", indent: 1);
+        write("Exception: ${example.exception}", indent: 2);
+      });
+    }
+  }
+
+  pendingSummary() {
+    if (pendingExamples.length > 0) {
+      write("\nPending:");
+      pendingExamples.forEach((example) {
+        write("${example.describe.subject} ${example.name}", indent: 1);
+      });
+    }
   }
 }
