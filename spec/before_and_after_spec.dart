@@ -35,6 +35,8 @@ class BeforeAndAfterSpec_With2Befores extends Spec {
   }
 }
 
+// This is a bit of a monster ... sorry  :/
+// I'll find a btter pattern for testing these types of scenarios.
 class BeforeAndAfterSpec_WithNestedDescribes extends Spec {
   // Using fields is problematic because you must 
   // explicitly set their defaults in a before() 
@@ -43,18 +45,28 @@ class BeforeAndAfterSpec_WithNestedDescribes extends Spec {
   // See setup() for defining an instance method 
   // that is run before every example in a spec.
   var text = "";
+  var output = "";
 
   spec() {
     describe("first", (){
+      before(() => output += "F");
       before(() => text = "");
       it("first 1", () => Expect.equals("first", text));
       before(() => text += "first");
       it("first 2", () => Expect.equals("first", text));
       describe("inner", (){
+        before(() => output += "I");
         it("inner", () => Expect.equals("firstinner", text));
+        it("add to output", () => output += "it");
         describe("innermost", (){
           before(() => text += "innermost");
           it("innermost", () => Expect.equals("firstinnerinnermost", text));
+          describe("innermostest", (){
+            before(() => text += "even more!");
+            it("innermostest", (){
+              Expect.equals("firstinnerinnermost even more!", text);
+            });
+          });
         });
         before(() => text += "inner");
       });
@@ -121,11 +133,18 @@ class BeforeAndAfterSpec extends SpecDartTest {
       "can have many before hooks in nested describes": (){
         withNested.run();
 
-        Expect.equals(SpecExampleResult.passed, withNested.describes[0].examples[0].result);
-        Expect.equals(SpecExampleResult.passed, withNested.describes[0].examples[1].result);
-        Expect.equals(SpecExampleResult.passed, withNested.describes[0].describes[0].examples[0].result);
-        Expect.equals(SpecExampleResult.passed, withNested.describes[0].describes[0].describes[0].examples[0].result);
-        Expect.equals(SpecExampleResult.passed, withNested.describes[1].examples[0].result);
+        // Check that all of the specs passed
+        withNested.describes.forEach((describe) {
+          describe.examples.forEach((example) {
+            Expect.equals(SpecExampleResult.passed, example.result);
+          });
+        });
+
+        // Check that the 'output' var has the text we would expect.
+        // You need to go read the spec carefully above to see how it 
+        // runs the 'F'irst before block for each it and then the 
+        // 'I'nner before block for each it in the Inner describe, etc.
+        Expect.stringEquals("FFFFIFIitFIFI", withNested.output);
       }
 
     });

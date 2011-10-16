@@ -39,7 +39,8 @@ class Spec {
   // subject: Description of what you're describing, eg. "Dog"
   // fn:      An anonymous function with calls to it(), before(), etc
   SpecDescribe describe([String subject = null, Function fn = null]) {
-    SpecDescribe describe = new SpecDescribe(spec: this, subject: subject, fn: fn);
+    SpecDescribe parent   = _currentDescribes.length == 0 ? null : _currentDescribes.last();
+    SpecDescribe describe = new SpecDescribe(spec: this, subject: subject, fn: fn, parent: parent);
 
     if (_currentDescribes.length == 0)
       describes.add(describe);

@@ -15,6 +15,10 @@ class SpecDescribe {
   // The Spec that this describe is in
   Spec spec;
 
+  // The describe that this is a child of, if any, as describes can be nested.
+  // If this is null, then this describe was defined directly in spec().
+  SpecDescribe parent;
+
   // The subject that we're describing, eg. "Dog"
   String subject;
 
@@ -40,8 +44,9 @@ class SpecDescribe {
   List afters;
 
   bool _evaluatedFn;
+  List<SpecDescribe> _parentDescribes;
 
-  SpecDescribe([Spec spec = null, String subject = null, Function fn = null]) {
+  SpecDescribe([Spec spec = null, SpecDescribe parent = null, String subject = null, Function fn = null]) {
     if (_beforeFunctions == null) _beforeFunctions = new List<Function>();
     if (_afterFunctions == null)  _afterFunctions = new List<Function>();
 
@@ -52,6 +57,7 @@ class SpecDescribe {
     this.describes = new List<SpecDescribe>();
     this.befores   = new List();
     this.afters    = new List();
+    this.parent    = parent;
   }
 
   // Evaluates this describe's function, if not already evaluated
@@ -62,13 +68,47 @@ class SpecDescribe {
     }
   }
 
+  // Returns a list of all of this describe's parent 
+  // describes with the outermost describes first.
+  List<SpecDescribe> get parentDescribes() {
+    if (_parentDescribes == null) {
+
+      List<SpecDescribe> tempDescribes = new List<SpecDescribe>();
+      SpecDescribe       currentParent = parent;
+
+      while (currentParent != null) {
+        tempDescribes.add(currentParent);
+        currentParent = currentParent.parent;
+      }
+
+      // insertRange isn't implemented yet, so we had to add each 
+      // describe to the end of a temporary array.  now we'll insert 
+      // them into the real array we want to return, in reverse.
+      _parentDescribes = new List<SpecDescribe>();
+      var times = tempDescribes.length;
+      for (int i = 0; i < times; i++)
+        _parentDescribes.add(tempDescribes.removeLast());
+    }   
+    return _parentDescribes;
+  }
+
+  void runBefores() {
+    befores.forEach((fn) => fn());
+  }
+
+  void runAfters() {
+    afters.forEach((fn) => fn());
+  }
+
   // Runs all of the examples in the describe
   void run() {
     _beforeFunctions.forEach((fn) => fn(this));
     examples.forEach((example) {
-      befores.forEach((fn) => fn());
+      parentDescribes.forEach((parent) => parent.runBefores());
+      runBefores();
       example.run();
-      afters.forEach((fn) => fn());
+      runAfters();
+      parentDescribes.forEach((parent) => parent.runAfters());
     });
     describes.forEach((desc) => desc.run());
     _afterFunctions.forEach((fn) => fn(this));
