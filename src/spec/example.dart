@@ -14,7 +14,7 @@ class SpecExample {
   // The SpecDecribe that this example is in
   SpecDescribe describe;
 
-  static bool raiseExceptions; // UNTESTED! TODO
+  static bool throwExceptions;
 
   String name;
 
@@ -59,7 +59,7 @@ class SpecExample {
     if (fn == null) {
       result = SpecExampleResult.pending;
     } else {
-      if (SpecExample.raiseExceptions == true) {
+      if (SpecExample.throwExceptions == true) {
         // Any Exceptions thrown will bubble up
         fn();
         result = SpecExampleResult.passed;

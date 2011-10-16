@@ -9,7 +9,7 @@
 #source("pending_example_spec.dart");
 #source("run_hooks_spec.dart");
 #source("specdoc_formatter_spec.dart");
-#source("raising_exceptions_spec.dart");
+#source("throwing_exceptions_spec.dart");
 #source("samples_spec.dart");
 #source("../samples/bowling_spec.dart");
 
@@ -24,7 +24,7 @@ int main() {
     new PendingExampleSpec(),
     new RunHooksSpec(),
     new SpecDocFormatterSpec(),
-    new RaisingExceptionsSpec(),
+    new ThrowingExceptionsSpec(),
     new SamplesSpec()
   ]);
 }

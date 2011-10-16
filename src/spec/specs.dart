@@ -14,12 +14,12 @@ class Specs {
     formatter.footer();
   }
 
-  static void raiseExceptions() {
-    SpecExample.raiseExceptions = true;
+  static void throwExceptions() {
+    SpecExample.throwExceptions = true;
   }
 
-  static void dontRaiseExceptions() {
-    SpecExample.raiseExceptions = false;
+  static void dontThrowExceptions() {
+    SpecExample.throwExceptions = false;
   }
 
   static _setupFormatterCallbacks() {

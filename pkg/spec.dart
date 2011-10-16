@@ -72,7 +72,7 @@ class SpecExample {
   static void beforeRun(Function callback) => _beforeFunctions.add(callback);
   static void afterRun(Function callback) => _afterFunctions.add(callback);
   SpecDescribe describe;
-  static bool raiseExceptions; // UNTESTED! TODO
+  static bool throwExceptions;
   String name;
   Function fn;
   String result;
@@ -103,7 +103,7 @@ class SpecExample {
     if (fn == null) {
       result = SpecExampleResult.pending;
     } else {
-      if (SpecExample.raiseExceptions == true) {
+      if (SpecExample.throwExceptions == true) {
         fn();
         result = SpecExampleResult.passed;
       } else {
@@ -365,11 +365,11 @@ class Specs {
     specs.forEach((spec) => spec.run());
     formatter.footer();
   }
-  static void raiseExceptions() {
-    SpecExample.raiseExceptions = true;
+  static void throwExceptions() {
+    SpecExample.throwExceptions = true;
   }
-  static void dontRaiseExceptions() {
-    SpecExample.raiseExceptions = false;
+  static void dontThrowExceptions() {
+    SpecExample.throwExceptions = false;
   }
   static _setupFormatterCallbacks() {
     if (_formatterCallbacksSetup != true) {
