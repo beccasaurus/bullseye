@@ -365,6 +365,12 @@ class Specs {
     specs.forEach((spec) => spec.run());
     formatter.footer();
   }
+  static void raiseExceptions() {
+    SpecExample.raiseExceptions = true;
+  }
+  static void dontRaiseExceptions() {
+    SpecExample.raiseExceptions = false;
+  }
   static _setupFormatterCallbacks() {
     if (_formatterCallbacksSetup != true) {
       _formatterCallbacksSetup = true;
