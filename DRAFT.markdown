@@ -15,9 +15,12 @@ Installing
 Usage
 -----
 
-### Hello World
+### Hello World (bowling)
 
 ### More Complex
+
+Submitting Bugs
+---------------
 
 Configuration
 -------------
@@ -48,6 +51,10 @@ Contributing
 
 Background
 ----------
+
+**TODO kill this section and make xUnit support its own section, briefly 
+noting how we can't support test() but we've got aliases geared towards 
+making it look like it ...**
 
 When Dart was released, one of the first things that I noticed 
 was the inclusion of the `Expect` class, which contains useful 
@@ -94,7 +101,7 @@ Once Dart has reflection, it's very likely that we'll add an [xUnit][] style
 syntax to Spec.dart.
 
 
-Future Features
+Planned Features
 ---------------
 
  * Tagging (examples, describes, and (maybe?) specs)
@@ -103,6 +110,7 @@ Future Features
  * Running tests asynchronously via Isolates?  And/or parallelizing tests across processes or ...?
  * Allowing it/before/after inside of spec() but outside of describe() blocks?
  * setup() / teardown() Spec instance methods to split this out / clean up test classes
+ * Command line arguments, once Dart VM can get them
 
 License
 -------
