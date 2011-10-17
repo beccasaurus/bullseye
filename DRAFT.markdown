@@ -3,11 +3,12 @@ spec.dart
 
 ## THIS IS JUST A DRAFT!  HERE BE DRAGONS!
 
-Spec.dart is a testing framework for Dart including:
+Spec.dart is a testing framework for Dart featuring:
 
- * Test definition DSL
- * Test runner
- * Test output formatters
+ * xUnit inspired test DSL
+ * RSpec inspired spec DSL
+ * Test suite runner
+ * Output formatters
 
 Installing
 ----------
