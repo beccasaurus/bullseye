@@ -1,20 +1,3 @@
-class ExampleSpec_Example extends Spec {
-  spec() {
-    describe("something", (){
-      it("should pass", (){
-        Expect.equals(1, 1);
-      });
-      it("should fail", (){
-        Expect.equals(1, "Not Equal!");
-      });
-      it("should have an error", (){
-        "".stringsDontHaveThisMethod__OhNoes();
-      });
-      it("should be pending");
-    });
-  }
-}
-
 class ExampleSpec extends SpecDartTest {
   spec() {
 
@@ -83,6 +66,23 @@ class ExampleSpec extends SpecDartTest {
         Expect.equals(SpecExampleResult.pending, example.result);
       }
 
+    });
+  }
+}
+
+class ExampleSpec_Example extends Spec {
+  spec() {
+    describe("something", (){
+      it("should pass", (){
+        Expect.equals(1, 1);
+      });
+      it("should fail", (){
+        Expect.equals(1, "Not Equal!");
+      });
+      it("should have an error", (){
+        "".stringsDontHaveThisMethod__OhNoes();
+      });
+      it("should be pending");
     });
   }
 }

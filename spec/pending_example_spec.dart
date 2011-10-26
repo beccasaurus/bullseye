@@ -1,19 +1,3 @@
-class PendingExampleSpec_Example extends Spec {
-  spec() {
-    describe("foo", (){
-      it("pending because no function");
-      it("pending because called pending()", (){
-        pending();
-        "".thisWouldBlowUpBecauseThisMethodDoesntExist();
-      });
-      it("pending because called pending('message')", (){
-        pending("my awesome message");
-        "".thisWouldBlowUpBecauseThisMethodDoesntExist();
-      });
-    });
-  }
-}
-
 class PendingExampleSpec extends SpecDartTest {
   spec() {
 
@@ -40,6 +24,22 @@ class PendingExampleSpec extends SpecDartTest {
         Expect.equals("my awesome message", example.pendingReason);
       }
 
+    });
+  }
+}
+
+class PendingExampleSpec_Example extends Spec {
+  spec() {
+    describe("foo", (){
+      it("pending because no function");
+      it("pending because called pending()", (){
+        pending();
+        "".thisWouldBlowUpBecauseThisMethodDoesntExist();
+      });
+      it("pending because called pending('message')", (){
+        pending("my awesome message");
+        "".thisWouldBlowUpBecauseThisMethodDoesntExist();
+      });
     });
   }
 }

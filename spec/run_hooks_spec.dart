@@ -1,21 +1,3 @@
-class RunHooksSpec_Example1 extends Spec {
-  spec() {
-    describe("foo", (){
-      it("foo");
-    });
-    describe("bar", (){
-      it("bar");
-    });
-  }
-}
-class RunHooksSpec_Example2 extends Spec {
-  spec() {
-    describe("baz", (){
-      it("baz");
-    });
-  }
-}
-
 class RunHooksSpec extends SpecDartTest {
   var hookData;
 
@@ -76,6 +58,24 @@ class RunHooksSpec extends SpecDartTest {
         Expect.equals("baz", hookData["ex:after"][2].name);
       }
 
+    });
+  }
+}
+
+class RunHooksSpec_Example1 extends Spec {
+  spec() {
+    describe("foo", (){
+      it("foo");
+    });
+    describe("bar", (){
+      it("bar");
+    });
+  }
+}
+class RunHooksSpec_Example2 extends Spec {
+  spec() {
+    describe("baz", (){
+      it("baz");
     });
   }
 }

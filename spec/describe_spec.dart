@@ -1,36 +1,3 @@
-class DescribeSpec_NoExamples extends Spec {
-  spec(){ describe("desc", (){}); }
-}
-class DescribeSpec_ManyExamples extends Spec {
-  spec() {
-    describe("desc", (){
-      it("should do stuff");
-      it("should do other stuff");
-    });
-    describe("more", (){
-      it("should do more stuff");
-    });
-  }
-}
-class DescribeSpec_SubDescribes extends Spec {
-  spec() {
-    describe("outer first", (){
-      it("outer top it");
-      describe("inner first", (){
-        it("inner first it");
-      }); 
-      it("outer bottom it");
-    });
-    describe("outer second", (){
-      describe("inner second", (){
-        describe("inner inner second", (){
-          it("inner inner second it");
-        });
-      });
-    });
-  }
-}
-
 class DescribeSpec extends SpecDartTest {
   spec() {
 
@@ -82,6 +49,39 @@ class DescribeSpec extends SpecDartTest {
         Expect.equals("inner inner second it", spec.describes[1].describes[0].describes[0].examples[0].name);
       }
 
+    });
+  }
+}
+
+class DescribeSpec_NoExamples extends Spec {
+  spec(){ describe("desc", (){}); }
+}
+class DescribeSpec_ManyExamples extends Spec {
+  spec() {
+    describe("desc", (){
+      it("should do stuff");
+      it("should do other stuff");
+    });
+    describe("more", (){
+      it("should do more stuff");
+    });
+  }
+}
+class DescribeSpec_SubDescribes extends Spec {
+  spec() {
+    describe("outer first", (){
+      it("outer top it");
+      describe("inner first", (){
+        it("inner first it");
+      }); 
+      it("outer bottom it");
+    });
+    describe("outer second", (){
+      describe("inner second", (){
+        describe("inner inner second", (){
+          it("inner inner second it");
+        });
+      });
     });
   }
 }

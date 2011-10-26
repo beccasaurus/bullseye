@@ -1,12 +1,3 @@
-class SpecSpec_NoDescribes extends Spec {}
-class SpecSpec_ManyDescribes extends Spec {
-  spec() {
-    describe("Foo");
-    describe("Bar");
-  }
-}
-class SpecSpec_ManyDescribesWithExamples extends Spec {}
-
 class SpecSpec extends SpecDartTest {
   spec() {
 
@@ -29,3 +20,12 @@ class SpecSpec extends SpecDartTest {
     });
   }
 }
+
+class SpecSpec_NoDescribes extends Spec {}
+class SpecSpec_ManyDescribes extends Spec {
+  spec() {
+    describe("Foo");
+    describe("Bar");
+  }
+}
+class SpecSpec_ManyDescribesWithExamples extends Spec {}

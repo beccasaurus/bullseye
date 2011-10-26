@@ -1,25 +1,3 @@
-class SpecDocFormatterSpec_Example extends Spec {
-  spec() {
-    describe("foo", (){
-      it("foo-1", () => Expect.isTrue(true));
-      it("foo-2", () { throw new Exception("My Exception"); });
-    });
-    describe("bar", (){
-      it("bar-1", () => Expect.isTrue(false));
-      it("bar-2");
-
-      describe("inner", (){
-        it("is indented more", (){
-          pending("custom pending message");
-        });
-        describe("one", (){
-          it("more");
-        });
-      });
-    });
-  }
-}
-
 class SpecDocFormatterSpec extends SpecDartTest {
   spec() {
 
@@ -103,6 +81,28 @@ class SpecDocFormatterSpec extends SpecDartTest {
       "the summary line should be red because atleast 1 example failed": (){
         Expect.isTrue(colored.contains("\x1b\x5b;0;31m\n12 Examples, 2 Failures, 2 Errors, 6 Pending", 0));
       }
+    });
+  }
+}
+
+class SpecDocFormatterSpec_Example extends Spec {
+  spec() {
+    describe("foo", (){
+      it("foo-1", () => Expect.isTrue(true));
+      it("foo-2", () { throw new Exception("My Exception"); });
+    });
+    describe("bar", (){
+      it("bar-1", () => Expect.isTrue(false));
+      it("bar-2");
+
+      describe("inner", (){
+        it("is indented more", (){
+          pending("custom pending message");
+        });
+        describe("one", (){
+          it("more");
+        });
+      });
     });
   }
 }

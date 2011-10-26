@@ -1,3 +1,60 @@
+class BeforeAndAfterSpec extends SpecDartTest {
+  spec() {
+
+    var with1Before  = new BeforeAndAfterSpec_With1Before();
+    var with2Befores = new BeforeAndAfterSpec_With2Befores();
+    var withNested   = new BeforeAndAfterSpec_WithNestedDescribes();
+    var withAfters   = new BeforeAndAfterSpec_WithAfters();
+
+    describe("Before", {
+
+      "can have 1 before hook": (){
+        with1Before.run();
+
+        // TODO this would be more ideal IMHO and it would get us stags 
+        //      that we'll be able to use from formatters.
+        // Expect.equals(2, with1Before.results.passedCount);
+
+        Expect.equals(SpecExampleResult.passed, with1Before.describes[0].examples[0].result);
+        Expect.equals(SpecExampleResult.passed, with1Before.describes[0].examples[1].result);
+      },
+
+      "can have many before hooks": (){
+        with2Befores.run();
+
+        Expect.equals(SpecExampleResult.passed, with1Before.describes[0].examples[1].result);
+      },
+
+      "can have many before hooks in nested describes": (){
+        withNested.run();
+
+        // Check that all of the specs passed
+        withNested.describes.forEach((describe) {
+          describe.examples.forEach((example) {
+            Expect.equals(SpecExampleResult.passed, example.result);
+          });
+        });
+
+        // Check that the 'output' var has the text we would expect.
+        // You need to go read the spec carefully above to see how it 
+        // runs the 'F'irst before block for each it and then the 
+        // 'I'nner before block for each it in the Inner describe, etc.
+        Expect.stringEquals("FFFFIFIitFIFI", withNested.output);
+      }
+
+    });
+
+    describe("After", {
+      "can have 1 after hook": (){
+        withAfters.run();
+
+        Expect.equals(SpecExampleResult.passed, withAfters.describes[0].examples[0].result);
+        Expect.equals(SpecExampleResult.passed, withAfters.describes[0].examples[1].result);
+      }
+    });
+  }
+}
+
 class BeforeAndAfterSpec_With1Before extends Spec {
   var text;
 
@@ -99,63 +156,6 @@ class BeforeAndAfterSpec_WithAfters extends Spec {
       it("now it's gone!", (){
         Expect.equals("It's gone!", inTheHat);
       });
-    });
-  }
-}
-
-class BeforeAndAfterSpec extends SpecDartTest {
-  spec() {
-
-    var with1Before  = new BeforeAndAfterSpec_With1Before();
-    var with2Befores = new BeforeAndAfterSpec_With2Befores();
-    var withNested   = new BeforeAndAfterSpec_WithNestedDescribes();
-    var withAfters   = new BeforeAndAfterSpec_WithAfters();
-
-    describe("Before", {
-
-      "can have 1 before hook": (){
-        with1Before.run();
-
-        // TODO this would be more ideal IMHO and it would get us stags 
-        //      that we'll be able to use from formatters.
-        // Expect.equals(2, with1Before.results.passedCount);
-
-        Expect.equals(SpecExampleResult.passed, with1Before.describes[0].examples[0].result);
-        Expect.equals(SpecExampleResult.passed, with1Before.describes[0].examples[1].result);
-      },
-
-      "can have many before hooks": (){
-        with2Befores.run();
-
-        Expect.equals(SpecExampleResult.passed, with1Before.describes[0].examples[1].result);
-      },
-
-      "can have many before hooks in nested describes": (){
-        withNested.run();
-
-        // Check that all of the specs passed
-        withNested.describes.forEach((describe) {
-          describe.examples.forEach((example) {
-            Expect.equals(SpecExampleResult.passed, example.result);
-          });
-        });
-
-        // Check that the 'output' var has the text we would expect.
-        // You need to go read the spec carefully above to see how it 
-        // runs the 'F'irst before block for each it and then the 
-        // 'I'nner before block for each it in the Inner describe, etc.
-        Expect.stringEquals("FFFFIFIitFIFI", withNested.output);
-      }
-
-    });
-
-    describe("After", {
-      "can have 1 after hook": (){
-        withAfters.run();
-
-        Expect.equals(SpecExampleResult.passed, withAfters.describes[0].examples[0].result);
-        Expect.equals(SpecExampleResult.passed, withAfters.describes[0].examples[1].result);
-      }
     });
   }
 }

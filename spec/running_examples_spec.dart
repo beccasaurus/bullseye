@@ -1,23 +1,3 @@
-class RunningExamplesSpec_SingleDescribe extends Spec {
-  spec() {
-    describe("foo", (){
-      it("passes", (){});
-      it("fails", (){ Expect.isTrue(false); });
-      it("blows up", (){ "".noMethodSoThisGoBoom(); });
-      it("pending");
-    });
-    describe("bar", (){
-      it("pending");
-      describe("inner", (){
-        describe("inner-inner", (){
-          it("fails", (){ Expect.isTrue(false); });
-        });
-      });
-      it("passed", (){});
-    });
-  }
-}
-
 class RunningExamplesSpec extends SpecDartTest {
   spec() {
     describe("Running Examples", {
@@ -59,3 +39,24 @@ class RunningExamplesSpec extends SpecDartTest {
     });
   }
 }
+
+class RunningExamplesSpec_SingleDescribe extends Spec {
+  spec() {
+    describe("foo", (){
+      it("passes", (){});
+      it("fails", (){ Expect.isTrue(false); });
+      it("blows up", (){ "".noMethodSoThisGoBoom(); });
+      it("pending");
+    });
+    describe("bar", (){
+      it("pending");
+      describe("inner", (){
+        describe("inner-inner", (){
+          it("fails", (){ Expect.isTrue(false); });
+        });
+      });
+      it("passed", (){});
+    });
+  }
+}
+

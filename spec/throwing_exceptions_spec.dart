@@ -1,15 +1,3 @@
-class ThrowingExceptionsSpec_Example extends Spec {
-  spec() {
-    describe("My specs", (){
-      // NOTE: using fail() or even pending() will also throw exceptions
-      // NOTE: assertion failures (eg. Expect.equals()) will also throw exceptions
-      it("the Exception thrown here (even an ExpectException) will bubble up", (){
-        throw new ExpectException("boom!");
-      });
-    });
-  }
-}
-
 class ThrowingExceptionsSpec extends SpecDartTest {
   spec() {
     describe("Configuring Throwing Exceptions", {
@@ -28,6 +16,18 @@ class ThrowingExceptionsSpec extends SpecDartTest {
         Specs.run([new ThrowingExceptionsSpec_Example()]); // No exceptions thrown
       }
 
+    });
+  }
+}
+
+class ThrowingExceptionsSpec_Example extends Spec {
+  spec() {
+    describe("My specs", (){
+      // NOTE: using fail() or even pending() will also throw exceptions
+      // NOTE: assertion failures (eg. Expect.equals()) will also throw exceptions
+      it("the Exception thrown here (even an ExpectException) will bubble up", (){
+        throw new ExpectException("boom!");
+      });
     });
   }
 }
