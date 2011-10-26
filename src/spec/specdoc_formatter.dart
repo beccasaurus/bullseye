@@ -1,13 +1,7 @@
-// Spec.dart's default formatter.
-//
-// SpecDocFormatter prints out each describe and its examples, indented 
-// to show nesting and colored based on the result of running each example.
 class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
 
   int _describeDepth;
 
-  // A list of all of the examples that have been run 
-  // through this formatter so far.
   List<SpecExample> examples;
 
   SpecDocFormatter() {
@@ -20,13 +14,10 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
   Collection<SpecExample> get errorExamples()   => examples.filter((ex) => ex.error);
   Collection<SpecExample> get pendingExamples() => examples.filter((ex) => ex.pending);
 
-  // Prints a header showing the current version of Spec.dart
   void header() {
     write("~ Spec.dart ${Spec.VERSION} ~\n");
   }
 
-  // Print out the name of the describe that we're about 
-  // to run examples for.
   void beforeDescribe(SpecDescribe describe) {
     write(describe.subject, indent: _describeDepth);
     ++_describeDepth;
@@ -36,10 +27,6 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
     --_describeDepth;
   }
 
-  // Print out the name of the example that was just run.
-  // If passes, the output will be green.
-  // If pending, the output will be yellow and will show the pending reason, if given.
-  // If failed or an error occurred, the output will be red.
   void afterExample(SpecExample example) {
     if (examples == null)
       examples = new List<SpecExample>();
@@ -56,8 +43,6 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
     write(pendingString + example.name, indent: _describeDepth, color: colorForExample(example));
   }
 
-  // Given a SpecExample, this returns the the color that this 
-  // example should be outputted as, eg. "red" for failing examples.
   String colorForExample(SpecExample example) {
     switch (example.result) {
       case SpecExampleResult.passed:  return "green";

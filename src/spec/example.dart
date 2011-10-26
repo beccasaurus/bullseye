@@ -3,15 +3,10 @@ class SpecExample {
   static List<Function> _beforeFunctions;
   static List<Function> _afterFunctions;
 
-  // Registers the given callback so it will be 
-  // fired every time any SpecExample is run()
   static void beforeRun(Function callback) => _beforeFunctions.add(callback);
 
-  // Registers the given callback so it will be 
-  // fired after every time any SpecExample is run()
   static void afterRun(Function callback) => _afterFunctions.add(callback);
 
-  // The SpecDecribe that this example is in
   SpecDescribe describe;
 
   static bool throwExceptions;
@@ -33,8 +28,6 @@ class SpecExample {
     this.fn         = fn;
   }
 
-  // If this spec is pending and a reason 
-  // was given, this returns that reason.
   String get pendingReason() {
     if (result == SpecExampleResult.pending && exception is SpecPendingException)
       return exception.message;
@@ -47,8 +40,6 @@ class SpecExample {
   bool get error()   => result == SpecExampleResult.error;
   bool get pending() => result == SpecExampleResult.pending;
 
-  // Runs the function defined with this example, 
-  // if it hasn't already been run.
   void run() {
     _beforeFunctions.forEach((fn) => fn(this));
     _runFunction();
@@ -60,7 +51,6 @@ class SpecExample {
       result = SpecExampleResult.pending;
     } else {
       if (SpecExample.throwExceptions == true) {
-        // Any Exceptions thrown will bubble up
         fn();
         result = SpecExampleResult.passed;
       } else {
