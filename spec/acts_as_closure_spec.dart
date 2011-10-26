@@ -95,22 +95,27 @@ class ActsAsClosureSpec extends SpecMap_Bullseye {
         Expect.listEquals(["first", "second"], closure.meta["tags"]);
       },
 
-      // "can be run()": null,
+      "can be run()": (){
+        // TODO Result -> Status
+        //var closure = newInstance();
+        //Expect.equals(BullseyeTestStatus.not_run);
+      },
+
       // "raises an Exception if you try to run() its function more than once": null,
       // "allows you to explicitly rerun() its function, allowing you to run it as many times are you'd like": null,
       // "you can rerun() even if you haven't run() before": null,
       // "saves the returnValue of the function when run()": null,
       // "updates the returnValue of the function when rerun()": null,
       // "has a status of 'not_run' before being run()": null,
-      // "has a status of 'passed' if running the function results in no Exceptions being thrown": null,
+      // "has a status of 'passed' if running the function statuss in no Exceptions being thrown": null,
       // "has a status of 'pending' if no function given (even before being run())": null,
-      // "has a status of 'error' if running the function results in an Exception being thrown (besides an ExpectException)": null,
-      // "has a status of 'failed' if running the function results in an ExpectException being thrown": null,
+      // "has a status of 'error' if running the function statuss in an Exception being thrown (besides an ExpectException)": null,
+      // "has a status of 'failed' if running the function statuss in an ExpectException being thrown": null,
 
-      // "exception property gets set to the thrown exception if an Exception is thrown as a result of running the function" : null,
-      // "exception property gets set to the thrown exception if an ExpectException is thrown as a result of running the function" : null,
-      // "stackTrace property gets set to the thrown exception's stack trace if an Exception is thrown as a result of running the function" : null,
-      // "stackTrace property gets set to the thrown exception's stack trace if an ExpectException is thrown as a result of running the function" : null,
+      // "exception property gets set to the thrown exception if an Exception is thrown as a status of running the function" : null,
+      // "exception property gets set to the thrown exception if an ExpectException is thrown as a status of running the function" : null,
+      // "stackTrace property gets set to the thrown exception's stack trace if an Exception is thrown as a status of running the function" : null,
+      // "stackTrace property gets set to the thrown exception's stack trace if an ExpectException is thrown as a status of running the function" : null,
       // "rerun() resets exception and stackTrace (incase they change)": null,
 
       // "can be configured to let any thrown Exceptions bubble up (to see the correct stacktrace)": null,

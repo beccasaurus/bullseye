@@ -8,19 +8,19 @@ class OriginalPendingTestSpec extends SpecMap_Bullseye {
       "can be defined by calling it() without a function": (){
         var test = spec.testFixtures[0].tests[0];
         test.run();
-        Expect.equals(BullseyeTestResult.pending, test.result);
+        Expect.equals(BullseyeTestStatus.pending, test.status);
       },
 
       "can be defined by calling pending() from within your it()": (){
         var test = spec.testFixtures[0].tests[1];
         test.run();
-        Expect.equals(BullseyeTestResult.pending, test.result);
+        Expect.equals(BullseyeTestStatus.pending, test.status);
       },
 
       "can be defined by calling pending('message') from within your it()": (){
         var test = spec.testFixtures[0].tests[2];
         test.run();
-        Expect.equals(BullseyeTestResult.pending, test.result);
+        Expect.equals(BullseyeTestStatus.pending, test.status);
         Expect.equals("my awesome message", test.pendingReason);
       }
 

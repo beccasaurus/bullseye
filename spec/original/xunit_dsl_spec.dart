@@ -6,21 +6,21 @@ class OriginalxUnitDSLSpec extends SpecMap_Bullseye {
         var testCase  = new xUnitDSLSpec_Test();
         var testFixture1 = testCase.testFixtures[0];
         var testFixture2 = testCase.testFixtures[1];
-        testFixture1.tests.forEach((ex) => Expect.isNull(ex.result));
-        testFixture2.tests.forEach((ex) => Expect.isNull(ex.result));
+        testFixture1.tests.forEach((ex) => Expect.isNull(ex.status));
+        testFixture2.tests.forEach((ex) => Expect.isNull(ex.status));
 
-        testCase.run(); // TODO should return a result
+        testCase.run(); // TODO should return a status
 
         // foo
-        Expect.equals(BullseyeTestResult.passed,  testFixture1.tests[0].result);
-        Expect.equals(BullseyeTestResult.failed,  testFixture1.tests[1].result);
-        Expect.equals(BullseyeTestResult.error,   testFixture1.tests[2].result);
-        Expect.equals(BullseyeTestResult.pending, testFixture1.tests[3].result);
+        Expect.equals(BullseyeTestStatus.passed,  testFixture1.tests[0].status);
+        Expect.equals(BullseyeTestStatus.failed,  testFixture1.tests[1].status);
+        Expect.equals(BullseyeTestStatus.error,   testFixture1.tests[2].status);
+        Expect.equals(BullseyeTestStatus.pending, testFixture1.tests[3].status);
 
         // bar
-        Expect.equals(BullseyeTestResult.pending, testFixture2.tests[0].result);
-        Expect.equals(BullseyeTestResult.failed,  testFixture2.testFixtures[0].testFixtures[0].tests[0].result);
-        Expect.equals(BullseyeTestResult.passed,  testFixture2.tests[1].result);
+        Expect.equals(BullseyeTestStatus.pending, testFixture2.tests[0].status);
+        Expect.equals(BullseyeTestStatus.failed,  testFixture2.testFixtures[0].testFixtures[0].tests[0].status);
+        Expect.equals(BullseyeTestStatus.passed,  testFixture2.tests[1].status);
 
         // Check that setUp and tearDown run as expected
         Expect.equals("ududududUDUDUXYD", testCase.text);

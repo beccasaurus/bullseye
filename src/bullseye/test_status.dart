@@ -1,4 +1,4 @@
-class BullseyeTestResult {
+class BullseyeTestStatus {
   static final String passed  = "Passed";
   static final String pending = "Pending";
   static final String failed  = "Failed";

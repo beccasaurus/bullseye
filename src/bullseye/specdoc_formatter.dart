@@ -44,11 +44,11 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
   }
 
   String colorForTest(BullseyeTest test) {
-    switch (test.result) {
-      case BullseyeTestResult.passed:  return "green";
-      case BullseyeTestResult.failed:  return "red";
-      case BullseyeTestResult.error:   return "red";
-      case BullseyeTestResult.pending: return "yellow";
+    switch (test.status) {
+      case BullseyeTestStatus.passed:  return "green";
+      case BullseyeTestStatus.failed:  return "red";
+      case BullseyeTestStatus.error:   return "red";
+      case BullseyeTestStatus.pending: return "yellow";
       default: return "white";
     }
   }

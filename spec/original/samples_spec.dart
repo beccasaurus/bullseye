@@ -5,7 +5,7 @@ class OriginalSamplesSpec extends SpecMap_Bullseye {
 
   // Given a spec, this runs the spec thru 
   // Bullseye.run using the SpecDocFormatter and 
-  // returns a String of the resulting output.
+  // returns a String of the statusing output.
   String getSpecOutput(BullseyeTestFixture testFixture) {
     var buffer    = new StringBuffer();
     var formatter = new SpecDocFormatter();

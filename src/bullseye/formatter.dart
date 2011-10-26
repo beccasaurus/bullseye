@@ -40,13 +40,13 @@ class SpecFormatter implements SpecFormattable {
   }
 
   void write(String text, [int indent = 0, String color = null]) {
-    String result = _indent(indent, text);
+    String status = _indent(indent, text);
     if (colorize == true)
-      result = _colorizeText(result, color);
+      status = _colorizeText(status, color);
     if (printToStdout != false)
-      print(result);
+      print(status);
     if (_loggingFunction != null)
-      _loggingFunction(result + "\n");
+      _loggingFunction(status + "\n");
   }
 
   String _colorizeText([String text = null, String color = null]) {

@@ -6,7 +6,7 @@
 #source("bullseye/closure.dart");
 
 #source("bullseye/test.dart");
-#source("bullseye/test_result.dart");
+#source("bullseye/test_status.dart");
 #source("bullseye/test_fixture.dart");
 
 #source("bullseye/test_fixture_definition.dart");

@@ -111,7 +111,7 @@ class OriginalClosureSpec extends SpecMap_Bullseye {
         Expect.equals("not_run", new BullseyeClosure(fn: (){}).status);
       },
 
-      "has a status of 'passed' if running the fn results in no Exceptions being thrown": (){
+      "has a status of 'passed' if running the fn statuss in no Exceptions being thrown": (){
         var closure = new BullseyeClosure(fn: (){});
         closure.run();
         Expect.equals("passed", closure.status);
@@ -121,33 +121,33 @@ class OriginalClosureSpec extends SpecMap_Bullseye {
         Expect.equals("pending", new BullseyeClosure().status);
       },
 
-      "has a status of 'error' if running the fn results in an Exception being thrown (besides an ExpectException)": (){
+      "has a status of 'error' if running the fn statuss in an Exception being thrown (besides an ExpectException)": (){
         var closure = new BullseyeClosure(fn: (){ throw new NotImplementedException(); });
         closure.run();
         Expect.equals("error", closure.status);
       },
 
-      "has a status of 'failed' if running the fn results in an ExpectException being thrown": (){
+      "has a status of 'failed' if running the fn statuss in an ExpectException being thrown": (){
         var closure = new BullseyeClosure(fn: (){ Expect.isTrue(false); });
         closure.run();
         Expect.equals("failed", closure.status);
       },
 
-      "exception property gets set to the thrown exception if an Exception is thrown as a result of running the fn" : (){
+      "exception property gets set to the thrown exception if an Exception is thrown as a status of running the fn" : (){
         var closure = new BullseyeClosure(fn: (){ throw new NotImplementedException(); });
         Expect.isNull(closure.exception);
         closure.run();
         Expect.isTrue(closure.exception is NotImplementedException);
       },
 
-      "exception property gets set to the thrown exception if an ExpectException is thrown as a result of running the fn" : (){
+      "exception property gets set to the thrown exception if an ExpectException is thrown as a status of running the fn" : (){
         var closure = new BullseyeClosure(fn: (){ Expect.fail("boom!"); });
         closure.run();
         Expect.isTrue(closure.exception is ExpectException);
         Expect.equals("Expect.fail('boom!')", closure.exception.toString());
       },
 
-      "stackTrace property gets set to the thrown exception's stack trace if an Exception is thrown as a result of running the fn" : (){
+      "stackTrace property gets set to the thrown exception's stack trace if an Exception is thrown as a status of running the fn" : (){
         var closure = new BullseyeClosure(fn: (){ throw new NotImplementedException(); });
         Expect.isNull(closure.stackTrace);
         closure.run();
@@ -155,7 +155,7 @@ class OriginalClosureSpec extends SpecMap_Bullseye {
         Expect.isTrue(closure.stackTrace.toString().contains("Function: 'OriginalClosureSpec.function' url: 'spec/original/closure_spec.dart'", 0));
       },
 
-      "stackTrace property gets set to the thrown exception's stack trace if an ExpectException is thrown as a result of running the fn" : (){
+      "stackTrace property gets set to the thrown exception's stack trace if an ExpectException is thrown as a status of running the fn" : (){
         var closure = new BullseyeClosure(fn: (){ Expect.fail("boom!"); });
         Expect.isNull(closure.stackTrace);
         closure.run();

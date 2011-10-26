@@ -18,22 +18,22 @@ class OriginalTestSpec extends SpecMap_Bullseye {
       "passed": (){
         var test = spec.testFixtures[0].tests[0];
         Expect.equals("should pass", test.description);
-        Expect.isNull(test.result);
+        Expect.isNull(test.status);
 
         test.run();
 
-        Expect.equals(BullseyeTestResult.passed, test.result);
+        Expect.equals(BullseyeTestStatus.passed, test.status);
       },
 
       "failed": (){
         var test = spec.testFixtures[0].tests[1];
         Expect.equals("should fail", test.description);
-        Expect.isNull(test.result);
+        Expect.isNull(test.status);
         Expect.isNull(test.exception);
 
         test.run();
 
-        Expect.equals(BullseyeTestResult.failed, test.result);
+        Expect.equals(BullseyeTestStatus.failed, test.status);
 
         var exception = test.exception;
         Expect.isNotNull(exception);
@@ -44,12 +44,12 @@ class OriginalTestSpec extends SpecMap_Bullseye {
       "error": (){
         var test = spec.testFixtures[0].tests[2];
         Expect.equals("should have an error", test.description);
-        Expect.isNull(test.result);
+        Expect.isNull(test.status);
         Expect.isNull(test.exception);
 
         test.run();
 
-        Expect.equals(BullseyeTestResult.error, test.result);
+        Expect.equals(BullseyeTestStatus.error, test.status);
 
         var exception = test.exception;
         Expect.isNotNull(exception);
@@ -60,11 +60,11 @@ class OriginalTestSpec extends SpecMap_Bullseye {
       "pending": (){
         var test = spec.testFixtures[0].tests[3];
         Expect.equals("should be pending", test.description);
-        Expect.isNull(test.result);
+        Expect.isNull(test.status);
 
         test.run();
 
-        Expect.equals(BullseyeTestResult.pending, test.result);
+        Expect.equals(BullseyeTestStatus.pending, test.status);
       }
 
     });

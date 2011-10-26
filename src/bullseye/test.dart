@@ -13,7 +13,7 @@ class BullseyeTest {
 
   Function fn;
 
-  String result;
+  String status;
 
   Exception exception;
 
@@ -27,16 +27,16 @@ class BullseyeTest {
   }
 
   String get pendingReason() {
-    if (result == BullseyeTestResult.pending && exception is SpecPendingException)
+    if (status == BullseyeTestStatus.pending && exception is SpecPendingException)
       return exception.message;
     else
       return null;
   }
 
-  bool get passed()  => result == BullseyeTestResult.passed;
-  bool get failed()  => result == BullseyeTestResult.failed;
-  bool get error()   => result == BullseyeTestResult.error;
-  bool get pending() => result == BullseyeTestResult.pending;
+  bool get passed()  => status == BullseyeTestStatus.passed;
+  bool get failed()  => status == BullseyeTestStatus.failed;
+  bool get error()   => status == BullseyeTestStatus.error;
+  bool get pending() => status == BullseyeTestStatus.pending;
 
   void run() {
     _beforeFunctions.forEach((fn) => fn(this));
@@ -46,23 +46,23 @@ class BullseyeTest {
 
   void _runFunction() {
     if (fn == null) {
-      result = BullseyeTestResult.pending;
+      status = BullseyeTestStatus.pending;
     } else {
       if (BullseyeTest.throwExceptions == true) {
         fn();
-        result = BullseyeTestResult.passed;
+        status = BullseyeTestStatus.passed;
       } else {
         try {
           fn();
-          result = BullseyeTestResult.passed;
+          status = BullseyeTestStatus.passed;
         } catch (ExpectException ex) {
-          result    = BullseyeTestResult.failed;
+          status    = BullseyeTestStatus.failed;
           exception = ex;
         } catch (SpecPendingException ex) {
-          result    = BullseyeTestResult.pending;
+          status    = BullseyeTestStatus.pending;
           exception = ex;
         } catch (Exception ex) {
-          result    = BullseyeTestResult.error;
+          status    = BullseyeTestStatus.error;
           exception = ex;
         }
       }
