@@ -1,4 +1,4 @@
-class PendingExampleSpec extends SpecDartTest {
+class PendingExampleSpec extends SpecMap_Bullseye {
   spec() {
 
     var spec = new PendingExampleSpec_Example();

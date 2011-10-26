@@ -1,4 +1,4 @@
-class SpecDocFormatterSpec extends SpecDartTest {
+class SpecDocFormatterSpec extends SpecMap_Bullseye {
   spec() {
 
     var buffer    = new StringBuffer();

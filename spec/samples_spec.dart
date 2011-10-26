@@ -1,7 +1,7 @@
 // Some sanity check style specs to make sure that all 
 // of the samples in our samples/ directory are working 
 // with the latest version of Spec.dart.
-class SamplesSpec extends SpecDartTest {
+class SamplesSpec extends SpecMap_Bullseye {
 
   // Given a spec, this runs the spec thru 
   // Bullseye.run using the SpecDocFormatter and 

@@ -1,4 +1,4 @@
-class TestFixtureSpec extends SpecDartTest {
+class TestFixtureSpec extends SpecMap_Bullseye {
   spec() {
 
     var noExamples   = new DescribeSpec_NoExamples();

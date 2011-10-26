@@ -1,4 +1,4 @@
-class RunHooksSpec extends SpecDartTest {
+class RunHooksSpec extends SpecMap_Bullseye {
   var hookData;
 
   spec() {

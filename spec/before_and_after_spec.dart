@@ -1,4 +1,4 @@
-class BeforeAndAfterSpec extends SpecDartTest {
+class BeforeAndAfterSpec extends SpecMap_Bullseye {
   spec() {
 
     var with1Before  = new BeforeAndAfterSpec_With1Before();

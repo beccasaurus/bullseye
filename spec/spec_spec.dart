@@ -1,4 +1,4 @@
-class SpecSpec extends SpecDartTest {
+class SpecSpec extends SpecMap_Bullseye {
   spec() {
 
     var noDescribes          = new SpecSpec_NoDescribesSpec();

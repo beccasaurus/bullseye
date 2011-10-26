@@ -1,4 +1,4 @@
-class RunningExamplesSpec extends SpecDartTest {
+class RunningExamplesSpec extends SpecMap_Bullseye {
   spec() {
     describe("Running Examples", {
 

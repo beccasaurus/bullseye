@@ -1,4 +1,4 @@
-class MagicMapSpec extends SpecDartTest {
+class MagicMapSpec extends SpecMap_Bullseye {
   spec() {
     describe("MagicMap", {
 
