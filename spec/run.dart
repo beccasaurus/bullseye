@@ -2,6 +2,7 @@
 // #import("../pkg/bullseye.dart");
 #import("../src/bullseye.dart");
 
+#source("magic_map_spec.dart");
 #source("spec_spec.dart");
 #source("test_spec.dart");
 #source("test_fixture_spec.dart");
@@ -17,6 +18,7 @@
 
 int main() {
   return SpecMap.run([
+    new MagicMapSpec(),
     new SpecSpec(),
     new TestSpec(),
     new TestFixtureSpec(),
