@@ -199,6 +199,17 @@ class ActsAsClosureSpec extends SpecMap_Bullseye {
         Expect.equals(BullseyeTestStatus.pending, closure.status);
       },
 
+      "has a status of 'pending' if SpecPendingException is thrown when run()": (){
+        var closure = newInstance();
+        closure.fn = (){ throw new SpecPendingException("Haven't gotten around to this yet"); };
+        Expect.equals(BullseyeTestStatus.not_run, closure.status);
+        Expect.isNull(closure.pendingReason);
+
+        closure.run();
+        Expect.equals(BullseyeTestStatus.pending, closure.status);
+        Expect.equals("Haven't gotten around to this yet", closure.pendingReason);
+      },
+
       "has a status of 'error' if running the function statuss in an Exception being thrown (besides an ExpectException)": (){
         var closure = newInstance();
         closure.fn = () => "oh noes".stringsDoNotHaveThisMethodSoItWillBlowUp();

@@ -15,7 +15,6 @@
 #source("original/pending_test_spec.dart");
 #source("original/run_hooks_spec.dart");
 #source("original/specdoc_formatter_spec.dart");
-#source("original/throwing_exceptions_spec.dart");
 #source("original/xunit_dsl_spec.dart");
 #source("original/samples_spec.dart");
 #source("../samples/bowling_spec.dart");
@@ -36,7 +35,6 @@ int main() {
     new OriginalPendingTestSpec(),
     new OriginalRunHooksSpec(),
     new OriginalSpecDocFormatterSpec(),
-    new OriginalThrowingExceptionsSpec(),
     new OriginalxUnitDSLSpec(),
     new OriginalSamplesSpec()
   ]);

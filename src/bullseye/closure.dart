@@ -46,6 +46,13 @@ class BullseyeClosure {
     return desc;
   }
 
+  String get pendingReason() {
+    if (status == BullseyeTestStatus.pending && exception is SpecPendingException)
+      return exception.message;
+    else
+      return null;
+  }
+
   void rerun() {
     _run       = false;
     exception  = null;
@@ -71,6 +78,10 @@ class BullseyeClosure {
         _status = BullseyeTestStatus.passed;
       } catch (ExpectException ex, var trace) {
         _status    = BullseyeTestStatus.failed;
+        exception  = ex;
+        stackTrace = trace;
+      } catch (SpecPendingException ex, var trace) {
+        _status    = BullseyeTestStatus.pending;
         exception  = ex;
         stackTrace = trace;
       } catch (Exception ex, var trace) {

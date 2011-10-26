@@ -15,14 +15,6 @@ class Bullseye {
     formatter.footer();
   }
 
-  static void throwExceptions() {
-    BullseyeTest.throwExceptions = true;
-  }
-
-  static void dontThrowExceptions() {
-    BullseyeTest.throwExceptions = false;
-  }
-
   static _setupFormatterCallbacks() {
     if (_formatterCallbacksSetup != true) {
       _formatterCallbacksSetup = true;

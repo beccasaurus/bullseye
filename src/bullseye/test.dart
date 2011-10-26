@@ -7,7 +7,7 @@ class BullseyeTest {
 
   BullseyeTestFixture parent;
 
-  static bool throwExceptions; // static for closure eis closuresThrowExceptions
+  // static bool throwExceptions; // static for closure eis closuresThrowExceptions
 
   String description;
   Function fn;
@@ -55,7 +55,7 @@ class BullseyeTest {
     if (fn == null) {
       status = BullseyeTestStatus.pending;
     } else {
-      if (BullseyeTest.throwExceptions == true) {
+      if (false) {
         fn();
         status = BullseyeTestStatus.passed;
       } else {
