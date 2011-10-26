@@ -1,10 +1,10 @@
-class DescribeSpec extends SpecDartTest {
+class TestFixtureSpec extends SpecDartTest {
   spec() {
 
     var noExamples   = new DescribeSpec_NoExamples();
     var manyExamples = new DescribeSpec_ManyExamples();
 
-    describe("Describe", {
+    describe("TestFixture", {
 
       "can have no examples": (){
         var testFixture = new DescribeSpec_NoExamples().testFixtures[0];

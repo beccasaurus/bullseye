@@ -1,10 +1,10 @@
 #import("../lib/specmap.dart");
-// #import("../pkg/spec.dart");
-#import("../src/spec.dart");
+// #import("../pkg/bullseye.dart");
+#import("../src/bullseye.dart");
 
 #source("spec_spec.dart");
-#source("example_spec.dart");
-#source("describe_spec.dart");
+#source("test_spec.dart");
+#source("test_fixture_spec.dart");
 #source("running_examples_spec.dart");
 #source("before_and_after_spec.dart");
 #source("pending_example_spec.dart");
@@ -18,8 +18,8 @@
 int main() {
   return SpecMap.run([
     new SpecSpec(),
-    new ExampleSpec(),
-    new DescribeSpec(),
+    new TestSpec(),
+    new TestFixtureSpec(),
     new RunningExamplesSpec(),
     new BeforeAndAfterSpec(),
     new PendingExampleSpec(),
