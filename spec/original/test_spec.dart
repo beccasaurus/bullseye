@@ -9,7 +9,7 @@ class OriginalTestSpec extends SpecMap_Bullseye {
         var testFixture = spec.testFixtures[0];
         var test  = testFixture.tests[0];
 
-        Expect.identical(testFixture, test.testFixture);
+        Expect.identical(testFixture, test.parent);
       }
     });
 

@@ -5,23 +5,30 @@ class BullseyeTest {
   static void beforeRun(Function callback) => _beforeFunctions.add(callback);
   static void afterRun(Function callback) => _afterFunctions.add(callback);
 
-  BullseyeTestFixture testFixture;
+  BullseyeTestFixture parent;
 
-  static bool throwExceptions;
+  static bool throwExceptions; // static for closure eis closuresThrowExceptions
 
   String description;
-
   Function fn;
-
   String status;
-
   Exception exception;
 
-  BullseyeTest([BullseyeTestFixture testFixture, String description = null, Function fn = null]) {
+  String get fullDescription() {
+    String desc = (parent == null) ? "" : parent.fullDescription;
+    if (description != null) {
+      if (desc.length > 0)
+        desc += " ";
+      desc = desc + description;
+    }
+    return desc;
+  }
+
+  BullseyeTest([BullseyeTestFixture parent, String description = null, Function fn = null]) {
     if (_beforeFunctions == null) _beforeFunctions = new List<Function>();
     if (_afterFunctions == null)  _afterFunctions = new List<Function>();
 
-    this.testFixture   = testFixture;
+    this.parent   = parent;
     this.description       = description;
     this.fn         = fn;
   }

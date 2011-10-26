@@ -37,7 +37,7 @@ class BullseyeTestFixtureDefinition extends BullseyeTestFixture {
   }
 
   BullseyeTest defineTest([String description = null, Function fn = null]) {
-    BullseyeTest test = new BullseyeTest(testFixture: _currentTestFixture, description: description, fn: fn);
+    BullseyeTest test = new BullseyeTest(parent: _currentTestFixture, description: description, fn: fn);
     _currentTestFixture.tests.add(test);
     return test;
   }
