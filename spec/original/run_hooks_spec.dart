@@ -16,20 +16,20 @@ class OriginalRunHooksSpec extends SpecMap_Bullseye {
 
       "can hook into BullseyeTestFixture.beforeRun()": (){
         Expect.equals(5,                       hookData["desc:before"].length);
-        Expect.equals("RunHooksSpec_Test1", hookData["desc:before"][0].subject);
-        Expect.equals("foo",                   hookData["desc:before"][1].subject);
-        Expect.equals("bar",                   hookData["desc:before"][2].subject);
-        Expect.equals("RunHooksSpec_Test2", hookData["desc:before"][3].subject);
-        Expect.equals("baz",                   hookData["desc:before"][4].subject);
+        Expect.equals("RunHooksSpec_Test1", hookData["desc:before"][0].description);
+        Expect.equals("foo",                   hookData["desc:before"][1].description);
+        Expect.equals("bar",                   hookData["desc:before"][2].description);
+        Expect.equals("RunHooksSpec_Test2", hookData["desc:before"][3].description);
+        Expect.equals("baz",                   hookData["desc:before"][4].description);
       },
 
       "can hook into BullseyeTestFixture.afterRun()": (){
         Expect.equals(5,                       hookData["desc:after"].length);
-        Expect.equals("foo",                   hookData["desc:after"][0].subject);
-        Expect.equals("bar",                   hookData["desc:after"][1].subject);
-        Expect.equals("RunHooksSpec_Test1", hookData["desc:after"][2].subject);
-        Expect.equals("baz",                   hookData["desc:after"][3].subject);
-        Expect.equals("RunHooksSpec_Test2", hookData["desc:after"][4].subject);
+        Expect.equals("foo",                   hookData["desc:after"][0].description);
+        Expect.equals("bar",                   hookData["desc:after"][1].description);
+        Expect.equals("RunHooksSpec_Test1", hookData["desc:after"][2].description);
+        Expect.equals("baz",                   hookData["desc:after"][3].description);
+        Expect.equals("RunHooksSpec_Test2", hookData["desc:after"][4].description);
       },
 
       "can hook into BullseyeTest.beforeRun()": (){

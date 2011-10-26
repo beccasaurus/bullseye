@@ -8,18 +8,18 @@ class BullseyeTestFixture {
 
   List<BullseyeTest> tests;
   BullseyeTestFixture parent;
-  String subject;
+  String description;
   Function fn;
   List befores;
   List afters;
   bool _evaluatedFn;
   List<BullseyeTestFixture> _parentDescribes;
 
-  BullseyeTestFixture([BullseyeTestFixture parent = null, String subject = null, Function fn = null]) {
+  BullseyeTestFixture([BullseyeTestFixture parent = null, String description = null, Function fn = null]) {
     if (_beforeFunctions == null) _beforeFunctions = new List<Function>();
     if (_afterFunctions == null)  _afterFunctions = new List<Function>();
 
-    this.subject   = subject;
+    this.description   = description;
     this.fn        = fn;
     this.tests  = new List<BullseyeTest>();
     this.testFixtures = new List<BullseyeTestFixture>();

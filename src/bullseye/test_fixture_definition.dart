@@ -15,8 +15,8 @@ class BullseyeTestFixtureDefinition extends BullseyeTestFixture {
     defineTestFixture();
   }
 
-  String get subject() {
-    // TODO if subject was set manually, return it, otherwise return the default.
+  String get description() {
+    // TODO if description was set manually, return it, otherwise return the default.
     return defaultSubjectName;
   }
 
@@ -24,8 +24,8 @@ class BullseyeTestFixtureDefinition extends BullseyeTestFixture {
 
   void defineTestFixture(){}
 
-  BullseyeTestFixture defineNestedTestFixture([String subject = null, Function fn = null]) {
-    BullseyeTestFixture testFixture = new BullseyeTestFixture(subject: subject, fn: fn, parent: _currentTestFixture);
+  BullseyeTestFixture defineNestedTestFixture([String description = null, Function fn = null]) {
+    BullseyeTestFixture testFixture = new BullseyeTestFixture(description: description, fn: fn, parent: _currentTestFixture);
 
     _currentTestFixture.testFixtures.add(testFixture);
 

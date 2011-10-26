@@ -13,8 +13,8 @@ class OriginalSpecSpec extends SpecMap_Bullseye {
 
       "can have many testFixtures": (){
         Expect.equals(2, manyDescribes.testFixtures.length);
-        Expect.equals("Foo", manyDescribes.testFixtures[0].subject);
-        Expect.equals("Bar", manyDescribes.testFixtures[1].subject);
+        Expect.equals("Foo", manyDescribes.testFixtures[0].description);
+        Expect.equals("Bar", manyDescribes.testFixtures[1].description);
       },
 
       "can have many tests": (){
@@ -22,10 +22,10 @@ class OriginalSpecSpec extends SpecMap_Bullseye {
         Expect.equals(1, testsAndDescribes.testFixtures.length);
         Expect.equals(1, testsAndDescribes.testFixtures[0].tests.length);
 
-        Expect.equals("SpecSpec_TestsAndDescribes", testsAndDescribes.subject);
+        Expect.equals("SpecSpec_TestsAndDescribes", testsAndDescribes.description);
         Expect.equals("foo", testsAndDescribes.tests[0].name);
 
-        Expect.equals("stuff", testsAndDescribes.testFixtures[0].subject);
+        Expect.equals("stuff", testsAndDescribes.testFixtures[0].description);
         Expect.equals("bar", testsAndDescribes.testFixtures[0].tests[0].name);
       }
 

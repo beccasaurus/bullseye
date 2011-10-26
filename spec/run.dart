@@ -2,6 +2,9 @@
 // #import("../pkg/bullseye.dart");
 #import("../src/bullseye.dart");
 
+#source("acts_as_closure_spec.dart");
+#source("test_spec.dart");
+
 #source("original/magic_map_spec.dart");
 #source("original/closure_spec.dart");
 #source("original/spec_spec.dart");
@@ -19,6 +22,10 @@
 
 int main() {
   return SpecMap.run([
+
+    new ActsAsClosureSpec(() => new BullseyeClosure()),
+    new TestSpec(),
+
     new OriginalMagicMapSpec(),
     new OriginalClosureSpec(),
     new OriginalSpecSpec(),

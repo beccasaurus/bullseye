@@ -33,12 +33,12 @@ class OriginalTestFixtureSpec extends SpecMap_Bullseye {
         Expect.equals(2, spec.testFixtures.length);
 
         Expect.equals("outer top it", spec.testFixtures[0].tests[0].name);
-        Expect.equals("inner first", spec.testFixtures[0].testFixtures[0].subject);
+        Expect.equals("inner first", spec.testFixtures[0].testFixtures[0].description);
         Expect.equals("inner first it", spec.testFixtures[0].testFixtures[0].tests[0].name);
         Expect.equals("outer bottom it", spec.testFixtures[0].tests[1].name);
 
-        Expect.equals("inner second", spec.testFixtures[1].testFixtures[0].subject);
-        Expect.equals("inner inner second", spec.testFixtures[1].testFixtures[0].testFixtures[0].subject);
+        Expect.equals("inner second", spec.testFixtures[1].testFixtures[0].description);
+        Expect.equals("inner inner second", spec.testFixtures[1].testFixtures[0].testFixtures[0].description);
         Expect.equals("inner inner second it", spec.testFixtures[1].testFixtures[0].testFixtures[0].tests[0].name);
       }
 

@@ -3,8 +3,8 @@ class TestCase extends BullseyeTestFixtureDefinition {
   void defineTestFixture() => defineTests();
   void defineTests(){}
 
-  BullseyeTestFixture context([String subject = null, Function fn = null]) {
-    defineNestedTestFixture(subject: subject, fn: fn);
+  BullseyeTestFixture context([String description = null, Function fn = null]) {
+    defineNestedTestFixture(description: description, fn: fn);
   }
 
   BullseyeTest test([String name = null, Function fn = null]) {
