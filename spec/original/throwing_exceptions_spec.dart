@@ -1,4 +1,4 @@
-class ThrowingExceptionsSpec extends SpecMap_Bullseye {
+class OriginalThrowingExceptionsSpec extends SpecMap_Bullseye {
   spec() {
     describe("Configuring Throwing Exceptions", {
 

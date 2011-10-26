@@ -1,4 +1,4 @@
-class RunHooksSpec extends SpecMap_Bullseye {
+class OriginalRunHooksSpec extends SpecMap_Bullseye {
   var hookData;
 
   spec() {

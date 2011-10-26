@@ -1,4 +1,4 @@
-class TestFixtureSpec extends SpecMap_Bullseye {
+class OriginalTestFixtureSpec extends SpecMap_Bullseye {
   spec() {
 
     var noTests   = new DescribeSpec_NoTests();

@@ -1,4 +1,4 @@
-class PendingTestSpec extends SpecMap_Bullseye {
+class OriginalPendingTestSpec extends SpecMap_Bullseye {
   spec() {
 
     var spec = new PendingTestSpec_Test();

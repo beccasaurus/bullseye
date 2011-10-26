@@ -1,4 +1,4 @@
-class ClosureSpec extends SpecMap_Bullseye {
+class OriginalClosureSpec extends SpecMap_Bullseye {
   spec() {
     describe("Closure", {
 
@@ -147,7 +147,7 @@ class ClosureSpec extends SpecMap_Bullseye {
         Expect.isNull(closure.stackTrace);
         closure.run();
         Expect.isTrue(closure.stackTrace.toString().contains("url: 'spec/../src/bullseye/closure.dart'", 0));
-        Expect.isTrue(closure.stackTrace.toString().contains("Function: 'ClosureSpec.function' url: 'spec/closure_spec.dart'", 0));
+        Expect.isTrue(closure.stackTrace.toString().contains("Function: 'OriginalClosureSpec.function' url: 'spec/original/closure_spec.dart'", 0));
       },
 
       "stackTrace property gets set to the thrown exception's stack trace if an ExpectException is thrown as a result of running the function" : (){
@@ -155,7 +155,7 @@ class ClosureSpec extends SpecMap_Bullseye {
         Expect.isNull(closure.stackTrace);
         closure.run();
         Expect.isTrue(closure.stackTrace.toString().contains("url: 'spec/../src/bullseye/closure.dart'", 0));
-        Expect.isTrue(closure.stackTrace.toString().contains("Function: 'ClosureSpec.function' url: 'spec/closure_spec.dart'", 0));
+        Expect.isTrue(closure.stackTrace.toString().contains("Function: 'OriginalClosureSpec.function' url: 'spec/original/closure_spec.dart'", 0));
       },
 
       "can be configured to let any thrown Exceptions bubble up (to see the correct stacktrace)": (){

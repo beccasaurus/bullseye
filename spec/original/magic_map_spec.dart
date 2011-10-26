@@ -1,4 +1,4 @@
-class MagicMapSpec extends SpecMap_Bullseye {
+class OriginalMagicMapSpec extends SpecMap_Bullseye {
   spec() {
     describe("MagicMap", {
 

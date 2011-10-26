@@ -1,4 +1,4 @@
-class TestSpec extends SpecMap_Bullseye {
+class OriginalTestSpec extends SpecMap_Bullseye {
   spec() {
 
     var spec = new TestSpec_Test();

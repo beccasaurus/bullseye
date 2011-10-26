@@ -1,4 +1,4 @@
-class RunningTestsSpec extends SpecMap_Bullseye {
+class OriginalRunningTestsSpec extends SpecMap_Bullseye {
   spec() {
     describe("Running Tests", {
 

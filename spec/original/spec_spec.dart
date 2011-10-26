@@ -1,4 +1,4 @@
-class SpecSpec extends SpecMap_Bullseye {
+class OriginalSpecSpec extends SpecMap_Bullseye {
   spec() {
 
     var noDescribes          = new SpecSpec_NoDescribesSpec();

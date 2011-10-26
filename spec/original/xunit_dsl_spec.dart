@@ -1,4 +1,4 @@
-class xUnitDSLSpec extends SpecMap_Bullseye {
+class OriginalxUnitDSLSpec extends SpecMap_Bullseye {
   spec() {
     describe("xUnit DSL", {
 

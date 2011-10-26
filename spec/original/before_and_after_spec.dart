@@ -1,4 +1,4 @@
-class BeforeAndAfterSpec extends SpecMap_Bullseye {
+class OriginalBeforeAndAfterSpec extends SpecMap_Bullseye {
   spec() {
 
     var with1Before  = new BeforeAndAfterSpec_With1Before();
