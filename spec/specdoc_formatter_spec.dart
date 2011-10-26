@@ -17,13 +17,14 @@ class SpecDocFormatterSpec extends SpecDartTest {
       "prints Spec.dart header": () => Expect.isTrue(output.contains("~ Spec.dart ${BullseyeTestFixtureDefinition.VERSION} ~\n\n", 0)),
 
       "prints describes": (){
-        Expect.isTrue(output.contains("\nfoo", 0));
-        Expect.isTrue(output.contains("\nbar", 0));
+        Expect.isTrue(output.contains("\nSpecDocFormatterSpec_Example", 0));
+        Expect.isTrue(output.contains("\n  foo", 0));
+        Expect.isTrue(output.contains("\n  bar", 0));
       },
 
       "prints examples (indented under descibes)": (){
-        Expect.isTrue(output.contains("\nfoo\n  foo-1\n  foo-2\n", 0));
-        Expect.isTrue(output.contains("\nbar\n  bar-1\n  [PENDING] bar-2\n", 0));
+        Expect.isTrue(output.contains("\n  foo\n    foo-1\n    foo-2\n", 0));
+        Expect.isTrue(output.contains("\n  bar\n    bar-1\n    [PENDING] bar-2\n", 0));
       },
 
       "prints summary": (){
@@ -43,7 +44,7 @@ class SpecDocFormatterSpec extends SpecDartTest {
       },
 
       "indents nested describes/it's": (){
-        Expect.isTrue(output.contains("bar\n  bar-1\n  [PENDING] bar-2\n  inner\n    [custom pending message] is indented more\n    one\n      [PENDING] more", 0));
+        Expect.isTrue(output.contains("bar\n    bar-1\n    [PENDING] bar-2\n    inner\n      [custom pending message] is indented more\n      one\n        [PENDING] more", 0));
       },
 
       "prints out custom pending messages": (){
@@ -63,19 +64,19 @@ class SpecDocFormatterSpec extends SpecDartTest {
     describe("SpecDocFormatter with colored output", {
 
       "passing examples should be printed in green": (){
-        Expect.isTrue(colored.contains("foo\n\x1b\x5b;0;32m  foo-1", 0));
+        Expect.isTrue(colored.contains("foo\n\x1b\x5b;0;32m    foo-1", 0));
       },
 
       "failed examples should be printed in red": (){
-        Expect.isTrue(colored.contains("bar\n\x1b\x5b;0;31m  bar-1", 0));
+        Expect.isTrue(colored.contains("bar\n\x1b\x5b;0;31m    bar-1", 0));
       },
 
       "error examples should be printed in red": (){
-        Expect.isTrue(colored.contains("\n\x1b\x5b;0;31m  foo-2", 0));
+        Expect.isTrue(colored.contains("\n\x1b\x5b;0;31m    foo-2", 0));
       },
 
       "pending examples should be printed in yellow": (){
-        Expect.isTrue(colored.contains("\n\x1b\x5b;0;33m    [custom pending message] is indented more", 0));
+        Expect.isTrue(colored.contains("\n\x1b\x5b;0;33m      [custom pending message] is indented more", 0));
       },
 
       "the summary line should be red because atleast 1 example failed": (){

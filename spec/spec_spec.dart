@@ -1,9 +1,9 @@
 class SpecSpec extends SpecDartTest {
   spec() {
 
-    var noDescribes               = new SpecSpec_NoDescribes();
-    var manyDescribes             = new SpecSpec_ManyDescribes();
-    var manyDescribesWithExamples = new SpecSpec_ManyDescribesWithExamples();
+    var noDescribes          = new SpecSpec_NoDescribesSpec();
+    var manyDescribes        = new SpecSpec_ManyDescribesSpec();
+    var examplesAndDescribes = new SpecSpec_ExamplesAndDescribesSpec();
 
     describe("Spec", {
 
@@ -15,17 +15,36 @@ class SpecSpec extends SpecDartTest {
         Expect.equals(2, manyDescribes.describes.length);
         Expect.equals("Foo", manyDescribes.describes[0].subject);
         Expect.equals("Bar", manyDescribes.describes[1].subject);
+      },
+
+      "can have many examples": (){
+        Expect.equals(1, examplesAndDescribes.examples.length);
+        Expect.equals(1, examplesAndDescribes.describes.length);
+        Expect.equals(1, examplesAndDescribes.describes[0].examples.length);
+
+        Expect.equals("SpecSpec_ExamplesAndDescribes", examplesAndDescribes.subject);
+        Expect.equals("foo", examplesAndDescribes.examples[0].name);
+
+        Expect.equals("stuff", examplesAndDescribes.describes[0].subject);
+        Expect.equals("bar", examplesAndDescribes.describes[0].examples[0].name);
       }
 
     });
   }
 }
 
-class SpecSpec_NoDescribes extends Spec {}
-class SpecSpec_ManyDescribes extends Spec {
+class SpecSpec_NoDescribesSpec extends Spec {}
+class SpecSpec_ManyDescribesSpec extends Spec {
   spec() {
     describe("Foo");
     describe("Bar");
   }
 }
-class SpecSpec_ManyDescribesWithExamples extends Spec {}
+class SpecSpec_ExamplesAndDescribesSpec extends Spec {
+  spec() {
+    it("foo");
+    describe("stuff", (){
+      it("bar");
+    });
+  }
+}

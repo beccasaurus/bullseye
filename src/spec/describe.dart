@@ -2,35 +2,23 @@ class SpecDescribe {
 
   static List<Function> _beforeFunctions;
   static List<Function> _afterFunctions;
-
   static void beforeRun(Function callback) => _beforeFunctions.add(callback);
-
   static void afterRun(Function callback) => _afterFunctions.add(callback);
-
-  BullseyeTestFixtureProvider spec;
-
-  SpecDescribe parent;
-
-  String subject;
-
-  Function fn;
-
-  List<SpecExample> examples;
-
   List<SpecDescribe> describes;
 
+  List<SpecExample> examples;
+  SpecDescribe parent;
+  String subject;
+  Function fn;
   List befores;
-
   List afters;
-
   bool _evaluatedFn;
   List<SpecDescribe> _parentDescribes;
 
-  SpecDescribe([BullseyeTestFixtureProvider spec = null, SpecDescribe parent = null, String subject = null, Function fn = null]) {
+  SpecDescribe([SpecDescribe parent = null, String subject = null, Function fn = null]) {
     if (_beforeFunctions == null) _beforeFunctions = new List<Function>();
     if (_afterFunctions == null)  _afterFunctions = new List<Function>();
 
-    this.spec      = spec;
     this.subject   = subject;
     this.fn        = fn;
     this.examples  = new List<SpecExample>();

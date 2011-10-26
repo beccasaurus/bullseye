@@ -6,14 +6,14 @@ class SamplesSpec extends SpecDartTest {
   // Given a spec, this runs the spec thru 
   // Specs.run using the SpecDocFormatter and 
   // returns a String of the resulting output.
-  String getSpecOutput(Spec spec) {
+  String getSpecOutput(SpecDescribe describe) {
     var buffer    = new StringBuffer();
     var formatter = new SpecDocFormatter();
     formatter.colorize      = false;
     formatter.printToStdout = false;
     formatter.logger((text) => buffer.add(text));
     Specs.formatter = formatter;
-    Specs.run([spec]);
+    Specs.run([describe]);
     return buffer.toString();
   }
 
@@ -40,8 +40,8 @@ class SamplesSpec extends SpecDartTest {
       "OK": (){
         var expected = """~ Spec.dart 0.1.0 ~
 
-                          Bowling #score
-                            returns 0 for all gutter game
+                          Bowling
+                            #score returns 0 for all gutter game
 
                           1 Examples, 0 Failures""";
 

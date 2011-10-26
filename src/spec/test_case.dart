@@ -1,6 +1,6 @@
 interface BullseyeTestFixtureProvider {
   //Iterable<BullseyeTestFixture> get testContexts();
-  Iterable<SpecDescribe> get testContexts();
+  Iterable<SpecDescribe> get testFixtures();
 }
 
 class TestCase extends BullseyeTestFixtureDefinition implements BullseyeTestFixtureProvider {
@@ -26,9 +26,15 @@ class TestCase extends BullseyeTestFixtureDefinition implements BullseyeTestFixt
 }
 
 class Spec extends BullseyeTestFixtureDefinition implements BullseyeTestFixtureProvider {
+  static final RegExp subjectNameReplacementPattern = const RegExp(@"Spec$");
 
   void defineTestFixture() => spec();
   void spec(){}
+
+  String get defaultSubjectName() {
+    var subject = super.defaultSubjectName;
+    return subject.endsWith("Spec") ? subject.substring(0, subject.length - 4) : subject;
+  }
 
   SpecDescribe describe([String subject = null, Function fn = null]) {
     defineNestedTestFixture(subject: subject, fn: fn);

@@ -1,56 +1,46 @@
-// TODO hmm ... this is just a definition class now ... should it know how to run itself?
-//      I think not!  We just want to run Iterable<BullseyeTestFixture>!  That's what this needs to provide!
+class BullseyeTestFixtureDefinition extends SpecDescribe implements BullseyeTestFixtureProvider {
 
-class BullseyeTestFixtureDefinition implements BullseyeTestFixtureProvider {
-  
-  static final VERSION = "0.1.0"; // TODO move me!
-
-  static List<Function> _beforeFunctions;
-  static List<Function> _afterFunctions;
-
-  static void beforeRun(Function callback) => _beforeFunctions.add(callback);
-
-  static void afterRun(Function callback) => _afterFunctions.add(callback);
-
-  // not implemented yet
-  Iterable<SpecDescribe> get testContexts() => <SpecDescribe>[];
-
-  List<SpecDescribe> describes;
-
-  List<SpecDescribe> _currentDescribes;
+  // Keeps track of the list of SpecDescribe that are currently being defined.
+  //
+  // A BullseyeTestFixtureDefinition lets you simply call defineTest() and it 
+  // finds the most recent SpecDescribe being defined via defineNestedTestFixture 
+  // (or the top-level SpecDescribe, ie. this BullseyeTestFixtureDefinition) and 
+  // it will add a SpecExample to *that* SpecDescribe.
+  //
+  // This keeps track of those SpecDescribe so we can find the one you're currently defining.
+  List<SpecDescribe> _testFixturesBeingDefined;
 
   BullseyeTestFixtureDefinition() {
-    if (_beforeFunctions == null) _beforeFunctions = new List<Function>();
-    if (_afterFunctions == null)  _afterFunctions = new List<Function>();
-
-    describes         = new List<SpecDescribe>();
-    _currentDescribes = new List<SpecDescribe>();
-
+    _testFixturesBeingDefined = <SpecDescribe>[this];
     defineTestFixture();
   }
+
+  String get subject() {
+    // TODO if subject was set manually, return it, otherwise return the default.
+    return defaultSubjectName;
+  }
+
+  String get defaultSubjectName() => BullseyeUtils.getClassName(this);
+
+  Iterable<SpecDescribe> get testFixtures() => <SpecDescribe>[this];
 
   void defineTestFixture(){}
 
   SpecDescribe defineNestedTestFixture([String subject = null, Function fn = null]) {
-    SpecDescribe parent   = _currentDescribes.length == 0 ? null : _currentDescribes.last();
-    SpecDescribe describe = new SpecDescribe(spec: this, subject: subject, fn: fn, parent: parent);
+    SpecDescribe describe = new SpecDescribe(subject: subject, fn: fn, parent: _currentTestFixture);
 
-    if (_currentDescribes.length == 0)
-      describes.add(describe);
-    else
-      _currentDescribes.last().describes.add(describe);
+    _currentTestFixture.describes.add(describe);
 
-    _currentDescribes.addLast(describe);
+    _testFixturesBeingDefined.addLast(describe);
     describe.evaluate();
-    _currentDescribes.removeLast();
+    _testFixturesBeingDefined.removeLast();
 
     return describe;
   }
 
   SpecExample defineTest([String name = null, Function fn = null]) {
-    SpecDescribe desc = _getCurrentDescribe("it");
-    SpecExample example = new SpecExample(describe: desc, name: name, fn: fn);
-    desc.examples.add(example);
+    SpecExample example = new SpecExample(describe: _currentTestFixture, name: name, fn: fn);
+    _currentTestFixture.examples.add(example);
     return example;
   }
 
@@ -59,26 +49,17 @@ class BullseyeTestFixtureDefinition implements BullseyeTestFixtureProvider {
   }
 
   void defineSetUp([Function fn = null]) {
-    _getCurrentDescribe("before").befores.add(fn);
+    _currentTestFixture.befores.add(fn);
   }
 
   void defineTearDown([Function fn = null]) {
-    _getCurrentDescribe("after").afters.add(fn);
+    _currentTestFixture.afters.add(fn);
   }
 
-  void run() {
-    _beforeFunctions.forEach((fn) => fn(this));
-    describes.forEach((desc) => desc.run());
-    _afterFunctions.forEach((fn) => fn(this));
-  }
+  SpecDescribe get _currentTestFixture() => _testFixturesBeingDefined.last();
 
-  SpecDescribe _getCurrentDescribe([String callerFunctionName = null]) {
-    SpecDescribe currentDescribe = _currentDescribes.last();
-    if (currentDescribe != null) {
-      return currentDescribe;
-    } else {
-      if (callerFunctionName != null)
-        throw new UnsupportedOperationException("it${callerFunctionName} cannot be used before calling describe()");
-    }
-  }
+  // ------------------------------ OLD BELOW ------------------------------
+  
+  static final VERSION = "0.1.0"; // TODO move me!
+
 }

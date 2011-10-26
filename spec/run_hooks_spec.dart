@@ -2,12 +2,8 @@ class RunHooksSpec extends SpecDartTest {
   var hookData;
 
   spec() {
-    hookData = { "spec:before": [], "spec:after": [], 
-                 "desc:before": [], "desc:after": [],
-                 "ex:before":   [], "ex:after":   [] };
+    hookData = { "desc:before": [], "desc:after": [], "ex:before": [], "ex:after": [] };
 
-    BullseyeTestFixtureDefinition.beforeRun((spec) => hookData["spec:before"].add(spec));
-    BullseyeTestFixtureDefinition.afterRun((spec) => hookData["spec:after"].add(spec));
     SpecDescribe.beforeRun((desc) => hookData["desc:before"].add(desc));
     SpecDescribe.afterRun((desc) => hookData["desc:after"].add(desc));
     SpecExample.beforeRun((ex) => hookData["ex:before"].add(ex));
@@ -18,30 +14,22 @@ class RunHooksSpec extends SpecDartTest {
 
     describe("Global run() hooks", {
 
-      "can hook into BullseyeTestFixtureDefinition.beforeRun()": (){
-        Expect.equals(2, hookData["spec:before"].length);
-        Expect.isTrue(hookData["spec:before"][0] is RunHooksSpec_Example1);
-        Expect.isTrue(hookData["spec:before"][1] is RunHooksSpec_Example2);
-      },
-
-      "can hook into BullseyeTestFixtureDefinition.afterRun()": (){
-        Expect.equals(2, hookData["spec:after"].length);
-        Expect.isTrue(hookData["spec:after"][0] is RunHooksSpec_Example1);
-        Expect.isTrue(hookData["spec:after"][1] is RunHooksSpec_Example2);
-      },
-
       "can hook into SpecDescribe.beforeRun()": (){
-        Expect.equals(3, hookData["desc:before"].length);
-        Expect.equals("foo", hookData["desc:before"][0].subject);
-        Expect.equals("bar", hookData["desc:before"][1].subject);
-        Expect.equals("baz", hookData["desc:before"][2].subject);
+        Expect.equals(5,                       hookData["desc:before"].length);
+        Expect.equals("RunHooksSpec_Example1", hookData["desc:before"][0].subject);
+        Expect.equals("foo",                   hookData["desc:before"][1].subject);
+        Expect.equals("bar",                   hookData["desc:before"][2].subject);
+        Expect.equals("RunHooksSpec_Example2", hookData["desc:before"][3].subject);
+        Expect.equals("baz",                   hookData["desc:before"][4].subject);
       },
 
       "can hook into SpecDescribe.afterRun()": (){
-        Expect.equals(3, hookData["desc:after"].length);
-        Expect.equals("foo", hookData["desc:after"][0].subject);
-        Expect.equals("bar", hookData["desc:after"][1].subject);
-        Expect.equals("baz", hookData["desc:after"][2].subject);
+        Expect.equals(5,                       hookData["desc:after"].length);
+        Expect.equals("foo",                   hookData["desc:after"][0].subject);
+        Expect.equals("bar",                   hookData["desc:after"][1].subject);
+        Expect.equals("RunHooksSpec_Example1", hookData["desc:after"][2].subject);
+        Expect.equals("baz",                   hookData["desc:after"][3].subject);
+        Expect.equals("RunHooksSpec_Example2", hookData["desc:after"][4].subject);
       },
 
       "can hook into SpecExample.beforeRun()": (){

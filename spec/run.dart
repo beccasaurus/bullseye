@@ -16,7 +16,6 @@
 #source("../samples/bowling_spec.dart");
 
 int main() {
-  SpecMap.raiseExceptions = true;
   return SpecMap.run([
     new SpecSpec(),
     new ExampleSpec(),

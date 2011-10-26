@@ -4,10 +4,6 @@ interface SpecFormattable {
 
   void footer();
 
-  void beforeSpec(Spec spec);
-
-  void afterSpec(Spec spec);
-
   void beforeDescribe(SpecDescribe describe);
 
   void afterDescribe(SpecDescribe describe);

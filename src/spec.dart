@@ -10,3 +10,5 @@
 #source("spec/formattable.dart");
 #source("spec/formatter.dart");
 #source("spec/specdoc_formatter.dart");
+
+#source("bullseye/utils.dart");

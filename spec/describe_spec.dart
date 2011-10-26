@@ -6,13 +6,6 @@ class DescribeSpec extends SpecDartTest {
 
     describe("Describe", {
 
-      "has reference to Spec": (){
-        var spec     = new DescribeSpec_NoExamples();
-        var describe = spec.describes[0];
-        
-        Expect.identical(spec, describe.spec);
-      },
-
       "can have no examples": (){
         var describe = new DescribeSpec_NoExamples().describes[0];
 

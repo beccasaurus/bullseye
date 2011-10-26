@@ -3,14 +3,14 @@ class Specs {
 
   static bool _formatterCallbacksSetup;
 
-  static void run(List<Spec> specs) {
+  static void run(List<SpecDescribe> describes) {
     _setupFormatterCallbacks();
 
     if (formatter == null)
       formatter = new SpecDocFormatter();
 
     formatter.header();
-    specs.forEach((spec) => spec.run());
+    describes.forEach((desc) => desc.run());
     formatter.footer();
   }
 
@@ -25,8 +25,6 @@ class Specs {
   static _setupFormatterCallbacks() {
     if (_formatterCallbacksSetup != true) {
       _formatterCallbacksSetup = true;
-      BullseyeTestFixtureDefinition.beforeRun((spec) => Specs.formatter.beforeSpec(spec));
-      BullseyeTestFixtureDefinition.afterRun((spec) => Specs.formatter.afterSpec(spec));
       SpecDescribe.beforeRun((desc) => Specs.formatter.beforeDescribe(desc));
       SpecDescribe.afterRun((desc) => Specs.formatter.afterDescribe(desc));
       SpecExample.beforeRun((ex) => Specs.formatter.beforeExample(ex));
