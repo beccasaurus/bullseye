@@ -1,4 +1,4 @@
-class SpecExample {
+class BullseyeTest {
 
   static List<Function> _beforeFunctions;
   static List<Function> _afterFunctions;
@@ -17,7 +17,7 @@ class SpecExample {
 
   Exception exception;
 
-  SpecExample([BullseyeTestFixture testFixture, String name = null, Function fn = null]) {
+  BullseyeTest([BullseyeTestFixture testFixture, String name = null, Function fn = null]) {
     if (_beforeFunctions == null) _beforeFunctions = new List<Function>();
     if (_afterFunctions == null)  _afterFunctions = new List<Function>();
 
@@ -27,16 +27,16 @@ class SpecExample {
   }
 
   String get pendingReason() {
-    if (result == SpecExampleResult.pending && exception is SpecPendingException)
+    if (result == BullseyeTestResult.pending && exception is SpecPendingException)
       return exception.message;
     else
       return null;
   }
 
-  bool get passed()  => result == SpecExampleResult.passed;
-  bool get failed()  => result == SpecExampleResult.failed;
-  bool get error()   => result == SpecExampleResult.error;
-  bool get pending() => result == SpecExampleResult.pending;
+  bool get passed()  => result == BullseyeTestResult.passed;
+  bool get failed()  => result == BullseyeTestResult.failed;
+  bool get error()   => result == BullseyeTestResult.error;
+  bool get pending() => result == BullseyeTestResult.pending;
 
   void run() {
     _beforeFunctions.forEach((fn) => fn(this));
@@ -46,23 +46,23 @@ class SpecExample {
 
   void _runFunction() {
     if (fn == null) {
-      result = SpecExampleResult.pending;
+      result = BullseyeTestResult.pending;
     } else {
-      if (SpecExample.throwExceptions == true) {
+      if (BullseyeTest.throwExceptions == true) {
         fn();
-        result = SpecExampleResult.passed;
+        result = BullseyeTestResult.passed;
       } else {
         try {
           fn();
-          result = SpecExampleResult.passed;
+          result = BullseyeTestResult.passed;
         } catch (ExpectException ex) {
-          result    = SpecExampleResult.failed;
+          result    = BullseyeTestResult.failed;
           exception = ex;
         } catch (SpecPendingException ex) {
-          result    = SpecExampleResult.pending;
+          result    = BullseyeTestResult.pending;
           exception = ex;
         } catch (Exception ex) {
-          result    = SpecExampleResult.error;
+          result    = BullseyeTestResult.error;
           exception = ex;
         }
       }

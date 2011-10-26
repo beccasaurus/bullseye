@@ -1,7 +1,7 @@
 class TestSpec extends SpecMap_Bullseye {
   spec() {
 
-    var spec = new ExampleSpec_Example();
+    var spec = new TestSpec_Test();
 
     // TODO expand on this!  When we bring over meta/tags/etc?
     describe("Test", {
@@ -22,7 +22,7 @@ class TestSpec extends SpecMap_Bullseye {
 
         test.run();
 
-        Expect.equals(SpecExampleResult.passed, test.result);
+        Expect.equals(BullseyeTestResult.passed, test.result);
       },
 
       "failed": (){
@@ -33,7 +33,7 @@ class TestSpec extends SpecMap_Bullseye {
 
         test.run();
 
-        Expect.equals(SpecExampleResult.failed, test.result);
+        Expect.equals(BullseyeTestResult.failed, test.result);
 
         var exception = test.exception;
         Expect.isNotNull(exception);
@@ -49,7 +49,7 @@ class TestSpec extends SpecMap_Bullseye {
 
         test.run();
 
-        Expect.equals(SpecExampleResult.error, test.result);
+        Expect.equals(BullseyeTestResult.error, test.result);
 
         var exception = test.exception;
         Expect.isNotNull(exception);
@@ -64,14 +64,14 @@ class TestSpec extends SpecMap_Bullseye {
 
         test.run();
 
-        Expect.equals(SpecExampleResult.pending, test.result);
+        Expect.equals(BullseyeTestResult.pending, test.result);
       }
 
     });
   }
 }
 
-class ExampleSpec_Example extends Spec {
+class TestSpec_Test extends Spec {
   spec() {
     describe("something", (){
       it("should pass", (){

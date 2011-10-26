@@ -7,7 +7,7 @@ class TestCase extends BullseyeTestFixtureDefinition {
     defineNestedTestFixture(subject: subject, fn: fn);
   }
 
-  SpecExample test([String name = null, Function fn = null]) {
+  BullseyeTest test([String name = null, Function fn = null]) {
     defineTest(name: name, fn: fn);
   }
 

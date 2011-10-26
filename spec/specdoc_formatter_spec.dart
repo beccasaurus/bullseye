@@ -8,7 +8,7 @@ class SpecDocFormatterSpec extends SpecMap_Bullseye {
     formatter.logger((text) => buffer.add(text));
 
     Bullseye.formatter = formatter;
-    Bullseye.run([new SpecDocFormatterSpec_Example()]);
+    Bullseye.run([new SpecDocFormatterSpec_Test()]);
 
     var output = buffer.toString();
 
@@ -17,29 +17,29 @@ class SpecDocFormatterSpec extends SpecMap_Bullseye {
       "prints Spec.dart header": () => Expect.isTrue(output.contains("~ Spec.dart ${BullseyeTestFixtureDefinition.VERSION} ~\n\n", 0)),
 
       "prints testFixtures": (){
-        Expect.isTrue(output.contains("\nSpecDocFormatterSpec_Example", 0));
+        Expect.isTrue(output.contains("\nSpecDocFormatterSpec_Test", 0));
         Expect.isTrue(output.contains("\n  foo", 0));
         Expect.isTrue(output.contains("\n  bar", 0));
       },
 
-      "prints examples (indented under descibes)": (){
+      "prints tests (indented under descibes)": (){
         Expect.isTrue(output.contains("\n  foo\n    foo-1\n    foo-2\n", 0));
         Expect.isTrue(output.contains("\n  bar\n    bar-1\n    [PENDING] bar-2\n", 0));
       },
 
       "prints summary": (){
-        Expect.isTrue(output.contains("6 Examples, 1 Failures, 1 Errors, 3 Pending", 0));
+        Expect.isTrue(output.contains("6 Tests, 1 Failures, 1 Errors, 3 Pending", 0));
       },
 
-      "prints out the details of any failed examples": (){
+      "prints out the details of any failed tests": (){
         Expect.isTrue(output.contains("\nFailures:\n\n  bar bar-1\n    Exception: Expect.isTrue(false) fails.", 0));
       },
 
-      "prints out the details of any examples that raised Exceptions": (){
+      "prints out the details of any tests that raised Exceptions": (){
         Expect.isTrue(output.contains("\nFailures:\n\n  bar bar-1\n    Exception: Expect.isTrue(false) fails.", 0));
       },
 
-      "prints out the details of any pending examples": (){
+      "prints out the details of any pending tests": (){
         Expect.isTrue(output.contains("\nPending:\n\n  bar bar-2", 0));
       },
 
@@ -58,35 +58,35 @@ class SpecDocFormatterSpec extends SpecMap_Bullseye {
 
     buffer = new StringBuffer();
     Bullseye.formatter.colorize = true;
-    Bullseye.run([new SpecDocFormatterSpec_Example()]);
+    Bullseye.run([new SpecDocFormatterSpec_Test()]);
     var colored = buffer.toString();
 
     describe("SpecDocFormatter with colored output", {
 
-      "passing examples should be printed in green": (){
+      "passing tests should be printed in green": (){
         Expect.isTrue(colored.contains("foo\n\x1b\x5b;0;32m    foo-1", 0));
       },
 
-      "failed examples should be printed in red": (){
+      "failed tests should be printed in red": (){
         Expect.isTrue(colored.contains("bar\n\x1b\x5b;0;31m    bar-1", 0));
       },
 
-      "error examples should be printed in red": (){
+      "error tests should be printed in red": (){
         Expect.isTrue(colored.contains("\n\x1b\x5b;0;31m    foo-2", 0));
       },
 
-      "pending examples should be printed in yellow": (){
+      "pending tests should be printed in yellow": (){
         Expect.isTrue(colored.contains("\n\x1b\x5b;0;33m      [custom pending message] is indented more", 0));
       },
 
-      "the summary line should be red because atleast 1 example failed": (){
-        Expect.isTrue(colored.contains("\x1b\x5b;0;31m\n12 Examples, 2 Failures, 2 Errors, 6 Pending", 0));
+      "the summary line should be red because atleast 1 test failed": (){
+        Expect.isTrue(colored.contains("\x1b\x5b;0;31m\n12 Tests, 2 Failures, 2 Errors, 6 Pending", 0));
       }
     });
   }
 }
 
-class SpecDocFormatterSpec_Example extends Spec {
+class SpecDocFormatterSpec_Test extends Spec {
   spec() {
     describe("foo", (){
       it("foo-1", () => Expect.isTrue(true));

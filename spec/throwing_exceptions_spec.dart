@@ -5,7 +5,7 @@ class ThrowingExceptionsSpec extends SpecMap_Bullseye {
       "Bullseye.throwExceptions() will let any exceptions thrown by your tests bubble up (out of Bullseye.run())": (){
         Bullseye.throwExceptions();
 
-        Expect.throws(() => Bullseye.run([new ThrowingExceptionsSpec_Example()]),
+        Expect.throws(() => Bullseye.run([new ThrowingExceptionsSpec_Test()]),
           check: (exception) => exception is ExpectException && exception.toString() == "boom!");
 
         Bullseye.dontThrowExceptions(); // Set it back to the default
@@ -13,14 +13,14 @@ class ThrowingExceptionsSpec extends SpecMap_Bullseye {
 
       "Bullseye.dontThrowExceptions() won't let any exceptions thrown by your tests bubble up (default)": (){
         Bullseye.dontThrowExceptions();
-        Bullseye.run([new ThrowingExceptionsSpec_Example()]); // No exceptions thrown
+        Bullseye.run([new ThrowingExceptionsSpec_Test()]); // No exceptions thrown
       }
 
     });
   }
 }
 
-class ThrowingExceptionsSpec_Example extends Spec {
+class ThrowingExceptionsSpec_Test extends Spec {
   spec() {
     describe("My specs", (){
       // NOTE: using fail() or even pending() will also throw exceptions

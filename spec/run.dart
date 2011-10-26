@@ -6,9 +6,9 @@
 #source("spec_spec.dart");
 #source("test_spec.dart");
 #source("test_fixture_spec.dart");
-#source("running_examples_spec.dart");
+#source("running_tests_spec.dart");
 #source("before_and_after_spec.dart");
-#source("pending_example_spec.dart");
+#source("pending_test_spec.dart");
 #source("run_hooks_spec.dart");
 #source("specdoc_formatter_spec.dart");
 #source("throwing_exceptions_spec.dart");
@@ -22,9 +22,9 @@ int main() {
     new SpecSpec(),
     new TestSpec(),
     new TestFixtureSpec(),
-    new RunningExamplesSpec(),
+    new RunningTestsSpec(),
     new BeforeAndAfterSpec(),
-    new PendingExampleSpec(),
+    new PendingTestSpec(),
     new RunHooksSpec(),
     new SpecDocFormatterSpec(),
     new ThrowingExceptionsSpec(),

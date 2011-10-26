@@ -8,8 +8,8 @@ interface SpecFormattable {
 
   void afterDescribe(BullseyeTestFixture testFixture);
 
-  void beforeExample(SpecExample testFixture);
+  void beforeTest(BullseyeTest testFixture);
 
-  void afterExample(SpecExample testFixture);
+  void afterTest(BullseyeTest testFixture);
 
 }

@@ -2,17 +2,17 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
 
   int _testFixtureDepth;
 
-  List<SpecExample> examples;
+  List<BullseyeTest> tests;
 
   SpecDocFormatter() {
-    examples = new List<SpecExample>();
+    tests = new List<BullseyeTest>();
     _testFixtureDepth = 0;
   }
 
-  Collection<SpecExample> get passedExamples()  => examples.filter((ex) => ex.passed);
-  Collection<SpecExample> get failedExamples()  => examples.filter((ex) => ex.failed);
-  Collection<SpecExample> get errorExamples()   => examples.filter((ex) => ex.error);
-  Collection<SpecExample> get pendingExamples() => examples.filter((ex) => ex.pending);
+  Collection<BullseyeTest> get passedTests()  => tests.filter((ex) => ex.passed);
+  Collection<BullseyeTest> get failedTests()  => tests.filter((ex) => ex.failed);
+  Collection<BullseyeTest> get errorTests()   => tests.filter((ex) => ex.error);
+  Collection<BullseyeTest> get pendingTests() => tests.filter((ex) => ex.pending);
 
   void header() {
     write("~ Spec.dart ${BullseyeTestFixtureDefinition.VERSION} ~\n");
@@ -27,28 +27,28 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
     --_testFixtureDepth;
   }
 
-  void afterExample(SpecExample example) {
-    if (examples == null)
-      examples = new List<SpecExample>();
+  void afterTest(BullseyeTest test) {
+    if (tests == null)
+      tests = new List<BullseyeTest>();
 
-    examples.add(example);
+    tests.add(test);
 
     String pendingString = "";
-    if (example.pending == true)
-      if (example.pendingReason == null)
+    if (test.pending == true)
+      if (test.pendingReason == null)
         pendingString = "[PENDING] ";
       else
-        pendingString = "[${example.pendingReason}] ";
+        pendingString = "[${test.pendingReason}] ";
 
-    write(pendingString + example.name, indent: _testFixtureDepth, color: colorForExample(example));
+    write(pendingString + test.name, indent: _testFixtureDepth, color: colorForTest(test));
   }
 
-  String colorForExample(SpecExample example) {
-    switch (example.result) {
-      case SpecExampleResult.passed:  return "green";
-      case SpecExampleResult.failed:  return "red";
-      case SpecExampleResult.error:   return "red";
-      case SpecExampleResult.pending: return "yellow";
+  String colorForTest(BullseyeTest test) {
+    switch (test.result) {
+      case BullseyeTestResult.passed:  return "green";
+      case BullseyeTestResult.failed:  return "red";
+      case BullseyeTestResult.error:   return "red";
+      case BullseyeTestResult.pending: return "yellow";
       default: return "white";
     }
   }
@@ -58,7 +58,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
   }
 
   void footer() {
-    if (failedExamples.length > 0 || errorExamples.length > 0 || pendingExamples.length > 0) separator();
+    if (failedTests.length > 0 || errorTests.length > 0 || pendingTests.length > 0) separator();
     failedSummary();
     errorSummary();
     pendingSummary();
@@ -67,13 +67,13 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
 
   void summary() {
     String color   = "green";
-    String summary = "\n${examples.length} Examples, ${failedExamples.length} Failures";
-    if (errorExamples.length > 0) {
-      summary += ", ${errorExamples.length} Errors";
+    String summary = "\n${tests.length} Tests, ${failedTests.length} Failures";
+    if (errorTests.length > 0) {
+      summary += ", ${errorTests.length} Errors";
       color = "red";
     }
-    if (pendingExamples.length > 0) {
-      summary += ", ${pendingExamples.length} Pending";
+    if (pendingTests.length > 0) {
+      summary += ", ${pendingTests.length} Pending";
       if (color == "green")
         color = "yellow";
     }
@@ -81,33 +81,33 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
   }
 
   void failedSummary() {
-    if (failedExamples.length > 0) {
+    if (failedTests.length > 0) {
       write("\nFailures:");
-      failedExamples.forEach((example) {
+      failedTests.forEach((test) {
         write("");
-        write("${example.testFixture.subject} ${example.name}", indent: 1, color: colorForExample(example));
-        write("Exception: ${example.exception}", indent: 2);
+        write("${test.testFixture.subject} ${test.name}", indent: 1, color: colorForTest(test));
+        write("Exception: ${test.exception}", indent: 2);
       });
     }
   }
 
   void errorSummary() {
-    if (errorExamples.length > 0) {
+    if (errorTests.length > 0) {
       write("\nErrors:");
-      errorExamples.forEach((example) {
+      errorTests.forEach((test) {
         write("");
-        write("${example.testFixture.subject} ${example.name}", indent: 1, color: colorForExample(example));
-        write("Exception: ${example.exception}", indent: 2, color: colorForExample(example));
+        write("${test.testFixture.subject} ${test.name}", indent: 1, color: colorForTest(test));
+        write("Exception: ${test.exception}", indent: 2, color: colorForTest(test));
       });
     }
   }
 
   void pendingSummary() {
-    if (pendingExamples.length > 0) {
+    if (pendingTests.length > 0) {
       write("\nPending:\n");
-      pendingExamples.forEach((example) {
-        String pendingReason = (example.pendingReason != null) ? " [${example.pendingReason}]" : "";
-        write("${example.testFixture.subject} ${example.name}${pendingReason}", indent: 1, color: colorForExample(example));
+      pendingTests.forEach((test) {
+        String pendingReason = (test.pendingReason != null) ? " [${test.pendingReason}]" : "";
+        write("${test.testFixture.subject} ${test.name}${pendingReason}", indent: 1, color: colorForTest(test));
       });
     }
   }

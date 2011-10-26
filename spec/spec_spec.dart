@@ -3,7 +3,7 @@ class SpecSpec extends SpecMap_Bullseye {
 
     var noDescribes          = new SpecSpec_NoDescribesSpec();
     var manyDescribes        = new SpecSpec_ManyDescribesSpec();
-    var examplesAndDescribes = new SpecSpec_ExamplesAndDescribesSpec();
+    var testsAndDescribes = new SpecSpec_TestsAndDescribesSpec();
 
     describe("Spec", {
 
@@ -17,16 +17,16 @@ class SpecSpec extends SpecMap_Bullseye {
         Expect.equals("Bar", manyDescribes.testFixtures[1].subject);
       },
 
-      "can have many examples": (){
-        Expect.equals(1, examplesAndDescribes.examples.length);
-        Expect.equals(1, examplesAndDescribes.testFixtures.length);
-        Expect.equals(1, examplesAndDescribes.testFixtures[0].examples.length);
+      "can have many tests": (){
+        Expect.equals(1, testsAndDescribes.tests.length);
+        Expect.equals(1, testsAndDescribes.testFixtures.length);
+        Expect.equals(1, testsAndDescribes.testFixtures[0].tests.length);
 
-        Expect.equals("SpecSpec_ExamplesAndDescribes", examplesAndDescribes.subject);
-        Expect.equals("foo", examplesAndDescribes.examples[0].name);
+        Expect.equals("SpecSpec_TestsAndDescribes", testsAndDescribes.subject);
+        Expect.equals("foo", testsAndDescribes.tests[0].name);
 
-        Expect.equals("stuff", examplesAndDescribes.testFixtures[0].subject);
-        Expect.equals("bar", examplesAndDescribes.testFixtures[0].examples[0].name);
+        Expect.equals("stuff", testsAndDescribes.testFixtures[0].subject);
+        Expect.equals("bar", testsAndDescribes.testFixtures[0].tests[0].name);
       }
 
     });
@@ -40,7 +40,7 @@ class SpecSpec_ManyDescribesSpec extends Spec {
     describe("Bar");
   }
 }
-class SpecSpec_ExamplesAndDescribesSpec extends Spec {
+class SpecSpec_TestsAndDescribesSpec extends Spec {
   spec() {
     it("foo");
     describe("stuff", (){

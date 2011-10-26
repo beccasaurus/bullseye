@@ -15,14 +15,14 @@ class BeforeAndAfterSpec extends SpecMap_Bullseye {
         //      that we'll be able to use from formatters.
         // Expect.equals(2, with1Before.results.passedCount);
 
-        Expect.equals(SpecExampleResult.passed, with1Before.testFixtures[0].examples[0].result);
-        Expect.equals(SpecExampleResult.passed, with1Before.testFixtures[0].examples[1].result);
+        Expect.equals(BullseyeTestResult.passed, with1Before.testFixtures[0].tests[0].result);
+        Expect.equals(BullseyeTestResult.passed, with1Before.testFixtures[0].tests[1].result);
       },
 
       "can have many before hooks": (){
         with2Befores.run();
 
-        Expect.equals(SpecExampleResult.passed, with1Before.testFixtures[0].examples[1].result);
+        Expect.equals(BullseyeTestResult.passed, with1Before.testFixtures[0].tests[1].result);
       },
 
       "can have many before hooks in nested testFixtures": (){
@@ -30,8 +30,8 @@ class BeforeAndAfterSpec extends SpecMap_Bullseye {
 
         // Check that all of the specs passed
         withNested.testFixtures.forEach((testFixture) {
-          testFixture.examples.forEach((example) {
-            Expect.equals(SpecExampleResult.passed, example.result);
+          testFixture.tests.forEach((test) {
+            Expect.equals(BullseyeTestResult.passed, test.result);
           });
         });
 
@@ -48,8 +48,8 @@ class BeforeAndAfterSpec extends SpecMap_Bullseye {
       "can have 1 after hook": (){
         withAfters.run();
 
-        Expect.equals(SpecExampleResult.passed, withAfters.testFixtures[0].examples[0].result);
-        Expect.equals(SpecExampleResult.passed, withAfters.testFixtures[0].examples[1].result);
+        Expect.equals(BullseyeTestResult.passed, withAfters.testFixtures[0].tests[0].result);
+        Expect.equals(BullseyeTestResult.passed, withAfters.testFixtures[0].tests[1].result);
       }
     });
   }
@@ -100,7 +100,7 @@ class BeforeAndAfterSpec_WithNestedDescribes extends Spec {
   // in every describe in your spec.
   //
   // See setup() for defining an instance method 
-  // that is run before every example in a spec.
+  // that is run before every test in a spec.
   var text = "";
   var output = "";
 

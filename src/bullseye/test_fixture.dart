@@ -6,7 +6,7 @@ class BullseyeTestFixture {
   static void afterRun(Function callback) => _afterFunctions.add(callback);
   List<BullseyeTestFixture> testFixtures;
 
-  List<SpecExample> tests;
+  List<BullseyeTest> tests;
   BullseyeTestFixture parent;
   String subject;
   Function fn;
@@ -15,15 +15,13 @@ class BullseyeTestFixture {
   bool _evaluatedFn;
   List<BullseyeTestFixture> _parentDescribes;
 
-  List<SpecExample> get examples() => tests; // TEMPORARY TODO while refactoring
-
   BullseyeTestFixture([BullseyeTestFixture parent = null, String subject = null, Function fn = null]) {
     if (_beforeFunctions == null) _beforeFunctions = new List<Function>();
     if (_afterFunctions == null)  _afterFunctions = new List<Function>();
 
     this.subject   = subject;
     this.fn        = fn;
-    this.tests  = new List<SpecExample>();
+    this.tests  = new List<BullseyeTest>();
     this.testFixtures = new List<BullseyeTestFixture>();
     this.befores   = new List();
     this.afters    = new List();
@@ -66,10 +64,10 @@ class BullseyeTestFixture {
 
   void run() {
     _beforeFunctions.forEach((fn) => fn(this));
-    tests.forEach((example) {
+    tests.forEach((test) {
       parentDescribes.forEach((parent) => parent.runBefores());
       runBefores();
-      example.run();
+      test.run();
       runAfters();
       parentDescribes.forEach((parent) => parent.runAfters());
     });

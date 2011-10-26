@@ -5,7 +5,7 @@ class BullseyeTestFixtureDefinition extends BullseyeTestFixture {
   // A BullseyeTestFixtureDefinition lets you simply call defineTest() and it 
   // finds the most recent BullseyeTestFixture being defined via defineNestedTestFixture 
   // (or the top-level BullseyeTestFixture, ie. this BullseyeTestFixtureDefinition) and 
-  // it will add a SpecExample to *that* BullseyeTestFixture.
+  // it will add a BullseyeTest to *that* BullseyeTestFixture.
   //
   // This keeps track of those BullseyeTestFixture so we can find the one you're currently defining.
   List<BullseyeTestFixture> _testFixturesBeingDefined;
@@ -36,10 +36,10 @@ class BullseyeTestFixtureDefinition extends BullseyeTestFixture {
     return testFixture;
   }
 
-  SpecExample defineTest([String name = null, Function fn = null]) {
-    SpecExample example = new SpecExample(testFixture: _currentTestFixture, name: name, fn: fn);
-    _currentTestFixture.examples.add(example);
-    return example;
+  BullseyeTest defineTest([String name = null, Function fn = null]) {
+    BullseyeTest test = new BullseyeTest(testFixture: _currentTestFixture, name: name, fn: fn);
+    _currentTestFixture.tests.add(test);
+    return test;
   }
 
   void pending([String message = "PENDING"]) {

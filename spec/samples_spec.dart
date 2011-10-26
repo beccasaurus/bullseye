@@ -43,7 +43,7 @@ class SamplesSpec extends SpecMap_Bullseye {
                           Bowling
                             #score returns 0 for all gutter game
 
-                          1 Examples, 0 Failures""";
+                          1 Tests, 0 Failures""";
 
         Expect.stringEquals(removeIndent(expected), getSpecOutput(new BowlingSpec()));
       }

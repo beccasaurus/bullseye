@@ -16,11 +16,11 @@ class Bullseye {
   }
 
   static void throwExceptions() {
-    SpecExample.throwExceptions = true;
+    BullseyeTest.throwExceptions = true;
   }
 
   static void dontThrowExceptions() {
-    SpecExample.throwExceptions = false;
+    BullseyeTest.throwExceptions = false;
   }
 
   static _setupFormatterCallbacks() {
@@ -28,8 +28,8 @@ class Bullseye {
       _formatterCallbacksSetup = true;
       BullseyeTestFixture.beforeRun((desc) => Bullseye.formatter.beforeDescribe(desc));
       BullseyeTestFixture.afterRun((desc) => Bullseye.formatter.afterDescribe(desc));
-      SpecExample.beforeRun((ex) => Bullseye.formatter.beforeExample(ex));
-      SpecExample.afterRun((ex) => Bullseye.formatter.afterExample(ex));
+      BullseyeTest.beforeRun((ex) => Bullseye.formatter.beforeTest(ex));
+      BullseyeTest.afterRun((ex) => Bullseye.formatter.afterTest(ex));
     }
   }
 }
