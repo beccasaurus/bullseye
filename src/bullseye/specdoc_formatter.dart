@@ -40,7 +40,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
       else
         pendingString = "[${test.pendingReason}] ";
 
-    write(pendingString + test.name, indent: _testFixtureDepth, color: colorForTest(test));
+    write(pendingString + test.description, indent: _testFixtureDepth, color: colorForTest(test));
   }
 
   String colorForTest(BullseyeTest test) {
@@ -85,7 +85,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
       write("\nFailures:");
       failedTests.forEach((test) {
         write("");
-        write("${test.testFixture.description} ${test.name}", indent: 1, color: colorForTest(test));
+        write("${test.testFixture.description} ${test.description}", indent: 1, color: colorForTest(test));
         write("Exception: ${test.exception}", indent: 2);
       });
     }
@@ -96,7 +96,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
       write("\nErrors:");
       errorTests.forEach((test) {
         write("");
-        write("${test.testFixture.description} ${test.name}", indent: 1, color: colorForTest(test));
+        write("${test.testFixture.description} ${test.description}", indent: 1, color: colorForTest(test));
         write("Exception: ${test.exception}", indent: 2, color: colorForTest(test));
       });
     }
@@ -107,7 +107,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
       write("\nPending:\n");
       pendingTests.forEach((test) {
         String pendingReason = (test.pendingReason != null) ? " [${test.pendingReason}]" : "";
-        write("${test.testFixture.description} ${test.name}${pendingReason}", indent: 1, color: colorForTest(test));
+        write("${test.testFixture.description} ${test.description}${pendingReason}", indent: 1, color: colorForTest(test));
       });
     }
   }

@@ -17,7 +17,7 @@ class OriginalTestSpec extends SpecMap_Bullseye {
 
       "passed": (){
         var test = spec.testFixtures[0].tests[0];
-        Expect.equals("should pass", test.name);
+        Expect.equals("should pass", test.description);
         Expect.isNull(test.result);
 
         test.run();
@@ -27,7 +27,7 @@ class OriginalTestSpec extends SpecMap_Bullseye {
 
       "failed": (){
         var test = spec.testFixtures[0].tests[1];
-        Expect.equals("should fail", test.name);
+        Expect.equals("should fail", test.description);
         Expect.isNull(test.result);
         Expect.isNull(test.exception);
 
@@ -43,7 +43,7 @@ class OriginalTestSpec extends SpecMap_Bullseye {
 
       "error": (){
         var test = spec.testFixtures[0].tests[2];
-        Expect.equals("should have an error", test.name);
+        Expect.equals("should have an error", test.description);
         Expect.isNull(test.result);
         Expect.isNull(test.exception);
 
@@ -59,7 +59,7 @@ class OriginalTestSpec extends SpecMap_Bullseye {
 
       "pending": (){
         var test = spec.testFixtures[0].tests[3];
-        Expect.equals("should be pending", test.name);
+        Expect.equals("should be pending", test.description);
         Expect.isNull(test.result);
 
         test.run();

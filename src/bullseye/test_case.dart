@@ -7,8 +7,8 @@ class TestCase extends BullseyeTestFixtureDefinition {
     defineNestedTestFixture(description: description, fn: fn);
   }
 
-  BullseyeTest test([String name = null, Function fn = null]) {
-    defineTest(name: name, fn: fn);
+  BullseyeTest test([String description = null, Function fn = null]) {
+    defineTest(description: description, fn: fn);
   }
 
   void setUp([Function fn = null]) {

@@ -9,7 +9,7 @@ class BullseyeTest {
 
   static bool throwExceptions;
 
-  String name;
+  String description;
 
   Function fn;
 
@@ -17,12 +17,12 @@ class BullseyeTest {
 
   Exception exception;
 
-  BullseyeTest([BullseyeTestFixture testFixture, String name = null, Function fn = null]) {
+  BullseyeTest([BullseyeTestFixture testFixture, String description = null, Function fn = null]) {
     if (_beforeFunctions == null) _beforeFunctions = new List<Function>();
     if (_afterFunctions == null)  _afterFunctions = new List<Function>();
 
     this.testFixture   = testFixture;
-    this.name       = name;
+    this.description       = description;
     this.fn         = fn;
   }
 

@@ -34,16 +34,16 @@ class OriginalRunHooksSpec extends SpecMap_Bullseye {
 
       "can hook into BullseyeTest.beforeRun()": (){
         Expect.equals(3, hookData["ex:before"].length);
-        Expect.equals("foo", hookData["ex:before"][0].name);
-        Expect.equals("bar", hookData["ex:before"][1].name);
-        Expect.equals("baz", hookData["ex:before"][2].name);
+        Expect.equals("foo", hookData["ex:before"][0].description);
+        Expect.equals("bar", hookData["ex:before"][1].description);
+        Expect.equals("baz", hookData["ex:before"][2].description);
       },
 
       "can hook into BullseyeTest.afterRun()": (){
         Expect.equals(3, hookData["ex:after"].length);
-        Expect.equals("foo", hookData["ex:after"][0].name);
-        Expect.equals("bar", hookData["ex:after"][1].name);
-        Expect.equals("baz", hookData["ex:after"][2].name);
+        Expect.equals("foo", hookData["ex:after"][0].description);
+        Expect.equals("bar", hookData["ex:after"][1].description);
+        Expect.equals("baz", hookData["ex:after"][2].description);
       }
 
     });

@@ -18,11 +18,11 @@ class OriginalTestFixtureSpec extends SpecMap_Bullseye {
         var testFixture2 = spec.testFixtures[1];
 
         Expect.equals(2, testFixture1.tests.length);
-        Expect.equals("should do stuff", testFixture1.tests[0].name);
-        Expect.equals("should do other stuff", testFixture1.tests[1].name);
+        Expect.equals("should do stuff", testFixture1.tests[0].description);
+        Expect.equals("should do other stuff", testFixture1.tests[1].description);
 
         Expect.equals(1, testFixture2.tests.length);
-        Expect.equals("should do more stuff", testFixture2.tests[0].name);
+        Expect.equals("should do more stuff", testFixture2.tests[0].description);
       },
 
       "can have many sub-testFixtures": (){
@@ -32,14 +32,14 @@ class OriginalTestFixtureSpec extends SpecMap_Bullseye {
         // are stored inside each of these testFixtures.
         Expect.equals(2, spec.testFixtures.length);
 
-        Expect.equals("outer top it", spec.testFixtures[0].tests[0].name);
+        Expect.equals("outer top it", spec.testFixtures[0].tests[0].description);
         Expect.equals("inner first", spec.testFixtures[0].testFixtures[0].description);
-        Expect.equals("inner first it", spec.testFixtures[0].testFixtures[0].tests[0].name);
-        Expect.equals("outer bottom it", spec.testFixtures[0].tests[1].name);
+        Expect.equals("inner first it", spec.testFixtures[0].testFixtures[0].tests[0].description);
+        Expect.equals("outer bottom it", spec.testFixtures[0].tests[1].description);
 
         Expect.equals("inner second", spec.testFixtures[1].testFixtures[0].description);
         Expect.equals("inner inner second", spec.testFixtures[1].testFixtures[0].testFixtures[0].description);
-        Expect.equals("inner inner second it", spec.testFixtures[1].testFixtures[0].testFixtures[0].tests[0].name);
+        Expect.equals("inner inner second it", spec.testFixtures[1].testFixtures[0].testFixtures[0].tests[0].description);
       }
 
     });

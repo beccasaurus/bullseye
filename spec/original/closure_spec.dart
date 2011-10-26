@@ -15,7 +15,7 @@ class OriginalClosureSpec extends SpecMap_Bullseye {
       // "can get its parentGroups as a list of groups with the outermost first and this closure's immediate parent group last": (){
       //   var outer   = new BullseyeClosureGroup("outer");
       //   var inner1  = new BullseyeClosureGroup("inner");
-      //   var inner2  = new BullseyeClosureGroup(); // make sure that nothing goes boom if one of the parents is un-named
+      //   var inner2  = new BullseyeClosureGroup(); // make sure that nothing goes boom if one of the parents is un-descriptiond
       //   var inner3  = new BullseyeClosureGroup("innermost");
       //   var closure = new BullseyeClosure("my cool closure");
 
@@ -30,7 +30,7 @@ class OriginalClosureSpec extends SpecMap_Bullseye {
       // "has a fullDescription which includes the descriptions of all parent groups": (){
       //   var outer   = new BullseyeClosureGroup("outer");
       //   var inner1  = new BullseyeClosureGroup("inner");
-      //   var inner2  = new BullseyeClosureGroup(); // make sure that nothing goes boom if one of the parents is un-named
+      //   var inner2  = new BullseyeClosureGroup(); // make sure that nothing goes boom if one of the parents is un-descriptiond
       //   var inner3  = new BullseyeClosureGroup("innermost");
       //   var closure = new BullseyeClosure("my cool closure");
 

@@ -23,10 +23,10 @@ class OriginalSpecSpec extends SpecMap_Bullseye {
         Expect.equals(1, testsAndDescribes.testFixtures[0].tests.length);
 
         Expect.equals("SpecSpec_TestsAndDescribes", testsAndDescribes.description);
-        Expect.equals("foo", testsAndDescribes.tests[0].name);
+        Expect.equals("foo", testsAndDescribes.tests[0].description);
 
         Expect.equals("stuff", testsAndDescribes.testFixtures[0].description);
-        Expect.equals("bar", testsAndDescribes.testFixtures[0].tests[0].name);
+        Expect.equals("bar", testsAndDescribes.testFixtures[0].tests[0].description);
       }
 
     });

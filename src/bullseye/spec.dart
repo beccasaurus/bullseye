@@ -8,8 +8,8 @@ class Spec extends BullseyeTestFixtureDefinition {
     defineNestedTestFixture(description: description, fn: fn);
   }
 
-  BullseyeTest it([String name = null, Function fn = null]) {
-    defineTest(name: name, fn: fn);
+  BullseyeTest it([String description = null, Function fn = null]) {
+    defineTest(description: description, fn: fn);
   }
 
   void before([Function fn = null]) {
