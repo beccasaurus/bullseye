@@ -6,8 +6,8 @@ class RunHooksSpec extends SpecDartTest {
                  "desc:before": [], "desc:after": [],
                  "ex:before":   [], "ex:after":   [] };
 
-    BullseyeTestContextDefinition.beforeRun((spec) => hookData["spec:before"].add(spec));
-    BullseyeTestContextDefinition.afterRun((spec) => hookData["spec:after"].add(spec));
+    BullseyeTestFixtureDefinition.beforeRun((spec) => hookData["spec:before"].add(spec));
+    BullseyeTestFixtureDefinition.afterRun((spec) => hookData["spec:after"].add(spec));
     SpecDescribe.beforeRun((desc) => hookData["desc:before"].add(desc));
     SpecDescribe.afterRun((desc) => hookData["desc:after"].add(desc));
     SpecExample.beforeRun((ex) => hookData["ex:before"].add(ex));
@@ -18,13 +18,13 @@ class RunHooksSpec extends SpecDartTest {
 
     describe("Global run() hooks", {
 
-      "can hook into BullseyeTestContextDefinition.beforeRun()": (){
+      "can hook into BullseyeTestFixtureDefinition.beforeRun()": (){
         Expect.equals(2, hookData["spec:before"].length);
         Expect.isTrue(hookData["spec:before"][0] is RunHooksSpec_Example1);
         Expect.isTrue(hookData["spec:before"][1] is RunHooksSpec_Example2);
       },
 
-      "can hook into BullseyeTestContextDefinition.afterRun()": (){
+      "can hook into BullseyeTestFixtureDefinition.afterRun()": (){
         Expect.equals(2, hookData["spec:after"].length);
         Expect.isTrue(hookData["spec:after"][0] is RunHooksSpec_Example1);
         Expect.isTrue(hookData["spec:after"][1] is RunHooksSpec_Example2);

@@ -1,15 +1,15 @@
-interface BullseyeTestContextProvider {
-  //Iterable<BullseyeTestContext> get testContexts();
+interface BullseyeTestFixtureProvider {
+  //Iterable<BullseyeTestFixture> get testContexts();
   Iterable<SpecDescribe> get testContexts();
 }
 
-class TestCase extends BullseyeTestContextDefinition implements BullseyeTestContextProvider {
+class TestCase extends BullseyeTestFixtureDefinition implements BullseyeTestFixtureProvider {
 
-  void defineTestContext() => defineTests();
+  void defineTestFixture() => defineTests();
   void defineTests(){}
 
   SpecDescribe context([String subject = null, Function fn = null]) {
-    defineNestedTestContext(subject: subject, fn: fn);
+    defineNestedTestFixture(subject: subject, fn: fn);
   }
 
   SpecExample test([String name = null, Function fn = null]) {
@@ -25,13 +25,13 @@ class TestCase extends BullseyeTestContextDefinition implements BullseyeTestCont
   }
 }
 
-class Spec extends BullseyeTestContextDefinition implements BullseyeTestContextProvider {
+class Spec extends BullseyeTestFixtureDefinition implements BullseyeTestFixtureProvider {
 
-  void defineTestContext() => spec();
+  void defineTestFixture() => spec();
   void spec(){}
 
   SpecDescribe describe([String subject = null, Function fn = null]) {
-    defineNestedTestContext(subject: subject, fn: fn);
+    defineNestedTestFixture(subject: subject, fn: fn);
   }
 
   SpecExample it([String name = null, Function fn = null]) {

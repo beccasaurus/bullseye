@@ -14,7 +14,7 @@ class SpecDocFormatterSpec extends SpecDartTest {
 
     describe("SpecDocFormatter", {
 
-      "prints Spec.dart header": () => Expect.isTrue(output.contains("~ Spec.dart ${BullseyeTestContextDefinition.VERSION} ~\n\n", 0)),
+      "prints Spec.dart header": () => Expect.isTrue(output.contains("~ Spec.dart ${BullseyeTestFixtureDefinition.VERSION} ~\n\n", 0)),
 
       "prints describes": (){
         Expect.isTrue(output.contains("\nfoo", 0));

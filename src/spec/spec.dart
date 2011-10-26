@@ -1,7 +1,7 @@
 // TODO hmm ... this is just a definition class now ... should it know how to run itself?
-//      I think not!  We just want to run Iterable<BullseyeTestContext>!  That's what this needs to provide!
+//      I think not!  We just want to run Iterable<BullseyeTestFixture>!  That's what this needs to provide!
 
-class BullseyeTestContextDefinition implements BullseyeTestContextProvider {
+class BullseyeTestFixtureDefinition implements BullseyeTestFixtureProvider {
   
   static final VERSION = "0.1.0"; // TODO move me!
 
@@ -19,19 +19,19 @@ class BullseyeTestContextDefinition implements BullseyeTestContextProvider {
 
   List<SpecDescribe> _currentDescribes;
 
-  BullseyeTestContextDefinition() {
+  BullseyeTestFixtureDefinition() {
     if (_beforeFunctions == null) _beforeFunctions = new List<Function>();
     if (_afterFunctions == null)  _afterFunctions = new List<Function>();
 
     describes         = new List<SpecDescribe>();
     _currentDescribes = new List<SpecDescribe>();
 
-    defineTestContext();
+    defineTestFixture();
   }
 
-  void defineTestContext(){}
+  void defineTestFixture(){}
 
-  SpecDescribe defineNestedTestContext([String subject = null, Function fn = null]) {
+  SpecDescribe defineNestedTestFixture([String subject = null, Function fn = null]) {
     SpecDescribe parent   = _currentDescribes.length == 0 ? null : _currentDescribes.last();
     SpecDescribe describe = new SpecDescribe(spec: this, subject: subject, fn: fn, parent: parent);
 
