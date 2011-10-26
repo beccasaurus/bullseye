@@ -3,14 +3,16 @@ class Specs {
 
   static bool _formatterCallbacksSetup;
 
-  static void run(List<SpecDescribe> describes) {
+  static void run(Iterable<BullseyeTestSuite> suites) {
     _setupFormatterCallbacks();
 
     if (formatter == null)
       formatter = new SpecDocFormatter();
 
     formatter.header();
-    describes.forEach((desc) => desc.run());
+    suites.forEach((suite) {
+      suite.testFixtures.forEach((fixture) => fixture.run());
+    });
     formatter.footer();
   }
 

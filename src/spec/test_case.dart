@@ -1,9 +1,11 @@
-interface BullseyeTestFixtureProvider {
-  //Iterable<BullseyeTestFixture> get testContexts();
+// This is useful so we don't have to care what type of object(s) you 
+// pass to a runner, it just takes test suites and knows howto get its 
+// fixtures.  You could provide the fixtures directly, but ... meh?  Might remove this?
+interface BullseyeTestSuite {
   Iterable<SpecDescribe> get testFixtures();
 }
 
-class TestCase extends BullseyeTestFixtureDefinition implements BullseyeTestFixtureProvider {
+class TestCase extends BullseyeTestFixtureDefinition implements BullseyeTestSuite {
 
   void defineTestFixture() => defineTests();
   void defineTests(){}
@@ -25,7 +27,7 @@ class TestCase extends BullseyeTestFixtureDefinition implements BullseyeTestFixt
   }
 }
 
-class Spec extends BullseyeTestFixtureDefinition implements BullseyeTestFixtureProvider {
+class Spec extends BullseyeTestFixtureDefinition implements BullseyeTestSuite {
   static final RegExp subjectNameReplacementPattern = const RegExp(@"Spec$");
 
   void defineTestFixture() => spec();

@@ -1,4 +1,4 @@
-class BullseyeTestFixtureDefinition extends SpecDescribe implements BullseyeTestFixtureProvider {
+class BullseyeTestFixtureDefinition extends SpecDescribe implements BullseyeTestSuite {
 
   // Keeps track of the list of SpecDescribe that are currently being defined.
   //
