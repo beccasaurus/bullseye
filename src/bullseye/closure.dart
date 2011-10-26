@@ -46,8 +46,13 @@ class BullseyeClosure {
     return desc;
   }
 
+  bool get passed()  => status == BullseyeTestStatus.passed;
+  bool get failed()  => status == BullseyeTestStatus.failed;
+  bool get error()   => status == BullseyeTestStatus.error;
+  bool get pending() => status == BullseyeTestStatus.pending;
+
   String get pendingReason() {
-    if (status == BullseyeTestStatus.pending && exception is SpecPendingException)
+    if (status == BullseyeTestStatus.pending && exception is BullseyePendingException)
       return exception.message;
     else
       return null;
@@ -61,6 +66,7 @@ class BullseyeClosure {
   }
 
   void run() {
+    if (fn == null) return;
     if (_run == true)
       throw new UnsupportedOperationException("This cannot be run() more than once.  Try rerun() to explicitly run again.");
 
@@ -80,7 +86,7 @@ class BullseyeClosure {
         _status    = BullseyeTestStatus.failed;
         exception  = ex;
         stackTrace = trace;
-      } catch (SpecPendingException ex, var trace) {
+      } catch (BullseyePendingException ex, var trace) {
         _status    = BullseyeTestStatus.pending;
         exception  = ex;
         stackTrace = trace;

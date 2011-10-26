@@ -1,7 +1,7 @@
-class SpecPendingException implements Exception {
+class BullseyePendingException implements Exception {
   String message;
 
-  SpecPendingException(this.message);
+  BullseyePendingException(this.message);
 
   String toString() => message;
 }

@@ -23,6 +23,7 @@ int main() {
   return SpecMap.run([
 
     new ActsAsClosureSpec(() => new BullseyeClosure()),
+    new ActsAsClosureSpec(() => new BullseyeTest()),
     new TestSpec(),
 
     new OriginalMagicMapSpec(),

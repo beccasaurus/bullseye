@@ -43,7 +43,7 @@ class BullseyeTestFixtureDefinition extends BullseyeTestFixture {
   }
 
   void pending([String message = "PENDING"]) {
-    throw new SpecPendingException(message);
+    throw new BullseyePendingException(message);
   }
 
   void defineSetUp([Function fn = null]) {

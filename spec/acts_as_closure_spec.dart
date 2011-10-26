@@ -199,9 +199,9 @@ class ActsAsClosureSpec extends SpecMap_Bullseye {
         Expect.equals(BullseyeTestStatus.pending, closure.status);
       },
 
-      "has a status of 'pending' if SpecPendingException is thrown when run()": (){
+      "has a status of 'pending' if BullseyePendingException is thrown when run()": (){
         var closure = newInstance();
-        closure.fn = (){ throw new SpecPendingException("Haven't gotten around to this yet"); };
+        closure.fn = (){ throw new BullseyePendingException("Haven't gotten around to this yet"); };
         Expect.equals(BullseyeTestStatus.not_run, closure.status);
         Expect.isNull(closure.pendingReason);
 
@@ -328,6 +328,26 @@ class ActsAsClosureSpec extends SpecMap_Bullseye {
 
         Expect.isTrue(closure.timeItTookToRunInUs > 0);    // More than 0 Microseconds
         Expect.isTrue(closure.timeItTookToRunInUs < 3000); // Less than a 3 Milliseconds (just incase)
+      },
+
+      "has helpers for checking is the closure currently has a given status, eg. passed()": (){
+        var closure = newInstance();
+        Expect.isTrue(closure.pending);
+        Expect.isFalse(closure.passed);
+        Expect.isFalse(closure.failed);
+        Expect.isFalse(closure.error);
+
+        closure.fn = (){};
+        Expect.isFalse(closure.pending);
+        Expect.isFalse(closure.passed);
+        Expect.isFalse(closure.failed);
+        Expect.isFalse(closure.error);
+
+        closure.run();
+        Expect.isTrue(closure.passed);
+        Expect.isFalse(closure.pending);
+        Expect.isFalse(closure.failed);
+        Expect.isFalse(closure.error);
       }
 
     });

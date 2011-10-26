@@ -251,7 +251,7 @@ class OriginalClosureSpec extends SpecMap_Bullseye {
         closure.run();
 
         Expect.isTrue(closure.timeItTookToRunInUs > 0);    // More than 0 Microseconds
-        Expect.isTrue(closure.timeItTookToRunInUs < 2000); // Less than a 2 Milliseconds (just incase)
+        Expect.isTrue(closure.timeItTookToRunInUs < 3000); // Less than a 3 Milliseconds (just incase)
       }
 
     });

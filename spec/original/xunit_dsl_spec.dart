@@ -6,10 +6,8 @@ class OriginalxUnitDSLSpec extends SpecMap_Bullseye {
         var testCase  = new xUnitDSLSpec_Test();
         var testFixture1 = testCase.testFixtures[0];
         var testFixture2 = testCase.testFixtures[1];
-        testFixture1.tests.forEach((ex) => Expect.isNull(ex.status));
-        testFixture2.tests.forEach((ex) => Expect.isNull(ex.status));
 
-        testCase.run(); // TODO should return a status
+        testCase.run(); // TODO should return a status?
 
         // foo
         Expect.equals(BullseyeTestStatus.passed,  testFixture1.tests[0].status);

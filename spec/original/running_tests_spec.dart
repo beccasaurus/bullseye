@@ -5,7 +5,6 @@ class OriginalRunningTestsSpec extends SpecMap_Bullseye {
       "it can run the tests in a single testFixture": (){
         var testFixture = new RunningTestsSpec_SingleDescribe().testFixtures[0];
         Expect.equals(4, testFixture.tests.length);
-        testFixture.tests.forEach((ex) => Expect.isNull(ex.status));
         
         testFixture.run(); // TODO should return a status
 
@@ -19,8 +18,6 @@ class OriginalRunningTestsSpec extends SpecMap_Bullseye {
         var spec      = new RunningTestsSpec_SingleDescribe();
         var testFixture1 = spec.testFixtures[0];
         var testFixture2 = spec.testFixtures[1];
-        testFixture1.tests.forEach((ex) => Expect.isNull(ex.status));
-        testFixture2.tests.forEach((ex) => Expect.isNull(ex.status));
 
         spec.run(); // TODO should return a status
 
