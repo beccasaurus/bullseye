@@ -4,12 +4,15 @@ class ActsAsClosureSpec extends SpecMap_Bullseye {
   ActsAsClosureSpec(this.newInstance);
 
   spec() {
-    var instance  = newInstance();
-    var className = BullseyeUtils.getClassName(instance);
+    var className = BullseyeUtils.getClassName(newInstance());
 
     describe("$className acts as BullseyeClosure", {
 
-      "has a function": null,
+      "has a function": (){
+        //var instance = newInstance();
+        //Expect.isNull(instance.function);
+      },
+
       // "has a description": null,
       // "can get its parentGroups as a list of groups with the outermost first and this closure's immediate parent group last": null,
       // "has a fullDescription which includes the descriptions of all parent groups": null,

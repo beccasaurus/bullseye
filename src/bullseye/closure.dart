@@ -2,7 +2,7 @@ class BullseyeClosure {
 
   static bool closuresThrowExceptions = false;
   String description;
-  Function function;
+  Function fn;
   var returnValue;
   int timeItTookToRunInUs;
   BullseyeMagicMap<String,Object> meta;
@@ -17,10 +17,10 @@ class BullseyeClosure {
   // TestGroup group;
 
   BullseyeClosure([
-     String description = null, Function function = null, Map<String,Object> meta = null, 
+     String description = null, Function fn = null, Map<String,Object> meta = null, 
      Iterable<String> tags = null, String tag = null]) 
   {
-    this.function        = function;
+    this.fn        = fn;
     this.description     = description;
     this.meta            = new BullseyeMagicMap<String,Object>(meta);
     this.throwExceptions = false;
@@ -62,13 +62,13 @@ class BullseyeClosure {
 
     if (throwExceptions == true || closuresThrowExceptions == true) {
       _startTimer();
-      returnValue = function();
+      returnValue = fn();
       _stopTimerAndRecordDuration();
       _status = 'passed';
     } else {
       try {
         _startTimer();
-        returnValue = function();
+        returnValue = fn();
         _status = 'passed';
       } catch (ExpectException ex, var trace) {
         _status    = 'failed';
@@ -87,7 +87,7 @@ class BullseyeClosure {
   String get status() {
     if (_status != null)
       return _status;
-    else if (function == null)
+    else if (fn == null)
       return "pending";
     else if (_run == true)
       return "run";
