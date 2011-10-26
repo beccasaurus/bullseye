@@ -374,8 +374,8 @@ class Specs {
   static _setupFormatterCallbacks() {
     if (_formatterCallbacksSetup != true) {
       _formatterCallbacksSetup = true;
-      Spec.beforeRun((spec) => Specs.formatter.beforeSpec(spec));
-      Spec.afterRun((spec) => Specs.formatter.afterSpec(spec));
+      BullseyeTestContextDefinition.beforeRun((spec) => Specs.formatter.beforeSpec(spec));
+      BullseyeTestContextDefinition.afterRun((spec) => Specs.formatter.afterSpec(spec));
       SpecDescribe.beforeRun((desc) => Specs.formatter.beforeDescribe(desc));
       SpecDescribe.afterRun((desc) => Specs.formatter.afterDescribe(desc));
       SpecExample.beforeRun((ex) => Specs.formatter.beforeExample(ex));

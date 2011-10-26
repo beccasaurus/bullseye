@@ -15,7 +15,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
   Collection<SpecExample> get pendingExamples() => examples.filter((ex) => ex.pending);
 
   void header() {
-    write("~ Spec.dart ${Spec.VERSION} ~\n");
+    write("~ Spec.dart ${BullseyeTestContextDefinition.VERSION} ~\n");
   }
 
   void beforeDescribe(SpecDescribe describe) {

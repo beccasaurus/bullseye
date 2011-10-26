@@ -17,8 +17,8 @@ class SpecFormatter implements SpecFormattable {
 
   void header(){}
   void footer(){}
-  void beforeSpec(Spec spec){}
-  void afterSpec(Spec Spec){}
+  void beforeSpec(BullseyeTestContextDefinition spec){}
+  void afterSpec(BullseyeTestContextDefinition Spec){}
   void beforeDescribe(SpecDescribe describe){}
   void afterDescribe(SpecDescribe describe){}
   void beforeExample(SpecExample example){}

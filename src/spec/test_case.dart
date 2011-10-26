@@ -1,20 +1,48 @@
-class TestCase extends Spec {
+interface BullseyeTestContextProvider {
+  //Iterable<BullseyeTestContext> get testContexts();
+  Iterable<SpecDescribe> get testContexts();
+}
 
-  void spec() => defineTests();
+class TestCase extends BullseyeTestContextDefinition implements BullseyeTestContextProvider {
+
+  void defineTestContext() => defineTests();
+  void defineTests(){}
 
   SpecDescribe context([String subject = null, Function fn = null]) {
-    describe(subject: subject, fn: fn);
+    defineNestedTestContext(subject: subject, fn: fn);
   }
 
   SpecExample test([String name = null, Function fn = null]) {
-    it(name: name, fn: fn);
+    defineTest(name: name, fn: fn);
   }
 
   void setUp([Function fn = null]) {
-    before(fn: fn);
+    defineSetUp(fn: fn);
   }
 
   void tearDown([Function fn = null]) {
-    after(fn: fn);
+    defineTearDown(fn: fn);
+  }
+}
+
+class Spec extends BullseyeTestContextDefinition implements BullseyeTestContextProvider {
+
+  void defineTestContext() => spec();
+  void spec(){}
+
+  SpecDescribe describe([String subject = null, Function fn = null]) {
+    defineNestedTestContext(subject: subject, fn: fn);
+  }
+
+  SpecExample it([String name = null, Function fn = null]) {
+    defineTest(name: name, fn: fn);
+  }
+
+  void before([Function fn = null]) {
+    defineSetUp(fn: fn);
+  }
+
+  void after([Function fn = null]) {
+    defineTearDown(fn: fn);
   }
 }

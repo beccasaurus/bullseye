@@ -1,6 +1,9 @@
-class Spec {
+// TODO hmm ... this is just a definition class now ... should it know how to run itself?
+//      I think not!  We just want to run Iterable<BullseyeTestContext>!  That's what this needs to provide!
+
+class BullseyeTestContextDefinition implements BullseyeTestContextProvider {
   
-  static final VERSION = "0.1.0";
+  static final VERSION = "0.1.0"; // TODO move me!
 
   static List<Function> _beforeFunctions;
   static List<Function> _afterFunctions;
@@ -9,23 +12,26 @@ class Spec {
 
   static void afterRun(Function callback) => _afterFunctions.add(callback);
 
+  // not implemented yet
+  Iterable<SpecDescribe> get testContexts() => <SpecDescribe>[];
+
   List<SpecDescribe> describes;
 
   List<SpecDescribe> _currentDescribes;
 
-  Spec() {
+  BullseyeTestContextDefinition() {
     if (_beforeFunctions == null) _beforeFunctions = new List<Function>();
     if (_afterFunctions == null)  _afterFunctions = new List<Function>();
 
     describes         = new List<SpecDescribe>();
     _currentDescribes = new List<SpecDescribe>();
 
-    spec();
+    defineTestContext();
   }
 
-  void spec() {}
+  void defineTestContext(){}
 
-  SpecDescribe describe([String subject = null, Function fn = null]) {
+  SpecDescribe defineNestedTestContext([String subject = null, Function fn = null]) {
     SpecDescribe parent   = _currentDescribes.length == 0 ? null : _currentDescribes.last();
     SpecDescribe describe = new SpecDescribe(spec: this, subject: subject, fn: fn, parent: parent);
 
@@ -41,7 +47,7 @@ class Spec {
     return describe;
   }
 
-  SpecExample it([String name = null, Function fn = null]) {
+  SpecExample defineTest([String name = null, Function fn = null]) {
     SpecDescribe desc = _getCurrentDescribe("it");
     SpecExample example = new SpecExample(describe: desc, name: name, fn: fn);
     desc.examples.add(example);
@@ -52,6 +58,20 @@ class Spec {
     throw new SpecPendingException(message);
   }
 
+  void defineSetUp([Function fn = null]) {
+    _getCurrentDescribe("before").befores.add(fn);
+  }
+
+  void defineTearDown([Function fn = null]) {
+    _getCurrentDescribe("after").afters.add(fn);
+  }
+
+  void run() {
+    _beforeFunctions.forEach((fn) => fn(this));
+    describes.forEach((desc) => desc.run());
+    _afterFunctions.forEach((fn) => fn(this));
+  }
+
   SpecDescribe _getCurrentDescribe([String callerFunctionName = null]) {
     SpecDescribe currentDescribe = _currentDescribes.last();
     if (currentDescribe != null) {
@@ -60,19 +80,5 @@ class Spec {
       if (callerFunctionName != null)
         throw new UnsupportedOperationException("it${callerFunctionName} cannot be used before calling describe()");
     }
-  }
-
-  void before([Function fn = null]) {
-    _getCurrentDescribe("before").befores.add(fn);
-  }
-
-  void after([Function fn = null]) {
-    _getCurrentDescribe("after").afters.add(fn);
-  }
-
-  void run() {
-    _beforeFunctions.forEach((fn) => fn(this));
-    describes.forEach((desc) => desc.run());
-    _afterFunctions.forEach((fn) => fn(this));
   }
 }

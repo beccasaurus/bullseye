@@ -7,7 +7,7 @@ class SpecDescribe {
 
   static void afterRun(Function callback) => _afterFunctions.add(callback);
 
-  Spec spec;
+  BullseyeTestContextProvider spec;
 
   SpecDescribe parent;
 
@@ -26,7 +26,7 @@ class SpecDescribe {
   bool _evaluatedFn;
   List<SpecDescribe> _parentDescribes;
 
-  SpecDescribe([Spec spec = null, SpecDescribe parent = null, String subject = null, Function fn = null]) {
+  SpecDescribe([BullseyeTestContextProvider spec = null, SpecDescribe parent = null, String subject = null, Function fn = null]) {
     if (_beforeFunctions == null) _beforeFunctions = new List<Function>();
     if (_afterFunctions == null)  _afterFunctions = new List<Function>();
 
