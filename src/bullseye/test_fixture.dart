@@ -36,22 +36,23 @@ class BullseyeTestFixture {
   }
 
   List<BullseyeTestFixture> get parentDescribes() {
-    if (_parentDescribes == null) {
+    List<BullseyeTestFixture> parents = new List<BullseyeTestFixture>();
+    BullseyeTestFixture       current = parent;
+    while (current != null) {
+      parents.insertRange(0, 1, current);
+      current = current.parent;
+    }
+    return parents;
+  }
 
-      List<BullseyeTestFixture> tempDescribes = new List<BullseyeTestFixture>();
-      BullseyeTestFixture       currentParent = parent;
-
-      while (currentParent != null) {
-        tempDescribes.add(currentParent);
-        currentParent = currentParent.parent;
-      }
-
-      _parentDescribes = new List<BullseyeTestFixture>();
-      var times = tempDescribes.length;
-      for (int i = 0; i < times; i++)
-        _parentDescribes.add(tempDescribes.removeLast());
-    }   
-    return _parentDescribes;
+  String get fullDescription() {
+    String desc = (parent == null) ? "" : parent.fullDescription;
+    if (description != null) {
+      if (desc.length > 0)
+        desc += " ";
+      desc = desc + description;
+    }
+    return desc;
   }
 
   void runBefores() {

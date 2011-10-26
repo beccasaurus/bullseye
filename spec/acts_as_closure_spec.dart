@@ -8,15 +8,65 @@ class ActsAsClosureSpec extends SpecMap_Bullseye {
 
     describe("$className acts as BullseyeClosure", {
 
-      "has a function": (){
-        //var instance = newInstance();
-        //Expect.isNull(instance.function);
+      "has a closure fn()": (){
+        var closure = newInstance();
+        Expect.isNull(closure.fn);
+        
+        var fn = (){};
+        closure.fn = fn;
+        Expect.identical(fn, closure.fn);
       },
 
-      // "has a description": null,
-      // "can get its parentGroups as a list of groups with the outermost first and this closure's immediate parent group last": null,
-      // "has a fullDescription which includes the descriptions of all parent groups": null,
-      // "has a reference to its parent group (if any)": null,
+      "has a description()": (){
+        var closure = newInstance();
+        Expect.isNull(closure.description);
+        
+        closure.description = "Cool closure";
+        Expect.identical("Cool closure", closure.description);
+      },
+
+      "can get parents() - a list of parent BullseyeTestFixture, starting with the outermost and ending with this closure's parent": (){
+        var closure = newInstance();
+        Expect.equals(0, closure.parents.length);
+
+        var fixture = new BullseyeTestFixture();
+        closure.parent = fixture;
+        Expect.equals(1, closure.parents.length);
+        Expect.identical(fixture, closure.parents[0]);
+
+        var outerFixture = new BullseyeTestFixture();
+        fixture.parent = outerFixture;
+        Expect.equals(2, closure.parents.length);
+        Expect.identical(outerFixture, closure.parents[0]);
+        Expect.identical(fixture, closure.parents[1]);
+      },
+
+      "has a fullDescription which includes the descriptions of all parent groups": (){
+        var outer = new BullseyeTestFixture(description: "outer");
+        var blank = new BullseyeTestFixture(description: null,    parent: outer);
+        var inner = new BullseyeTestFixture(description: "inner", parent: blank);
+        var last  = new BullseyeTestFixture(description: null,    parent: inner);
+
+        var closure = newInstance();
+        closure.description = "foo";
+        Expect.equals("foo", closure.fullDescription);
+
+        closure.parent = last;
+        Expect.equals("outer inner foo", closure.fullDescription);
+
+        closure.description = null;
+        Expect.equals("outer inner", closure.fullDescription);
+      },
+
+      "has a reference to its parent() BullseyeTestFixture (if any)": (){
+        var closure = newInstance();
+        Expect.isNull(closure.parent);
+        
+        var fixture = new BullseyeTestFixture();
+        closure.parent = fixture;
+        Expect.identical(fixture, closure.parent);
+      },
+
       // "has meta data": null,
       // "meta is magical (values accessible via methods via noSuchMethod)": null,
       // "has tags (which are stored in metadata['tags'])": null,

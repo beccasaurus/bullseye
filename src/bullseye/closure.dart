@@ -1,5 +1,6 @@
 class BullseyeClosure {
 
+  BullseyeTestFixture parent;
   static bool closuresThrowExceptions = false;
   String description;
   Function fn;
@@ -14,15 +15,14 @@ class BullseyeClosure {
   String    _status;
   bool      _run;
 
-  // TestGroup group;
-
   BullseyeClosure([
      String description = null, Function fn = null, Map<String,Object> meta = null, 
-     Iterable<String> tags = null, String tag = null]) 
+     Iterable<String> tags = null, String tag = null, BullseyeTestFixture parent = null]) 
   {
     this.fn        = fn;
     this.description     = description;
     this.meta            = new BullseyeMagicMap<String,Object>(meta);
+    this.parent          = parent;
     this.throwExceptions = false;
     this._run            = false;
 
@@ -30,22 +30,21 @@ class BullseyeClosure {
     if (tag  != null) this.tags.insertRange(0, 1, tag);
   }
 
-  // // Returns a list of all of this closure's parent groups, starting with 
-  // // the outer-most group and ending with this closure's immediate parent group.
-  // List<TestGroup> get parentGroups() {
-  //   List<TestGroup> allParents = (group == null) ? new List<TestGroup>() : group.parentGroups;
-  //   if (group != null) allParents.add(group);
-  //   return allParents;
-  // }
+  List<BullseyeTestFixture> get parents() {
+    List<BullseyeTestFixture> allParents = (parent == null) ? new List<BullseyeTestFixture>() : parent.parentDescribes;
+    if (parent != null) allParents.add(parent);
+    return allParents;
+  }
 
-  // // Returns this closure's "full" description by joining together 
-  // // this closure's description with all of its parent groups' descriptions.
-  // String get fullDescription() {
-  //   String desc = (group == null) ? "" : group.fullDescription;
-  //   if (description != null)
-  //     desc = desc + " " + description;
-  //   return desc;
-  // }
+  String get fullDescription() {
+    String desc = (parent == null) ? "" : parent.fullDescription;
+    if (description != null) {
+      if (desc.length > 0)
+        desc += " ";
+      desc = desc + description;
+    }
+    return desc;
+  }
 
   void rerun() {
     _run       = false;
