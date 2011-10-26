@@ -7,26 +7,26 @@ class SpecSpec extends SpecDartTest {
 
     describe("Spec", {
 
-      "can have no describes": (){
-        Expect.equals(0, noDescribes.describes.length);
+      "can have no testFixtures": (){
+        Expect.equals(0, noDescribes.testFixtures.length);
       },
 
-      "can have many describes": (){
-        Expect.equals(2, manyDescribes.describes.length);
-        Expect.equals("Foo", manyDescribes.describes[0].subject);
-        Expect.equals("Bar", manyDescribes.describes[1].subject);
+      "can have many testFixtures": (){
+        Expect.equals(2, manyDescribes.testFixtures.length);
+        Expect.equals("Foo", manyDescribes.testFixtures[0].subject);
+        Expect.equals("Bar", manyDescribes.testFixtures[1].subject);
       },
 
       "can have many examples": (){
         Expect.equals(1, examplesAndDescribes.examples.length);
-        Expect.equals(1, examplesAndDescribes.describes.length);
-        Expect.equals(1, examplesAndDescribes.describes[0].examples.length);
+        Expect.equals(1, examplesAndDescribes.testFixtures.length);
+        Expect.equals(1, examplesAndDescribes.testFixtures[0].examples.length);
 
         Expect.equals("SpecSpec_ExamplesAndDescribes", examplesAndDescribes.subject);
         Expect.equals("foo", examplesAndDescribes.examples[0].name);
 
-        Expect.equals("stuff", examplesAndDescribes.describes[0].subject);
-        Expect.equals("bar", examplesAndDescribes.describes[0].examples[0].name);
+        Expect.equals("stuff", examplesAndDescribes.testFixtures[0].subject);
+        Expect.equals("bar", examplesAndDescribes.testFixtures[0].examples[0].name);
       }
 
     });

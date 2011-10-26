@@ -4,12 +4,12 @@ interface SpecFormattable {
 
   void footer();
 
-  void beforeDescribe(SpecDescribe describe);
+  void beforeDescribe(BullseyeTestFixture testFixture);
 
-  void afterDescribe(SpecDescribe describe);
+  void afterDescribe(BullseyeTestFixture testFixture);
 
-  void beforeExample(SpecExample describe);
+  void beforeExample(SpecExample testFixture);
 
-  void afterExample(SpecExample describe);
+  void afterExample(SpecExample testFixture);
 
 }

@@ -4,18 +4,18 @@ class ExampleSpec extends SpecDartTest {
     var spec = new ExampleSpec_Example();
 
     describe("Example", {
-      "has reference to SpecDescribe": (){
-        var describe = spec.describes[0];
-        var example  = describe.examples[0];
+      "has reference to BullseyeTestFixture": (){
+        var testFixture = spec.testFixtures[0];
+        var example  = testFixture.examples[0];
 
-        Expect.identical(describe, example.describe);
+        Expect.identical(testFixture, example.testFixture);
       }
     });
 
     describe("Running Examples", {
 
       "passed": (){
-        var example = spec.describes[0].examples[0];
+        var example = spec.testFixtures[0].examples[0];
         Expect.equals("should pass", example.name);
         Expect.isNull(example.result);
 
@@ -25,7 +25,7 @@ class ExampleSpec extends SpecDartTest {
       },
 
       "failed": (){
-        var example = spec.describes[0].examples[1];
+        var example = spec.testFixtures[0].examples[1];
         Expect.equals("should fail", example.name);
         Expect.isNull(example.result);
         Expect.isNull(example.exception);
@@ -41,7 +41,7 @@ class ExampleSpec extends SpecDartTest {
       },
 
       "error": (){
-        var example = spec.describes[0].examples[2];
+        var example = spec.testFixtures[0].examples[2];
         Expect.equals("should have an error", example.name);
         Expect.isNull(example.result);
         Expect.isNull(example.exception);
@@ -57,7 +57,7 @@ class ExampleSpec extends SpecDartTest {
       },
 
       "pending": (){
-        var example = spec.describes[0].examples[3];
+        var example = spec.testFixtures[0].examples[3];
         Expect.equals("should be pending", example.name);
         Expect.isNull(example.result);
 

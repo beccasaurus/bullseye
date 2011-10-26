@@ -16,7 +16,7 @@ class SpecDocFormatterSpec extends SpecDartTest {
 
       "prints Spec.dart header": () => Expect.isTrue(output.contains("~ Spec.dart ${BullseyeTestFixtureDefinition.VERSION} ~\n\n", 0)),
 
-      "prints describes": (){
+      "prints testFixtures": (){
         Expect.isTrue(output.contains("\nSpecDocFormatterSpec_Example", 0));
         Expect.isTrue(output.contains("\n  foo", 0));
         Expect.isTrue(output.contains("\n  bar", 0));
@@ -43,7 +43,7 @@ class SpecDocFormatterSpec extends SpecDartTest {
         Expect.isTrue(output.contains("\nPending:\n\n  bar bar-2", 0));
       },
 
-      "indents nested describes/it's": (){
+      "indents nested testFixtures/it's": (){
         Expect.isTrue(output.contains("bar\n    bar-1\n    [PENDING] bar-2\n    inner\n      [custom pending message] is indented more\n      one\n        [PENDING] more", 0));
       },
 

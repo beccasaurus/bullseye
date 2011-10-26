@@ -3,16 +3,14 @@ class Specs {
 
   static bool _formatterCallbacksSetup;
 
-  static void run(Iterable<BullseyeTestSuite> suites) {
+  static void run(Iterable<BullseyeTestFixture> fixtures) {
     _setupFormatterCallbacks();
 
     if (formatter == null)
       formatter = new SpecDocFormatter();
 
     formatter.header();
-    suites.forEach((suite) {
-      suite.testFixtures.forEach((fixture) => fixture.run());
-    });
+    fixtures.forEach((fixture) => fixture.run());
     formatter.footer();
   }
 
@@ -27,8 +25,8 @@ class Specs {
   static _setupFormatterCallbacks() {
     if (_formatterCallbacksSetup != true) {
       _formatterCallbacksSetup = true;
-      SpecDescribe.beforeRun((desc) => Specs.formatter.beforeDescribe(desc));
-      SpecDescribe.afterRun((desc) => Specs.formatter.afterDescribe(desc));
+      BullseyeTestFixture.beforeRun((desc) => Specs.formatter.beforeDescribe(desc));
+      BullseyeTestFixture.afterRun((desc) => Specs.formatter.afterDescribe(desc));
       SpecExample.beforeRun((ex) => Specs.formatter.beforeExample(ex));
       SpecExample.afterRun((ex) => Specs.formatter.afterExample(ex));
     }

@@ -6,19 +6,19 @@ class PendingExampleSpec extends SpecDartTest {
     describe("Pending examples", {
 
       "can be defined by calling it() without a function": (){
-        var example = spec.describes[0].examples[0];
+        var example = spec.testFixtures[0].examples[0];
         example.run();
         Expect.equals(SpecExampleResult.pending, example.result);
       },
 
       "can be defined by calling pending() from within your it()": (){
-        var example = spec.describes[0].examples[1];
+        var example = spec.testFixtures[0].examples[1];
         example.run();
         Expect.equals(SpecExampleResult.pending, example.result);
       },
 
       "can be defined by calling pending('message') from within your it()": (){
-        var example = spec.describes[0].examples[2];
+        var example = spec.testFixtures[0].examples[2];
         example.run();
         Expect.equals(SpecExampleResult.pending, example.result);
         Expect.equals("my awesome message", example.pendingReason);

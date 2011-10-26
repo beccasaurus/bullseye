@@ -1,16 +1,9 @@
-// This is useful so we don't have to care what type of object(s) you 
-// pass to a runner, it just takes test suites and knows howto get its 
-// fixtures.  You could provide the fixtures directly, but ... meh?  Might remove this?
-interface BullseyeTestSuite {
-  Iterable<SpecDescribe> get testFixtures();
-}
-
-class TestCase extends BullseyeTestFixtureDefinition implements BullseyeTestSuite {
+class TestCase extends BullseyeTestFixtureDefinition {
 
   void defineTestFixture() => defineTests();
   void defineTests(){}
 
-  SpecDescribe context([String subject = null, Function fn = null]) {
+  BullseyeTestFixture context([String subject = null, Function fn = null]) {
     defineNestedTestFixture(subject: subject, fn: fn);
   }
 
@@ -27,7 +20,7 @@ class TestCase extends BullseyeTestFixtureDefinition implements BullseyeTestSuit
   }
 }
 
-class Spec extends BullseyeTestFixtureDefinition implements BullseyeTestSuite {
+class Spec extends BullseyeTestFixtureDefinition {
   static final RegExp subjectNameReplacementPattern = const RegExp(@"Spec$");
 
   void defineTestFixture() => spec();
@@ -38,7 +31,7 @@ class Spec extends BullseyeTestFixtureDefinition implements BullseyeTestSuite {
     return subject.endsWith("Spec") ? subject.substring(0, subject.length - 4) : subject;
   }
 
-  SpecDescribe describe([String subject = null, Function fn = null]) {
+  BullseyeTestFixture describe([String subject = null, Function fn = null]) {
     defineNestedTestFixture(subject: subject, fn: fn);
   }
 

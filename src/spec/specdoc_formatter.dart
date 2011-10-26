@@ -1,12 +1,12 @@
 class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
 
-  int _describeDepth;
+  int _testFixtureDepth;
 
   List<SpecExample> examples;
 
   SpecDocFormatter() {
     examples = new List<SpecExample>();
-    _describeDepth = 0;
+    _testFixtureDepth = 0;
   }
 
   Collection<SpecExample> get passedExamples()  => examples.filter((ex) => ex.passed);
@@ -18,13 +18,13 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
     write("~ Spec.dart ${BullseyeTestFixtureDefinition.VERSION} ~\n");
   }
 
-  void beforeDescribe(SpecDescribe describe) {
-    write(describe.subject, indent: _describeDepth);
-    ++_describeDepth;
+  void beforeDescribe(BullseyeTestFixture testFixture) {
+    write(testFixture.subject, indent: _testFixtureDepth);
+    ++_testFixtureDepth;
   }
 
-  void afterDescribe(SpecDescribe describe) {
-    --_describeDepth;
+  void afterDescribe(BullseyeTestFixture testFixture) {
+    --_testFixtureDepth;
   }
 
   void afterExample(SpecExample example) {
@@ -40,7 +40,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
       else
         pendingString = "[${example.pendingReason}] ";
 
-    write(pendingString + example.name, indent: _describeDepth, color: colorForExample(example));
+    write(pendingString + example.name, indent: _testFixtureDepth, color: colorForExample(example));
   }
 
   String colorForExample(SpecExample example) {
@@ -85,7 +85,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
       write("\nFailures:");
       failedExamples.forEach((example) {
         write("");
-        write("${example.describe.subject} ${example.name}", indent: 1, color: colorForExample(example));
+        write("${example.testFixture.subject} ${example.name}", indent: 1, color: colorForExample(example));
         write("Exception: ${example.exception}", indent: 2);
       });
     }
@@ -96,7 +96,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
       write("\nErrors:");
       errorExamples.forEach((example) {
         write("");
-        write("${example.describe.subject} ${example.name}", indent: 1, color: colorForExample(example));
+        write("${example.testFixture.subject} ${example.name}", indent: 1, color: colorForExample(example));
         write("Exception: ${example.exception}", indent: 2, color: colorForExample(example));
       });
     }
@@ -107,7 +107,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
       write("\nPending:\n");
       pendingExamples.forEach((example) {
         String pendingReason = (example.pendingReason != null) ? " [${example.pendingReason}]" : "";
-        write("${example.describe.subject} ${example.name}${pendingReason}", indent: 1, color: colorForExample(example));
+        write("${example.testFixture.subject} ${example.name}${pendingReason}", indent: 1, color: colorForExample(example));
       });
     }
   }
