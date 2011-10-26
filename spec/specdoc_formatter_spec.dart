@@ -7,8 +7,8 @@ class SpecDocFormatterSpec extends SpecDartTest {
     formatter.printToStdout = false;
     formatter.logger((text) => buffer.add(text));
 
-    Specs.formatter = formatter;
-    Specs.run([new SpecDocFormatterSpec_Example()]);
+    Bullseye.formatter = formatter;
+    Bullseye.run([new SpecDocFormatterSpec_Example()]);
 
     var output = buffer.toString();
 
@@ -57,8 +57,8 @@ class SpecDocFormatterSpec extends SpecDartTest {
     });
 
     buffer = new StringBuffer();
-    Specs.formatter.colorize = true;
-    Specs.run([new SpecDocFormatterSpec_Example()]);
+    Bullseye.formatter.colorize = true;
+    Bullseye.run([new SpecDocFormatterSpec_Example()]);
     var colored = buffer.toString();
 
     describe("SpecDocFormatter with colored output", {

@@ -1,4 +1,5 @@
-class Specs {
+class Bullseye {
+
   static SpecFormatter formatter;
 
   static bool _formatterCallbacksSetup;
@@ -25,10 +26,10 @@ class Specs {
   static _setupFormatterCallbacks() {
     if (_formatterCallbacksSetup != true) {
       _formatterCallbacksSetup = true;
-      BullseyeTestFixture.beforeRun((desc) => Specs.formatter.beforeDescribe(desc));
-      BullseyeTestFixture.afterRun((desc) => Specs.formatter.afterDescribe(desc));
-      SpecExample.beforeRun((ex) => Specs.formatter.beforeExample(ex));
-      SpecExample.afterRun((ex) => Specs.formatter.afterExample(ex));
+      BullseyeTestFixture.beforeRun((desc) => Bullseye.formatter.beforeDescribe(desc));
+      BullseyeTestFixture.afterRun((desc) => Bullseye.formatter.afterDescribe(desc));
+      SpecExample.beforeRun((ex) => Bullseye.formatter.beforeExample(ex));
+      SpecExample.afterRun((ex) => Bullseye.formatter.afterExample(ex));
     }
   }
 }

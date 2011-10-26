@@ -2,18 +2,18 @@ class ThrowingExceptionsSpec extends SpecDartTest {
   spec() {
     describe("Configuring Throwing Exceptions", {
 
-      "Specs.throwExceptions() will let any exceptions thrown by your tests bubble up (out of Specs.run())": (){
-        Specs.throwExceptions();
+      "Bullseye.throwExceptions() will let any exceptions thrown by your tests bubble up (out of Bullseye.run())": (){
+        Bullseye.throwExceptions();
 
-        Expect.throws(() => Specs.run([new ThrowingExceptionsSpec_Example()]),
+        Expect.throws(() => Bullseye.run([new ThrowingExceptionsSpec_Example()]),
           check: (exception) => exception is ExpectException && exception.toString() == "boom!");
 
-        Specs.dontThrowExceptions(); // Set it back to the default
+        Bullseye.dontThrowExceptions(); // Set it back to the default
       },
 
-      "Specs.dontThrowExceptions() won't let any exceptions thrown by your tests bubble up (default)": (){
-        Specs.dontThrowExceptions();
-        Specs.run([new ThrowingExceptionsSpec_Example()]); // No exceptions thrown
+      "Bullseye.dontThrowExceptions() won't let any exceptions thrown by your tests bubble up (default)": (){
+        Bullseye.dontThrowExceptions();
+        Bullseye.run([new ThrowingExceptionsSpec_Example()]); // No exceptions thrown
       }
 
     });

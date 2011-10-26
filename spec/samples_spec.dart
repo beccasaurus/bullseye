@@ -4,7 +4,7 @@
 class SamplesSpec extends SpecDartTest {
 
   // Given a spec, this runs the spec thru 
-  // Specs.run using the SpecDocFormatter and 
+  // Bullseye.run using the SpecDocFormatter and 
   // returns a String of the resulting output.
   String getSpecOutput(BullseyeTestFixture testFixture) {
     var buffer    = new StringBuffer();
@@ -12,8 +12,8 @@ class SamplesSpec extends SpecDartTest {
     formatter.colorize      = false;
     formatter.printToStdout = false;
     formatter.logger((text) => buffer.add(text));
-    Specs.formatter = formatter;
-    Specs.run([testFixture]);
+    Bullseye.formatter = formatter;
+    Bullseye.run([testFixture]);
     return buffer.toString();
   }
 
