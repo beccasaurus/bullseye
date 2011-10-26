@@ -2,6 +2,11 @@ class OriginalClosureSpec extends SpecMap_Bullseye {
   spec() {
     describe("Closure", {
 
+      // TODO any overlap with ActsAsClosureSpec can be removed, 
+      //      except be sure to sanity check the constructor arguments!
+      //      ActsAsClosureSpec has no coverage for that!
+      //      Specificially the tag and tags stuff.
+
       "has a fn": (){
         Expect.equals("foo", new BullseyeClosure("", () => "foo").fn());
         Expect.equals("foo", new BullseyeClosure(fn: () => "foo").fn());

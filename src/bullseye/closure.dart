@@ -102,6 +102,10 @@ class BullseyeClosure {
 
   void set tags(List<String> values) => meta["tags"] = values;
 
+  void setMeta(Map<String,Object> metaData) {
+    meta.map = metaData;
+  }
+
   void _startTimer() {
     if (_stopWatch == null)
       _stopWatch = new StopWatch();
