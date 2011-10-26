@@ -3,6 +3,7 @@
 #source("bullseye/bullseye.dart");
 
 #source("bullseye/magic_map.dart");
+#source("bullseye/closure.dart");
 
 #source("bullseye/test.dart");
 #source("bullseye/test_result.dart");
