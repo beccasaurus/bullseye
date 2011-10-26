@@ -31,7 +31,7 @@ class BullseyeClosure {
   }
 
   List<BullseyeTestFixture> get parents() {
-    List<BullseyeTestFixture> allParents = (parent == null) ? new List<BullseyeTestFixture>() : parent.parentDescribes;
+    List<BullseyeTestFixture> allParents = (parent == null) ? new List<BullseyeTestFixture>() : parent.parents;
     if (parent != null) allParents.add(parent);
     return allParents;
   }

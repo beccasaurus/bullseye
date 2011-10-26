@@ -13,7 +13,7 @@ class BullseyeTestFixture {
   List befores;
   List afters;
   bool _evaluatedFn;
-  List<BullseyeTestFixture> _parentDescribes;
+  List<BullseyeTestFixture> _parents;
 
   BullseyeTestFixture([BullseyeTestFixture parent = null, String description = null, Function fn = null]) {
     if (_beforeFunctions == null) _beforeFunctions = new List<Function>();
@@ -35,7 +35,7 @@ class BullseyeTestFixture {
     }
   }
 
-  List<BullseyeTestFixture> get parentDescribes() {
+  List<BullseyeTestFixture> get parents() {
     List<BullseyeTestFixture> parents = new List<BullseyeTestFixture>();
     BullseyeTestFixture       current = parent;
     while (current != null) {
@@ -66,11 +66,11 @@ class BullseyeTestFixture {
   void run() {
     _beforeFunctions.forEach((fn) => fn(this));
     tests.forEach((test) {
-      parentDescribes.forEach((parent) => parent.runBefores());
+      parents.forEach((parent) => parent.runBefores());
       runBefores();
       test.run();
       runAfters();
-      parentDescribes.forEach((parent) => parent.runAfters());
+      parents.forEach((parent) => parent.runAfters());
     });
     testFixtures.forEach((desc) => desc.run());
     _afterFunctions.forEach((fn) => fn(this));
