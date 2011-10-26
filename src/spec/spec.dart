@@ -19,6 +19,7 @@ class Spec {
 
     describes         = new List<SpecDescribe>();
     _currentDescribes = new List<SpecDescribe>();
+
     spec();
   }
 

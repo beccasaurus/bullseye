@@ -1,5 +1,6 @@
 #import("../lib/specmap.dart");
-#import("../pkg/spec.dart");
+// #import("../pkg/spec.dart");
+#import("../src/spec.dart");
 
 #source("spec_spec.dart");
 #source("example_spec.dart");
@@ -10,6 +11,7 @@
 #source("run_hooks_spec.dart");
 #source("specdoc_formatter_spec.dart");
 #source("throwing_exceptions_spec.dart");
+#source("xunit_dsl_spec.dart");
 #source("samples_spec.dart");
 #source("../samples/bowling_spec.dart");
 
@@ -25,6 +27,7 @@ int main() {
     new RunHooksSpec(),
     new SpecDocFormatterSpec(),
     new ThrowingExceptionsSpec(),
+    new xUnitDSLSpec(),
     new SamplesSpec()
   ]);
 }

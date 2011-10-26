@@ -2,6 +2,7 @@
 
 #source("spec/specs.dart");
 #source("spec/spec.dart");
+#source("spec/test_case.dart");
 #source("spec/describe.dart");
 #source("spec/example.dart");
 #source("spec/example_result.dart");

@@ -59,4 +59,3 @@ class RunningExamplesSpec_SingleDescribe extends Spec {
     });
   }
 }
-
