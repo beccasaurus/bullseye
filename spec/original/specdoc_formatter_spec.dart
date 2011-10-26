@@ -33,10 +33,13 @@ class OriginalSpecDocFormatterSpec extends SpecMap_Bullseye {
 
       "prints out the details of any failed tests": (){
         Expect.isTrue(output.contains("\nFailures:\n\n  SpecDocFormatterSpec_Test bar bar-1\n    Exception: Expect.isTrue(false) fails.", 0));
+        Expect.isTrue(output.contains("Function: 'Expect.isTrue'", 0));
+        Expect.isTrue(output.contains("Function: 'SpecDocFormatterSpec_Test.function' url: 'spec/original/specdoc_formatter_spec.dart'", 0));
       },
 
       "prints out the details of any tests that raised Exceptions": (){
         Expect.isTrue(output.contains("\nErrors:\n\n  SpecDocFormatterSpec_Test foo foo-2\n    Exception: Exception: My Exception", 0));
+        Expect.isTrue(output.contains("Function: 'SpecDocFormatterSpec_Test.function' url: 'spec/original/specdoc_formatter_spec.dart'", 0));
       },
 
       "prints out the details of any pending tests": (){

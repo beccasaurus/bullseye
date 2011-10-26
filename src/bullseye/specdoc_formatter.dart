@@ -87,6 +87,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
         write("");
         write(test.fullDescription, indent: 1, color: colorForTest(test));
         write("Exception: ${test.exception}", indent: 2);
+        write("StackTrace:\n${test.stackTrace}", indent: 2);
       });
     }
   }
@@ -98,6 +99,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
         write("");
         write(test.fullDescription, indent: 1, color: colorForTest(test));
         write("Exception: ${test.exception}", indent: 2, color: colorForTest(test));
+        write("StackTrace:\n${test.stackTrace}", indent: 2);
       });
     }
   }
