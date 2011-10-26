@@ -95,7 +95,7 @@ class OriginalClosureSpec extends SpecMap_Bullseye {
 
       "can be run()": (){
         var closure = new BullseyeClosure(fn: (){});
-        Expect.equals("not_run", closure.status);
+        Expect.equals(BullseyeTestStatus.not_run, closure.status);
         closure.run();
         Expect.notEquals("not_run", closure.status);
       },
@@ -108,29 +108,29 @@ class OriginalClosureSpec extends SpecMap_Bullseye {
       },
 
       "has a status of 'not_run' before being run()": (){
-        Expect.equals("not_run", new BullseyeClosure(fn: (){}).status);
+        Expect.equals(BullseyeTestStatus.not_run, new BullseyeClosure(fn: (){}).status);
       },
 
       "has a status of 'passed' if running the fn statuss in no Exceptions being thrown": (){
         var closure = new BullseyeClosure(fn: (){});
         closure.run();
-        Expect.equals("passed", closure.status);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
       },
 
       "has a status of 'pending' if no fn given (even before being run())": (){
-        Expect.equals("pending", new BullseyeClosure().status);
+        Expect.equals(BullseyeTestStatus.pending, new BullseyeClosure().status);
       },
 
       "has a status of 'error' if running the fn statuss in an Exception being thrown (besides an ExpectException)": (){
         var closure = new BullseyeClosure(fn: (){ throw new NotImplementedException(); });
         closure.run();
-        Expect.equals("error", closure.status);
+        Expect.equals(BullseyeTestStatus.error, closure.status);
       },
 
       "has a status of 'failed' if running the fn statuss in an ExpectException being thrown": (){
         var closure = new BullseyeClosure(fn: (){ Expect.isTrue(false); });
         closure.run();
-        Expect.equals("failed", closure.status);
+        Expect.equals(BullseyeTestStatus.failed, closure.status);
       },
 
       "exception property gets set to the thrown exception if an Exception is thrown as a status of running the fn" : (){
@@ -180,10 +180,10 @@ class OriginalClosureSpec extends SpecMap_Bullseye {
       "raises an Exception if you try to run() its fn more than once": (){
         var closure = new BullseyeClosure(fn: (){});
         closure.run();
-        Expect.equals("passed", closure.status);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
 
         Expect.throws(() => closure.run(), check: (ex) => ex.toString() == "UnsupportedOperationException: This cannot be run() more than once.  Try rerun() to explicitly run again.");
-        Expect.equals("passed", closure.status);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
       },
 
       "allows you to explicitly rerun() its fn, allowing you to run it as many times are you'd like": (){
@@ -191,11 +191,11 @@ class OriginalClosureSpec extends SpecMap_Bullseye {
         var closure  = new BullseyeClosure(fn: () => ++timesRun);
 
         closure.run();
-        Expect.equals("passed", closure.status);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
         Expect.equals(1, timesRun);
         
         closure.rerun();
-        Expect.equals("passed", closure.status);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
         Expect.equals(2, timesRun);
       },
 
@@ -218,28 +218,28 @@ class OriginalClosureSpec extends SpecMap_Bullseye {
         closure.run();
         Expect.isNull(closure.exception);
         Expect.isNull(closure.stackTrace);
-        Expect.equals("passed", closure.status);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
 
         throwException = true;
         closure.rerun();
         Expect.isNotNull(closure.exception);
         Expect.isNotNull(closure.stackTrace);
-        Expect.equals("error", closure.status);
+        Expect.equals(BullseyeTestStatus.error, closure.status);
 
         throwException = false;
         closure.rerun();
         Expect.isNull(closure.exception);
         Expect.isNull(closure.stackTrace);
-        Expect.equals("passed", closure.status);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
       },
 
       "you can rerun() even if you haven't run() before": (){
         var closure = new BullseyeClosure(fn: (){ throw new NotImplementedException(); });
-        Expect.equals("not_run", closure.status);
+        Expect.equals(BullseyeTestStatus.not_run, closure.status);
 
         closure.rerun();
 
-        Expect.equals("error", closure.status);
+        Expect.equals(BullseyeTestStatus.error, closure.status);
         Expect.isNotNull(closure.exception);
         Expect.isNotNull(closure.stackTrace);
       },

@@ -63,18 +63,18 @@ class BullseyeClosure {
       _startTimer();
       returnValue = fn();
       _stopTimerAndRecordDuration();
-      _status = 'passed';
+      _status = BullseyeTestStatus.passed;
     } else {
       try {
         _startTimer();
         returnValue = fn();
-        _status = 'passed';
+        _status = BullseyeTestStatus.passed;
       } catch (ExpectException ex, var trace) {
-        _status    = 'failed';
+        _status    = BullseyeTestStatus.failed;
         exception  = ex;
         stackTrace = trace;
       } catch (Exception ex, var trace) {
-        _status    = 'error';
+        _status    = BullseyeTestStatus.error;
         exception  = ex;
         stackTrace = trace;
       } finally {
@@ -87,11 +87,9 @@ class BullseyeClosure {
     if (_status != null)
       return _status;
     else if (fn == null)
-      return "pending";
-    else if (_run == true)
-      return "run";
+      return BullseyeTestStatus.pending;
     else
-      return "not_run";
+      return BullseyeTestStatus.not_run;
   }
 
   Iterable<String> get tags() {

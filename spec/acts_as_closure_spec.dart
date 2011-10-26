@@ -96,32 +96,228 @@ class ActsAsClosureSpec extends SpecMap_Bullseye {
       },
 
       "can be run()": (){
-        // TODO Result -> Status
-        //var closure = newInstance();
-        //Expect.equals(BullseyeTestStatus.not_run);
+        var has_been_run = false;
+        var closure = newInstance();
+        closure.fn = () => has_been_run = true;
+        Expect.isFalse(has_been_run);
+        Expect.equals(BullseyeTestStatus.not_run, closure.status);
+
+        closure.run();
+
+        Expect.isTrue(has_been_run);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
       },
 
-      // "raises an Exception if you try to run() its function more than once": null,
-      // "allows you to explicitly rerun() its function, allowing you to run it as many times are you'd like": null,
-      // "you can rerun() even if you haven't run() before": null,
-      // "saves the returnValue of the function when run()": null,
-      // "updates the returnValue of the function when rerun()": null,
-      // "has a status of 'not_run' before being run()": null,
-      // "has a status of 'passed' if running the function statuss in no Exceptions being thrown": null,
-      // "has a status of 'pending' if no function given (even before being run())": null,
-      // "has a status of 'error' if running the function statuss in an Exception being thrown (besides an ExpectException)": null,
-      // "has a status of 'failed' if running the function statuss in an ExpectException being thrown": null,
+      "raises an Exception (and doesn't run) if you try to run() its function more than once": (){
+        var times_run = 0;
+        var closure = newInstance();
+        closure.fn = () => ++times_run;
+        Expect.equals(0, times_run);
+        Expect.equals(BullseyeTestStatus.not_run, closure.status);
 
-      // "exception property gets set to the thrown exception if an Exception is thrown as a status of running the function" : null,
-      // "exception property gets set to the thrown exception if an ExpectException is thrown as a status of running the function" : null,
-      // "stackTrace property gets set to the thrown exception's stack trace if an Exception is thrown as a status of running the function" : null,
-      // "stackTrace property gets set to the thrown exception's stack trace if an ExpectException is thrown as a status of running the function" : null,
-      // "rerun() resets exception and stackTrace (incase they change)": null,
+        closure.run();
+        Expect.equals(1, times_run);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
 
-      // "can be configured to let any thrown Exceptions bubble up (to see the correct stacktrace)": null,
-      // "can globally be configured to let any thrown Exceptions bupple up (in all BullseyeClosures)": null,
+        Expect.throws(() => closure.run(),
+          check: (ex) => ex.toString() == "UnsupportedOperationException: This cannot be run() more than once.  Try rerun() to explicitly run again.");
+        Expect.equals(1, times_run);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
+      },
 
-      // "tracks the total time that it takes to run the function": null
+      "allows you to explicitly rerun() its function, allowing you to run it as many times are you'd like": (){
+        var times_run = 0;
+        var closure = newInstance();
+        closure.fn = () => ++times_run;
+        Expect.equals(0, times_run);
+        Expect.equals(BullseyeTestStatus.not_run, closure.status);
+
+        closure.run();
+        Expect.equals(1, times_run);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
+
+        closure.rerun();
+        Expect.equals(2, times_run);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
+      },
+
+      "you can rerun() even if you haven't run() before": (){
+        var times_run = 0;
+        var closure = newInstance();
+        closure.fn = () => ++times_run;
+        Expect.equals(0, times_run);
+        Expect.equals(BullseyeTestStatus.not_run, closure.status);
+
+        closure.rerun();
+
+        Expect.equals(1, times_run);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
+      },
+
+      "saves the returnValue of the function when run()": (){
+        var closure = newInstance();
+        closure.fn = () => "foo";
+        Expect.isNull(closure.returnValue);
+
+        closure.run();
+
+        Expect.equals("foo", closure.returnValue);
+      },
+
+      "updates the returnValue of the function when rerun()": (){
+        var returnMe = "foo";
+        var closure = newInstance();
+        closure.fn = () => returnMe;
+        Expect.isNull(closure.returnValue);
+
+        closure.run();
+        Expect.equals("foo", closure.returnValue);
+
+        returnMe = "changed!";
+        closure.rerun();
+        Expect.equals("changed!", closure.returnValue);
+      },
+
+      "has a status of 'not_run' before being run()": (){
+        var closure = newInstance();
+        closure.fn = (){};
+        Expect.equals(BullseyeTestStatus.not_run, closure.status);
+      },
+
+      "has a status of 'passed' if running the function statuss in no Exceptions being thrown": (){
+        var closure = newInstance();
+        closure.fn = (){};
+        Expect.equals(BullseyeTestStatus.not_run, closure.status);
+      
+        closure.run();
+
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
+      },
+
+      "has a status of 'pending' if no function given (even before being run())": (){
+        var closure = newInstance();
+        Expect.equals(BullseyeTestStatus.pending, closure.status);
+      },
+
+      "has a status of 'error' if running the function statuss in an Exception being thrown (besides an ExpectException)": (){
+        var closure = newInstance();
+        closure.fn = () => "oh noes".stringsDoNotHaveThisMethodSoItWillBlowUp();
+        Expect.equals(BullseyeTestStatus.not_run, closure.status);
+
+        closure.run();
+
+        Expect.equals(BullseyeTestStatus.error, closure.status);
+      },
+
+      "has a status of 'failed' if running the function statuss in an ExpectException being thrown": (){
+        var closure = newInstance();
+        closure.fn = () => Expect.isTrue(false);
+        Expect.equals(BullseyeTestStatus.not_run, closure.status);
+
+        closure.run();
+
+        Expect.equals(BullseyeTestStatus.failed, closure.status);
+      },
+
+      "exception property gets set to the thrown exception if an Exception is thrown as a status of running the function" : (){
+        var closure = newInstance();
+        closure.fn = () => "oh noes".stringsDoNotHaveThisMethodSoItWillBlowUp();
+        Expect.isNull(closure.exception);
+
+        closure.run();
+
+        Expect.isTrue(closure.exception is NoSuchMethodException);
+        Expect.equals("NoSuchMethodException - receiver: 'oh noes' function name: 'stringsDoNotHaveThisMethodSoItWillBlowUp' arguments: []]", closure.exception.toString());
+      },
+
+      "exception property gets set to the thrown exception if an ExpectException is thrown as a status of running the function" : (){
+        var closure = newInstance();
+        closure.fn = () => Expect.isTrue(false);
+        Expect.isNull(closure.exception);
+
+        closure.run();
+
+        Expect.isTrue(closure.exception is ExpectException);
+        Expect.equals("Expect.isTrue(false) fails.", closure.exception.toString());
+      },
+
+      "stackTrace property gets set to the thrown exception's stack trace if an Exception is thrown as a status of running the function" : (){
+        var closure = newInstance();
+        closure.fn = () => "oh noes".stringsDoNotHaveThisMethodSoItWillBlowUp();
+        Expect.isNull(closure.stackTrace);
+
+        closure.run();
+
+        Expect.isNotNull(closure.stackTrace);
+        Expect.isTrue(closure.stackTrace.toString().contains("Function: 'ActsAsClosureSpec.function' url: 'spec/acts_as_closure_spec.dart'", 0));
+        Expect.isTrue(closure.stackTrace.toString().contains("Function: 'BullseyeClosure.run' url: 'spec/../src/bullseye/closure.dart'", 0));
+      },
+
+      "stackTrace property gets set to the thrown exception's stack trace if an ExpectException is thrown as a status of running the function" : (){
+        var closure = newInstance();
+        closure.fn = () => Expect.isTrue(false);
+        Expect.isNull(closure.stackTrace);
+
+        closure.run();
+
+        Expect.isNotNull(closure.stackTrace);
+        Expect.isTrue(closure.stackTrace.toString().contains("Function: 'Expect.isTrue'", 0));
+        Expect.isTrue(closure.stackTrace.toString().contains("Function: 'ActsAsClosureSpec.function' url: 'spec/acts_as_closure_spec.dart'", 0));
+      },
+
+      "rerun() resets exception and stackTrace (incase they change)": (){
+        var throwException = false;
+        var closure = newInstance();
+        closure.fn = (){ if (throwException == true) throw new NotImplementedException(); };
+
+        closure.run();
+        Expect.isNull(closure.exception);
+        Expect.isNull(closure.stackTrace);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
+
+        throwException = true;
+        closure.rerun();
+        Expect.isNotNull(closure.exception);
+        Expect.isNotNull(closure.stackTrace);
+        Expect.equals(BullseyeTestStatus.error, closure.status);
+
+        throwException = false;
+        closure.rerun();
+        Expect.isNull(closure.exception);
+        Expect.isNull(closure.stackTrace);
+        Expect.equals(BullseyeTestStatus.passed, closure.status);
+      },
+
+      "can be configured to let any thrown Exceptions bubble up (to see the correct stacktrace)": (){
+        var closure = newInstance();
+        closure.fn = (){ Expect.fail("boom!"); };
+        closure.rerun();
+
+        closure.throwExceptions = true;
+        Expect.throws(() => closure.rerun(), check: (ex) => ex.toString() == "Expect.fail('boom!')");
+      },
+
+      "can globally be configured to let any thrown Exceptions bupple up (in all BullseyeClosures)": (){
+        var closure = newInstance();
+        closure.fn = (){ Expect.fail("boom!"); };
+        closure.rerun();
+
+        BullseyeClosure.closuresThrowExceptions = true;
+        Expect.throws(() => closure.rerun(), check: (ex) => ex.toString() == "Expect.fail('boom!')");
+
+        BullseyeClosure.closuresThrowExceptions = false; // reset!
+      },
+
+      "tracks the total time that it takes to run the function": (){
+        var closure = newInstance();
+        closure.fn = (){};
+        Expect.isNull(closure.timeItTookToRunInUs);
+
+        closure.run();
+
+        Expect.isTrue(closure.timeItTookToRunInUs > 0);    // More than 0 Microseconds
+        Expect.isTrue(closure.timeItTookToRunInUs < 3000); // Less than a 3 Milliseconds (just incase)
+      }
 
     });
   }
