@@ -1,5 +1,8 @@
 class OriginalClosureSpec extends SpecMap_Bullseye {
   spec() {
+
+    shouldBehaveLike("BullseyeClosure", () => new BullseyeClosure());
+
     describe("Closure", {
 
       // TODO any overlap with ActsAsClosureSpec can be removed, 

@@ -2,7 +2,8 @@
 // #import("../pkg/bullseye.dart");
 #import("../src/bullseye.dart");
 
-#source("acts_as_closure_spec.dart");
+#source("shared_examples_for_closure.dart");
+
 #source("test_spec.dart");
 
 #source("original/magic_map_spec.dart");
@@ -22,8 +23,6 @@
 int main() {
   return SpecMap.run([
 
-    new ActsAsClosureSpec(() => new BullseyeClosure()),
-    new ActsAsClosureSpec(() => new BullseyeTest()),
     new TestSpec(),
 
     new OriginalMagicMapSpec(),
@@ -47,4 +46,48 @@ int main() {
 // can use all of the helper methods defined here.
 class SpecMap_Bullseye extends SpecMap {
 
+  // Defines all of the shared behaviors that are available.
+  // You must add your sharedBehaviors here!  Atleast for now.
+  get sharedBehaviors() => {
+    "BullseyeClosure": (newInstance) => new SharedExamplesForClosure(newInstance)
+  };
+
+  // Given the name of a shared behavior and a function that, when called, 
+  // returns a new instance of the object that you want to test the behavior of, 
+  // this adds a describe() to your SpecMap that tests the given behavior.
+  //
+  // Example:  shouldBehaveLike("Animal", () => new Dog());
+  shouldBehaveLike(String sharedBehaviorName, Function newInstance) {
+    if (! sharedBehaviors.containsKey(sharedBehaviorName))
+      throw new UnsupportedOperationException("Unknown shared behavior: $sharedBehaviorName.  Register your shared behavior in spec/run.dart");
+
+    var subject     = BullseyeUtils.getClassName(this) + " should behave like " + sharedBehaviorName;
+    var examples    = sharedBehaviors[sharedBehaviorName](newInstance).examples;
+
+    describe(subject, examples);
+  }
+}
+
+// Little interface for making classes that provide shared examples.
+interface HasSharedExamples {
+  Function newInstance;
+
+  // Your constructor should take a function that, when invoked, 
+  // will give you a new instance of the object that these examples 
+  // will test the behavior of.
+  HasSharedExamples(Function newInstance);
+
+  // Returns a Map that can be provides to a SpecMap describe 
+  // with functions that test that the given object (via newInstance())
+  // behave as expected.
+  Map<String,Function> get examples();
+}
+
+// Base implementation of HasSharedExamples
+class SharedExampleBase implements HasSharedExamples {
+  Function newInstance;
+  SharedExampleBase(this.newInstance);
+  Map<String,Function> get examples() {
+    throw new NotImplementedException();
+  }
 }

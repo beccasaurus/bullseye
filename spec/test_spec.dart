@@ -1,8 +1,5 @@
 class TestSpec extends SpecMap_Bullseye {
   spec() {
-    describe("BullseyeTest", {
-
-
-    });
+    shouldBehaveLike("BullseyeClosure", () => new BullseyeTest());
   }
 }
