@@ -1,3 +1,23 @@
+// PLAYING WITH MAKING SOME MINIMALISTIC (YET REALISTIC) interfaces ...
+
+// NOTE: can we just do 'String description' and implement that via a getter instead of a field or ... ?
+
+/*
+interface BullseyeTest {
+  TestFixture get parent();
+  void run();
+  bool get passed();
+  String get description();
+}
+
+interface BullseyeTestFixture {
+  TestFixture get parent();
+  Iterable<BullseyeTest> get tests();
+  // setups?
+  // teardowns?
+}
+*/
+
 class BullseyeTestFixture {
 
   static List<Function> _beforeFunctions;

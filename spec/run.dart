@@ -5,6 +5,7 @@
 #source("shared_examples_for_closure.dart");
 
 #source("test_spec.dart");
+#source("test_fixture_spec.dart");
 
 #source("original/magic_map_spec.dart");
 #source("original/closure_spec.dart");
@@ -24,6 +25,7 @@ int main() {
   return SpecMap.run([
 
     new TestSpec(),
+    new TestFixtureSpec(),
 
     new OriginalMagicMapSpec(),
     new OriginalClosureSpec(),
@@ -61,7 +63,7 @@ class SpecMap_Bullseye extends SpecMap {
     if (! sharedBehaviors.containsKey(sharedBehaviorName))
       throw new UnsupportedOperationException("Unknown shared behavior: $sharedBehaviorName.  Register your shared behavior in spec/run.dart");
 
-    var subject     = BullseyeUtils.getClassName(this) + " should behave like " + sharedBehaviorName;
+    var subject     = BullseyeUtils.getClassName(newInstance()) + " should behave like " + sharedBehaviorName;
     var examples    = sharedBehaviors[sharedBehaviorName](newInstance).examples;
 
     describe(subject, examples);
