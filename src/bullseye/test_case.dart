@@ -12,12 +12,12 @@ class TestCase extends BullseyeTestFixtureDefinition {
   }
 
   // TODO add coverage - specifically for Classic DSL
-  List<BullseyeTest> tests(Iterable<Function> functions) {
-    List<BullseyeTest> allTests;
-    for (Function fn in functions)
-      allTests.add(test(fn: fn));
-    return allTests;
-  }
+  // List<BullseyeTest> tests(Iterable<Function> functions) {
+  //   List<BullseyeTest> allTests;
+  //   for (Function fn in functions)
+  //     allTests.add(test(fn: fn));
+  //   return allTests;
+  // }
 
   void setUp([Function fn = null]) {
     defineSetUp(fn: fn);
