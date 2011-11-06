@@ -255,8 +255,12 @@ class SharedExamplesForClosure extends SharedExampleBase {
       closure.run();
 
       Expect.isNotNull(closure.stackTrace);
-      Expect.isTrue(closure.stackTrace.toString().contains("Function: 'SharedExamplesForClosure.function' url: 'spec/shared_examples_for_closure.dart'", 0));
-      Expect.isTrue(closure.stackTrace.toString().contains("Function: 'BullseyeClosure.run' url: 'spec/../src/bullseye/closure.dart'", 0));
+
+      Expect.isTrue(closure.stackTrace.toString().contains("Function: 'SharedExamplesForClosure.function'", 0));
+      Expect.isTrue(closure.stackTrace.toString().contains("spec/shared_examples_for_closure.dart'", 0));
+
+      Expect.isTrue(closure.stackTrace.toString().contains("Function: 'BullseyeClosure.run'", 0));
+      Expect.isTrue(closure.stackTrace.toString().contains("src/bullseye/closure.dart'", 0));
     },
 
     "stackTrace property gets set to the thrown exception's stack trace if an ExpectException is thrown as a status of running the function" : (){
@@ -268,7 +272,8 @@ class SharedExamplesForClosure extends SharedExampleBase {
 
       Expect.isNotNull(closure.stackTrace);
       Expect.isTrue(closure.stackTrace.toString().contains("Function: 'Expect.isTrue'", 0));
-      Expect.isTrue(closure.stackTrace.toString().contains("Function: 'SharedExamplesForClosure.function' url: 'spec/shared_examples_for_closure.dart'", 0));
+      Expect.isTrue(closure.stackTrace.toString().contains("Function: 'SharedExamplesForClosure.function'", 0));
+      Expect.isTrue(closure.stackTrace.toString().contains("spec/shared_examples_for_closure.dart'", 0));
     },
 
     "rerun() resets exception and stackTrace (incase they change)": (){

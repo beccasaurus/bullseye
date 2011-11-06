@@ -41,7 +41,7 @@ class OriginalMagicMapSpec extends SpecMap_Bullseye {
         magic.throwExceptionUnlessMapContainsKey = true;
       
         Expect.throws(() => Expect.isNull(magic.foo), 
-          check: (ex) => ex is NoSuchMethodException && ex.toString().contains("Class: BullseyeMagicMap'' function name: 'get:foo' arguments: []]", 0));
+          check: (ex) => ex is NoSuchMethodException && ex.toString().contains("'Instance of 'BullseyeMagicMap<String, String>'' function name: 'get:foo' arguments: []]", 0));
       },
 
       "when configured to throwExceptionUnlessMapContainsKey, an exception is not thrown if the key already exists but the value is null": (){
@@ -64,11 +64,11 @@ class OriginalMagicMapSpec extends SpecMap_Bullseye {
 
         // Can't get
         Expect.throws(() => magic.somethingElse,
-          check: (ex) => ex is NoSuchMethodException && ex.toString().contains("Class: BullseyeMagicMap'' function name: 'get:somethingElse' arguments: []]", 0));
+          check: (ex) => ex is NoSuchMethodException && ex.toString().contains("'Instance of 'BullseyeMagicMap<String, String>'' function name: 'get:somethingElse' arguments: []]", 0));
 
         // Can't set
         Expect.throws(() => magic.somethingElse = "hi",
-          check: (ex) => ex is NoSuchMethodException && ex.toString().contains("Class: BullseyeMagicMap'' function name: 'set:somethingElse' arguments: [hi]]", 0));
+          check: (ex) => ex is NoSuchMethodException && ex.toString().contains("'Instance of 'BullseyeMagicMap<String, String>'' function name: 'set:somethingElse' arguments: [hi]]", 0));
       },
 
       "delegates [](key) to Map": (){
@@ -102,7 +102,7 @@ class OriginalMagicMapSpec extends SpecMap_Bullseye {
         Expect.equals("bar", magic.foo);
 
         Expect.throws(() => Expect.equals("bar", magic.foo()), 
-          check: (ex) => ex is NoSuchMethodException && ex.toString().contains("Class: BullseyeMagicMap'' function name: 'foo' arguments: []]", 0));
+          check: (ex) => ex is NoSuchMethodException && ex.toString().contains("'Instance of 'BullseyeMagicMap<String, String>'' function name: 'foo' arguments: []]", 0));
       },
 
       "can see if a MagicMap respondsTo('keyName') so you can more easily prevent a NoSuchMethodException being thrown": (){
@@ -120,7 +120,7 @@ class OriginalMagicMapSpec extends SpecMap_Bullseye {
         Expect.isNull(magic.foo);
 
         Expect.throws(() => Expect.isNull(magic.bar),
-          check: (ex) => ex is NoSuchMethodException && ex.toString().contains("Class: BullseyeMagicMap'' function name: 'get:bar' arguments: []]", 0));
+          check: (ex) => ex is NoSuchMethodException && ex.toString().contains("'Instance of 'BullseyeMagicMap<String, String>'' function name: 'get:bar' arguments: []]", 0));
       }
 
       // If you want to use any other Map functions, you should call the internal Map directly (atleast for now)
