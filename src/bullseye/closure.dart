@@ -6,7 +6,7 @@ class BullseyeClosure {
   Function fn;
   var returnValue;
   int timeItTookToRunInUs;
-  BullseyeMagicMap<String,Object> meta;
+  BullseyeMagicMap meta;
   Exception exception;
   var stackTrace;
   bool throwExceptions;
@@ -21,7 +21,7 @@ class BullseyeClosure {
   {
     this.fn        = fn;
     this.description     = description;
-    this.meta            = new BullseyeMagicMap<String,Object>(meta);
+    this.meta            = new BullseyeMagicMap(meta);
     this.parent          = parent;
     this.throwExceptions = false;
     this._run            = false;
@@ -53,7 +53,7 @@ class BullseyeClosure {
 
   String get pendingReason() {
     if (status == BullseyeTestStatus.pending && exception is BullseyePendingException)
-      return exception.message;
+      return exception.toString();
     else
       return null;
   }
@@ -115,7 +115,7 @@ class BullseyeClosure {
     return meta["tags"];
   }
 
-  void set tags(List<String> values) => meta["tags"] = values;
+  void set tags(List<String> values){ meta["tags"] = values; }
 
   void setMeta(Map<String,Object> metaData) {
     meta.map = metaData;

@@ -22,8 +22,8 @@ class BullseyeTestFixture {
 
   static List<Function> _beforeFunctions;
   static List<Function> _afterFunctions;
-  static void beforeRun(Function callback) => _beforeFunctions.add(callback);
-  static void afterRun(Function callback) => _afterFunctions.add(callback);
+  static void beforeRun(Function callback){ _beforeFunctions.add(callback); }
+  static void afterRun(Function callback){ _afterFunctions.add(callback); }
   List<BullseyeTestFixture> testFixtures;
 
   List<BullseyeTest> tests;

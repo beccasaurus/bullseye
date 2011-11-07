@@ -1,12 +1,14 @@
-class BullseyeMagicMap<K,V> {
+class BullseyeMagicMap {
 
-  Map<K,V> map;
+  Map<String,Object> map;
 
   bool throwExceptionUnlessMapContainsKey;
 
-  BullseyeMagicMap([Map<K,V> map = null, bool throwExceptionUnlessMapContainsKey = false, Iterable<String> allowed = null]) {
+  String get something() => "hi";
+
+  BullseyeMagicMap([Map<String,Object> map = null, bool throwExceptionUnlessMapContainsKey = false, Iterable<String> allowed = null]) {
     this.throwExceptionUnlessMapContainsKey = throwExceptionUnlessMapContainsKey;
-    this.map = (map == null) ? new LinkedHashMap<K,V>() : map;
+    this.map = (map == null) ? new LinkedHashMap<String,Object>() : map;
 
     if (allowed != null)
       onlyAllow(allowed);
@@ -24,7 +26,7 @@ class BullseyeMagicMap<K,V> {
   //       allowed name given with the value set to null.
   void onlyAllow(Iterable<String> allowed) {
     throwExceptionUnlessMapContainsKey = true;
-    allowed.forEach((key) => map[key] = null);
+    for (String key in allowed) map[key] = null;
   }
 
   noSuchMethod(String name, List args) {
@@ -74,7 +76,7 @@ class BullseyeMagicMap<K,V> {
   int get length() => map.length;
 
   // @see Map.forEach
-  void forEach(void f(K, V)) => map.forEach(f);
+  void forEach(void f(String, V)){ map.forEach(f); }
 
   // Get the name of the key to use in the map.
   // 

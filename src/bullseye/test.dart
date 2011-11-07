@@ -2,8 +2,8 @@ class BullseyeTest extends BullseyeClosure {
 
   static List<Function> _beforeFunctions;
   static List<Function> _afterFunctions;
-  static void beforeRun(Function callback) => _beforeFunctions.add(callback);
-  static void afterRun(Function callback) => _afterFunctions.add(callback);
+  static void beforeRun(Function callback){ _beforeFunctions.add(callback); }
+  static void afterRun(Function callback){ _afterFunctions.add(callback); }
 
   BullseyeTest([BullseyeTestFixture parent, String description = null, Function fn = null]) : super(parent: parent, description: description, fn: fn) {
     if (_beforeFunctions == null) _beforeFunctions = new List<Function>();

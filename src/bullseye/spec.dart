@@ -1,7 +1,7 @@
 class Spec extends BullseyeTestFixtureDefinition {
   static final RegExp descriptionNameReplacementPattern = const RegExp(@"Spec$");
 
-  void defineTestFixture() => spec();
+  void defineTestFixture(){ spec(); }
   void spec(){}
 
   BullseyeTestFixture describe([String description = null, Function fn = null]) {

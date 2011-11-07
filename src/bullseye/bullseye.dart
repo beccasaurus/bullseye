@@ -11,7 +11,7 @@ class Bullseye {
       formatter = new SpecDocFormatter();
 
     formatter.header();
-    fixtures.forEach((fixture) => fixture.run());
+    for (BullseyeTestFixture fixture in fixtures) fixture.run();
     formatter.footer();
   }
 
