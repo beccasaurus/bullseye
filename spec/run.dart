@@ -1,6 +1,6 @@
 #import("../lib/specmap.dart");
-// #import("../pkg/bullseye.dart");
-#import("../src/bullseye.dart");
+#import("../pkg/bullseye.dart");
+// #import("../src/bullseye.dart");
 
 #source("shared_examples_for_closure.dart");
 

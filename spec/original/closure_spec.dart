@@ -154,7 +154,8 @@ class OriginalClosureSpec extends SpecMap_Bullseye {
         var closure = new BullseyeClosure(fn: (){ throw new NotImplementedException(); });
         Expect.isNull(closure.stackTrace);
         closure.run();
-        Expect.isTrue(closure.stackTrace.toString().contains("/src/bullseye/closure.dart'", 0));
+        Expect.isTrue(closure.stackTrace.toString().contains("/src/bullseye/closure.dart'", 0) ||
+            closure.stackTrace.toString().contains("/pkg/bullseye.dart", 0));
         Expect.isTrue(closure.stackTrace.toString().contains("Function: 'OriginalClosureSpec.function'", 0));
         Expect.isTrue(closure.stackTrace.toString().contains("spec/original/closure_spec.dart'", 0));
       },
@@ -163,7 +164,8 @@ class OriginalClosureSpec extends SpecMap_Bullseye {
         var closure = new BullseyeClosure(fn: (){ Expect.fail("boom!"); });
         Expect.isNull(closure.stackTrace);
         closure.run();
-        Expect.isTrue(closure.stackTrace.toString().contains("/src/bullseye/closure.dart'", 0));
+        Expect.isTrue(closure.stackTrace.toString().contains("/src/bullseye/closure.dart'", 0) || 
+            closure.stackTrace.toString().contains("/pkg/bullseye.dart", 0));
         Expect.isTrue(closure.stackTrace.toString().contains("Function: 'OriginalClosureSpec.function'", 0));
         Expect.isTrue(closure.stackTrace.toString().contains("spec/original/closure_spec.dart'", 0));
       },
