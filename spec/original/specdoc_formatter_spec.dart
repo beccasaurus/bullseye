@@ -14,7 +14,7 @@ class OriginalSpecDocFormatterSpec extends SpecMap_Bullseye {
 
     describe("SpecDocFormatter", {
 
-      "prints Spec.dart header": () => Expect.isTrue(output.contains("~ Spec.dart ${BullseyeTestFixtureDefinition.VERSION} ~\n\n", 0)),
+      "prints Bullseye header": () => Expect.isTrue(output.contains("~ Bullseye ${BullseyeTestFixtureDefinition.VERSION} ~\n\n", 0)),
 
       "prints testFixtures": (){
         Expect.isTrue(output.contains("\nSpecDocFormatterSpec_Test", 0));

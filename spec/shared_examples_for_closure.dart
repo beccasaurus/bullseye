@@ -14,7 +14,6 @@ class SharedExamplesForClosure extends SharedExampleBase {
 
     "has a description()": (){
       var closure = newInstance();
-      Expect.isNull(closure.description);
       
       closure.description = "Cool closure";
       Expect.identical("Cool closure", closure.description);

@@ -49,6 +49,8 @@ class SpecFormatter implements SpecFormattable {
       _loggingFunction(status + "\n");
   }
 
+  void writeNewline() => write("");
+
   String _colorizeText([String text = null, String color = null]) {
     if (color == null)
       return text;

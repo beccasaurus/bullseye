@@ -15,7 +15,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
   Collection<BullseyeTest> get pendingTests() => tests.filter((ex) => ex.pending);
 
   void header() {
-    write("~ Spec.dart ${BullseyeTestFixtureDefinition.VERSION} ~\n");
+    write("~ Bullseye ${BullseyeTestFixtureDefinition.VERSION} ~\n");
   }
 
   void beforeDescribe(BullseyeTestFixture testFixture) {
@@ -25,6 +25,8 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
 
   void afterDescribe(BullseyeTestFixture testFixture) {
     --_testFixtureDepth;
+    if (_testFixtureDepth == 0)
+      writeNewline();
   }
 
   void afterTest(BullseyeTest test) {
@@ -54,20 +56,24 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
   }
 
   void separator() {
-    write("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
   }
 
   void footer() {
-    if (failedTests.length > 0 || errorTests.length > 0 || pendingTests.length > 0) separator();
+    if (shouldPrintSeparator) separator();
     failedSummary();
     errorSummary();
     pendingSummary();
     summary();
   }
 
+  bool get shouldPrintSeparator() => (failedTests.length > 0 || errorTests.length > 0 || pendingTests.length > 0);
+
   void summary() {
     String color   = "green";
-    String summary = "\n${tests.length} Tests, ${failedTests.length} Failures";
+    String summary = "${tests.length} Tests, ${failedTests.length} Failures";
+    if (shouldPrintSeparator)
+      summary = "\n$summary";
     if (errorTests.length > 0) {
       summary += ", ${errorTests.length} Errors";
       color = "red";
@@ -84,7 +90,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
     if (failedTests.length > 0) {
       write("\nFailures:");
       failedTests.forEach((test) {
-        write("");
+        writeNewline();
         write(test.fullDescription, indent: 1, color: colorForTest(test));
         write("Exception: ${test.exception}", indent: 2);
         write("StackTrace:\n${test.stackTrace}", indent: 2);
@@ -96,7 +102,7 @@ class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
     if (errorTests.length > 0) {
       write("\nErrors:");
       errorTests.forEach((test) {
-        write("");
+        writeNewline();
         write(test.fullDescription, indent: 1, color: colorForTest(test));
         write("Exception: ${test.exception}", indent: 2, color: colorForTest(test));
         write("StackTrace:\n${test.stackTrace}", indent: 2);

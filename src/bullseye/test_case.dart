@@ -1,7 +1,15 @@
 class TestCase extends BullseyeTestFixtureDefinition {
 
-  void defineTestFixture() => defineTests();
-  void defineTests(){}
+  void defineTestFixture() { 
+    // defineTests() can optionally return an Iterable<Function>.
+    // If functions are returned, we call test() to add each of them as an unnamed test.
+    var testFunctions = defineTests();
+    if (testFunctions is Iterable<Function>)
+      for (Function fn in testFunctions)
+        test(fn: fn);
+  }
+
+  Iterable<Function> defineTests(){}
 
   BullseyeTestFixture context([String description = null, Function fn = null]) {
     defineNestedTestFixture(description: description, fn: fn);
@@ -10,14 +18,6 @@ class TestCase extends BullseyeTestFixtureDefinition {
   BullseyeTest test([String description = null, Function fn = null]) {
     defineTest(description: description, fn: fn);
   }
-
-  // TODO add coverage - specifically for Classic DSL
-  // List<BullseyeTest> tests(Iterable<Function> functions) {
-  //   List<BullseyeTest> allTests;
-  //   for (Function fn in functions)
-  //     allTests.add(test(fn: fn));
-  //   return allTests;
-  // }
 
   void setUp([Function fn = null]) {
     defineSetUp(fn: fn);

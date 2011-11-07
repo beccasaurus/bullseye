@@ -1,6 +1,6 @@
 // Some sanity check style specs to make sure that all 
 // of the samples in our samples/ directory are working 
-// with the latest version of Spec.dart.
+// with the latest version of Bullseye.
 class OriginalSamplesSpec extends SpecMap_Bullseye {
 
   // Given a spec, this runs the spec thru 
@@ -38,7 +38,7 @@ class OriginalSamplesSpec extends SpecMap_Bullseye {
   spec() {
     describe("BowlingSpec", {
       "OK": (){
-        var expected = """~ Spec.dart 0.1.0 ~
+        var expected = """~ Bullseye 0.1.0 ~
 
                           Bowling
                             #score returns 0 for all gutter game
