@@ -1,4 +1,5 @@
 class Bullseye {
+  static final VERSION = "0.1.0";
 
   static BullseyeSpecFormatter formatter;
 

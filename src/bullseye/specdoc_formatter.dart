@@ -15,7 +15,7 @@ class BullseyeSpecDocFormatter extends BullseyeSpecFormatter implements Bullseye
   Collection<BullseyeTest> get pendingTests() => tests.filter((ex) => ex.pending);
 
   void header() {
-    write("~ Bullseye ${BullseyeTestFixtureDefinition.VERSION} ~\n");
+    write("~ Bullseye ${Bullseye.VERSION} ~\n");
   }
 
   void beforeDescribe(BullseyeTestFixture testFixture) {

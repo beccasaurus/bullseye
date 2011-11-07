@@ -56,8 +56,4 @@ class BullseyeTestFixtureDefinition extends BullseyeTestFixture {
 
   BullseyeTestFixture get _currentTestFixture() => _testFixturesBeingDefined.last();
 
-  // ------------------------------ OLD BELOW ------------------------------
-  
-  static final VERSION = "0.1.0"; // TODO move me!
-
 }

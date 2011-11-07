@@ -3,6 +3,7 @@
 
 /* src/bullseye/bullseye.dart */
 class Bullseye {
+  static final VERSION = "0.1.0";
 
   static BullseyeSpecFormatter formatter;
 
@@ -443,10 +444,6 @@ class BullseyeTestFixtureDefinition extends BullseyeTestFixture {
 
   BullseyeTestFixture get _currentTestFixture() => _testFixturesBeingDefined.last();
 
-  // ------------------------------ OLD BELOW ------------------------------
-  
-  static final VERSION = "0.1.0"; // TODO move me!
-
 }
 /* src/bullseye/spec.dart */
 class BullseyeSpec extends BullseyeTestFixtureDefinition {
@@ -621,7 +618,7 @@ class BullseyeSpecDocFormatter extends BullseyeSpecFormatter implements Bullseye
   Collection<BullseyeTest> get pendingTests() => tests.filter((ex) => ex.pending);
 
   void header() {
-    write("~ Bullseye ${BullseyeTestFixtureDefinition.VERSION} ~\n");
+    write("~ Bullseye ${Bullseye.VERSION} ~\n");
   }
 
   void beforeDescribe(BullseyeTestFixture testFixture) {
