@@ -1,6 +1,6 @@
 class Bullseye {
 
-  static SpecFormatter formatter;
+  static BullseyeSpecFormatter formatter;
 
   static bool _formatterCallbacksSetup;
 
@@ -8,7 +8,7 @@ class Bullseye {
     _setupFormatterCallbacks();
 
     if (formatter == null)
-      formatter = new SpecDocFormatter();
+      formatter = new BullseyeSpecDocFormatter();
 
     formatter.header();
     for (BullseyeTestFixture fixture in fixtures) fixture.run();

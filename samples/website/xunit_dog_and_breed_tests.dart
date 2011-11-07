@@ -1,7 +1,7 @@
 #import("../../src/bullseye.dart");
 #import("dog.dart");
 
-class DogTest extends TestCase {
+class DogTest extends BullseyeTestCase {
 
   // DogTest is a regular class so you can add fields that your tests can access.
   // Be sure to reset your fields in a setUp block so they're the same for each test.
@@ -51,7 +51,7 @@ class DogTest extends TestCase {
   }
 }
 
-class BreedTest extends TestCase {
+class BreedTest extends BullseyeTestCase {
   get description() => "Dog Breed";
 
   defineTests() {

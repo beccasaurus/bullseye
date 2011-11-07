@@ -3,7 +3,7 @@
 
 main() => Bullseye.run([new DogTest()]);
 
-class DogTest extends TestCase {
+class DogTest extends BullseyeTestCase {
   Dog dog;
 
   testCase() {

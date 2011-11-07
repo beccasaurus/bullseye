@@ -1,6 +1,6 @@
 #import("../../src/bullseye.dart");
 
-class DateTest extends TestCase {
+class DateTest extends BullseyeTestCase {
   defineTests() => [testNow, testFarAwayDates, testEquivalentYears];
 
   static String foo = "bar";

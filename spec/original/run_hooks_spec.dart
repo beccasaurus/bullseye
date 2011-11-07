@@ -50,7 +50,7 @@ class OriginalRunHooksSpec extends SpecMap_Bullseye {
   }
 }
 
-class RunHooksSpec_Test1 extends Spec {
+class RunHooksSpec_Test1 extends BullseyeSpec {
   spec() {
     describe("foo", (){
       it("foo");
@@ -60,7 +60,7 @@ class RunHooksSpec_Test1 extends Spec {
     });
   }
 }
-class RunHooksSpec_Test2 extends Spec {
+class RunHooksSpec_Test2 extends BullseyeSpec {
   spec() {
     describe("baz", (){
       it("baz");

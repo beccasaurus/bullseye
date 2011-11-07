@@ -1,4 +1,4 @@
-class Spec extends BullseyeTestFixtureDefinition {
+class BullseyeSpec extends BullseyeTestFixtureDefinition {
   static final RegExp descriptionNameReplacementPattern = const RegExp(@"Spec$");
 
   void defineTestFixture(){ spec(); }

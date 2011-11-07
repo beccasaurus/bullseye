@@ -33,14 +33,14 @@ class OriginalSpecSpec extends SpecMap_Bullseye {
   }
 }
 
-class SpecSpec_NoDescribesSpec extends Spec {}
-class SpecSpec_ManyDescribesSpec extends Spec {
+class SpecSpec_NoDescribesSpec extends BullseyeSpec {}
+class SpecSpec_ManyDescribesSpec extends BullseyeSpec {
   spec() {
     describe("Foo");
     describe("Bar");
   }
 }
-class SpecSpec_TestsAndDescribesSpec extends Spec {
+class SpecSpec_TestsAndDescribesSpec extends BullseyeSpec {
   spec() {
     it("foo");
     describe("stuff", (){

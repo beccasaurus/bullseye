@@ -37,7 +37,7 @@ class OriginalRunningTestsSpec extends SpecMap_Bullseye {
   }
 }
 
-class RunningTestsSpec_SingleDescribe extends Spec {
+class RunningTestsSpec_SingleDescribe extends BullseyeSpec {
   spec() {
     describe("foo", (){
       it("passes", (){});

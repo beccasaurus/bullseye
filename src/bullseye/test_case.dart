@@ -1,4 +1,4 @@
-class TestCase extends BullseyeTestFixtureDefinition {
+class BullseyeTestCase extends BullseyeTestFixtureDefinition {
 
   void defineTestFixture() { 
     // defineTests() can optionally return an Iterable<Function>.

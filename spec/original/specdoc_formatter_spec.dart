@@ -2,7 +2,7 @@ class OriginalSpecDocFormatterSpec extends SpecMap_Bullseye {
   spec() {
 
     var buffer    = new StringBuffer();
-    var formatter = new SpecDocFormatter();
+    var formatter = new BullseyeSpecDocFormatter();
     formatter.colorize      = false;
     formatter.printToStdout = false;
     formatter.logger((text) => buffer.add(text));
@@ -91,7 +91,7 @@ class OriginalSpecDocFormatterSpec extends SpecMap_Bullseye {
   }
 }
 
-class SpecDocFormatterSpec_Test extends Spec {
+class SpecDocFormatterSpec_Test extends BullseyeSpec {
   spec() {
     describe("foo", (){
       it("foo-1", () => Expect.isTrue(true));

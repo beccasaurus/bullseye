@@ -1,4 +1,4 @@
-interface SpecFormattable {
+interface BullseyeSpecFormattable {
 
   void header();
 

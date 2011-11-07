@@ -4,7 +4,7 @@
 /* src/bullseye/bullseye.dart */
 class Bullseye {
 
-  static SpecFormatter formatter;
+  static BullseyeSpecFormatter formatter;
 
   static bool _formatterCallbacksSetup;
 
@@ -12,7 +12,7 @@ class Bullseye {
     _setupFormatterCallbacks();
 
     if (formatter == null)
-      formatter = new SpecDocFormatter();
+      formatter = new BullseyeSpecDocFormatter();
 
     formatter.header();
     for (BullseyeTestFixture fixture in fixtures) fixture.run();
@@ -449,7 +449,7 @@ class BullseyeTestFixtureDefinition extends BullseyeTestFixture {
 
 }
 /* src/bullseye/spec.dart */
-class Spec extends BullseyeTestFixtureDefinition {
+class BullseyeSpec extends BullseyeTestFixtureDefinition {
   static final RegExp descriptionNameReplacementPattern = const RegExp(@"Spec$");
 
   void defineTestFixture(){ spec(); }
@@ -477,7 +477,7 @@ class Spec extends BullseyeTestFixtureDefinition {
   }
 }
 /* src/bullseye/test_case.dart */
-class TestCase extends BullseyeTestFixtureDefinition {
+class BullseyeTestCase extends BullseyeTestFixtureDefinition {
 
   void defineTestFixture() { 
     // defineTests() can optionally return an Iterable<Function>.
@@ -520,7 +520,7 @@ class BullseyePendingException implements Exception {
   String toString() => message;
 }
 /* src/bullseye/formattable.dart */
-interface SpecFormattable {
+interface BullseyeSpecFormattable {
 
   void header();
 
@@ -536,7 +536,7 @@ interface SpecFormattable {
 
 }
 /* src/bullseye/formatter.dart */
-class SpecFormatter implements SpecFormattable {
+class BullseyeSpecFormatter implements BullseyeSpecFormattable {
 
   static Map<String,String> _colors;
          bool               _colorize;
@@ -604,13 +604,13 @@ class SpecFormatter implements SpecFormattable {
   }
 }
 /* src/bullseye/specdoc_formatter.dart */
-class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
+class BullseyeSpecDocFormatter extends BullseyeSpecFormatter implements BullseyeSpecFormattable {
 
   int _testFixtureDepth;
 
   List<BullseyeTest> tests;
 
-  SpecDocFormatter() {
+  BullseyeSpecDocFormatter() {
     tests = new List<BullseyeTest>();
     _testFixtureDepth = 0;
   }

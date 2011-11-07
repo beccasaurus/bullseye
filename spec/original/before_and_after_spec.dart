@@ -55,7 +55,7 @@ class OriginalBeforeAndAfterSpec extends SpecMap_Bullseye {
   }
 }
 
-class BeforeAndAfterSpec_With1Before extends Spec {
+class BeforeAndAfterSpec_With1Before extends BullseyeSpec {
   var text;
 
   spec() {
@@ -77,7 +77,7 @@ class BeforeAndAfterSpec_With1Before extends Spec {
   }
 }
 
-class BeforeAndAfterSpec_With2Befores extends Spec {
+class BeforeAndAfterSpec_With2Befores extends BullseyeSpec {
   var text = "";
 
   spec() {
@@ -94,7 +94,7 @@ class BeforeAndAfterSpec_With2Befores extends Spec {
 
 // This is a bit of a monster ... sorry  :/
 // I'll find a btter pattern for testing these types of scenarios.
-class BeforeAndAfterSpec_WithNestedDescribes extends Spec {
+class BeforeAndAfterSpec_WithNestedDescribes extends BullseyeSpec {
   // Using fields is problematic because you must 
   // explicitly set their defaults in a before() 
   // in every describe in your spec.
@@ -140,7 +140,7 @@ class BeforeAndAfterSpec_WithNestedDescribes extends Spec {
 // NOTE - this spec depends on it()'s running in order.
 //        if we implement random order running, we'll 
 //        need to disable it for this spec.
-class BeforeAndAfterSpec_WithAfters extends Spec {
+class BeforeAndAfterSpec_WithAfters extends BullseyeSpec {
   var inTheHat;
 
   spec() {

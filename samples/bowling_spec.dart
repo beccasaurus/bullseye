@@ -3,7 +3,7 @@ class Bowling {
   get score() => 0;
 }
 
-class BowlingSpec extends Spec {
+class BowlingSpec extends BullseyeSpec {
   spec() {
     it("#score returns 0 for all gutter game", (){
       var bowling = new Bowling();

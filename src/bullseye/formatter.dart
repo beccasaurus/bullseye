@@ -1,4 +1,4 @@
-class SpecFormatter implements SpecFormattable {
+class BullseyeSpecFormatter implements BullseyeSpecFormattable {
 
   static Map<String,String> _colors;
          bool               _colorize;

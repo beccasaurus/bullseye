@@ -1,10 +1,10 @@
-class SpecDocFormatter extends SpecFormatter implements SpecFormattable {
+class BullseyeSpecDocFormatter extends BullseyeSpecFormatter implements BullseyeSpecFormattable {
 
   int _testFixtureDepth;
 
   List<BullseyeTest> tests;
 
-  SpecDocFormatter() {
+  BullseyeSpecDocFormatter() {
     tests = new List<BullseyeTest>();
     _testFixtureDepth = 0;
   }

@@ -28,7 +28,7 @@ class OriginalPendingTestSpec extends SpecMap_Bullseye {
   }
 }
 
-class PendingTestSpec_Test extends Spec {
+class PendingTestSpec_Test extends BullseyeSpec {
   spec() {
     describe("foo", (){
       it("pending because no function");

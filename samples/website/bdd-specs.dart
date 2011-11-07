@@ -1,7 +1,7 @@
 #import("dog.dart");
 #import("../../src/bullseye.dart");
 
-class DogSpec extends Spec {
+class DogSpec extends BullseyeSpec {
 
   // DogSpec is a regular class so you can add fields that your tests can access.
   // Be sure to reset your fields in a before block so they're the same for each test.
@@ -52,7 +52,7 @@ class DogSpec extends Spec {
 }
 
 // Let's make another test
-class BreedSpec extends Spec {
+class BreedSpec extends BullseyeSpec {
 
   // Any tests defined directly inside of defineTests() are put into this 
   // test case's "default" context.  By default, we try to get the name of 

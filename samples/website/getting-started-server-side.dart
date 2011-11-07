@@ -5,7 +5,7 @@
 main() => Bullseye.run([new DogSpec()]);
 
 // We extend the BullseyeSpec class which lets us use the BDD DSL to define our tests
-class DogSpec extends Spec {
+class DogSpec extends BullseyeSpec {
   Dog dog;
 
   // Define your spec inside the spec() method

@@ -46,10 +46,10 @@ class OriginalTestFixtureSpec extends SpecMap_Bullseye {
   }
 }
 
-class DescribeSpec_NoTests extends Spec {
+class DescribeSpec_NoTests extends BullseyeSpec {
   spec(){ describe("desc", (){}); }
 }
-class DescribeSpec_ManyTests extends Spec {
+class DescribeSpec_ManyTests extends BullseyeSpec {
   spec() {
     describe("desc", (){
       it("should do stuff");
@@ -60,7 +60,7 @@ class DescribeSpec_ManyTests extends Spec {
     });
   }
 }
-class DescribeSpec_SubDescribes extends Spec {
+class DescribeSpec_SubDescribes extends BullseyeSpec {
   spec() {
     describe("outer first", (){
       it("outer top it");

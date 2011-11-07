@@ -71,7 +71,7 @@ class OriginalTestSpec extends SpecMap_Bullseye {
   }
 }
 
-class TestSpec_Test extends Spec {
+class TestSpec_Test extends BullseyeSpec {
   spec() {
     describe("something", (){
       it("should pass", (){

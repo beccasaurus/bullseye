@@ -8,7 +8,7 @@ class OriginalSamplesSpec extends SpecMap_Bullseye {
   // returns a String of the statusing output.
   String getSpecOutput(BullseyeTestFixture testFixture) {
     var buffer    = new StringBuffer();
-    var formatter = new SpecDocFormatter();
+    var formatter = new BullseyeSpecDocFormatter();
     formatter.colorize      = false;
     formatter.printToStdout = false;
     formatter.logger((text) => buffer.add(text));

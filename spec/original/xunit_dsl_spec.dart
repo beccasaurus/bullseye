@@ -28,7 +28,7 @@ class OriginalxUnitDSLSpec extends SpecMap_Bullseye {
   }
 }
 
-class xUnitDSLSpec_Test extends TestCase {
+class xUnitDSLSpec_Test extends BullseyeTestCase {
   var text = "";
 
   defineTests() {
