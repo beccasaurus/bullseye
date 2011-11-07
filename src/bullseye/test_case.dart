@@ -4,12 +4,16 @@ class TestCase extends BullseyeTestFixtureDefinition {
     // defineTests() can optionally return an Iterable<Function>.
     // If functions are returned, we call test() to add each of them as an unnamed test.
     var testFunctions = defineTests();
+    if (testFunctions == null) testFunctions = testCase();
     if (testFunctions is Iterable<Function>)
       for (Function fn in testFunctions)
         test(fn: fn);
   }
 
-  Iterable<Function> defineTests(){}
+  Iterable<Function> defineTests() => null;
+
+  /* Alias for defineTests() */
+  Iterable<Function> testCase() => null;
 
   BullseyeTestFixture context([String description = null, Function fn = null]) {
     defineNestedTestFixture(description: description, fn: fn);
